@@ -1,59 +1,167 @@
-<!--index.wxml-->
-<view class="container">
+<home wx:if="{{curPage=='home'}}"></home>
+<block wx:if="{{curPage==='about'}}">
+  <scroll-view scroll-y class="scrollPage">
+    <view class="UCenter-bg">
+      <block wx:if="{{identity===0}}">
+        <view class="cu-avatar round xxl" style="background-image:url(https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg)">
+        <!-- <open-data type="userAvatarUrl" -->
+        </view>
+        
+        <view class="margin-left">
+          <view class="cu-capsule margin-top-xl">
+            <view class="cu-tag radius bg-grey">未登陆用户</view>
+          </view>
+          <view class="text-xl margin-top-sm">
+            <text class="margin-top-sm" style="font-weight:bold;">阿卡林</text>
+            <!-- <open-data type="userNickName"></open-data> -->
+            <button class="cu-btn sm bg-white round line" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+              <text class="cuIcon-upload"></text>授权登陆
+            </button>
+          </view>
+        </view>
+      </block>
+      <block wx:if="{{identity===1}}">
+        <view class="cu-avatar round xxl" style="background-image:url({{userInfo.avatarUrl}})" bindlongpress="toIdentify">
+          <view class="cu-tag badge {{(userInfo.gender-1)%2==1?'cuIcon-female bg-pink':'cuIcon-male bg-blue'}}"></view>
+        </view>
+          
+        <view class="margin-left">
+          <view class="cu-capsule margin-top-xl">
+            <view class="cu-tag radius bg-white">普通用户</view>
+          </view>
+          <view class="text-xl margin-top-sm">
+            <text class="margin-top-sm" style="font-weight:bold;">{{userInfo.nickName}}</text>
+            <button class="cu-btn sm bg-white round line" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+              <text class="cuIcon-upload"></text>更新
+            </button>
+          </view>
+        </view>
+      </block>
+      <block wx:if="{{identity > 1}}">
+        <view class="cu-avatar round xxl" style="background-image:url({{userInfo.avatarUrl}})" bindlongpress="toIdentify">
+          <view class="cu-tag badge {{(userInfo.gender-1)%2==1?'cuIcon-female bg-pink':'cuIcon-male bg-blue'}}"></view>
+        </view>
 
-  <!-- 用户 openid -->
-  <view class="userinfo">
-    <button 
-      open-type="getUserInfo" 
-      bindgetuserinfo="onGetUserInfo"
-      class="userinfo-avatar"
-      style="background-image: url({{avatarUrl}})"
-      size="default"
-    ></button>
-    <view class="userinfo-nickname-wrapper">
-      <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
+        <view class="margin-left">
+          <view class="cu-capsule radius margin-top-xl">
+            <view class="cu-tag bg-yellow">{{adminInfo.department}}</view>
+            <view class="cu-tag bg-{{identityColor[identity]}}">{{adminInfo.identity}}</view>
+          </view>
+          <view class="text-xl margin-top-sm">
+            <text class="margin-top-sm" style="font-weight:bold;">{{adminInfo.name}}</text>
+            <button class="cu-btn sm bg-white round line" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+              <text class="cuIcon-upload"></text>更新
+            </button>
+          </view>
+        </view>
+      </block>
+      <image src="cloud://demo-vr23l.6465-demo-vr23l-1259081600/image/wave.gif" mode="scaleToFill" class="gif-wave"></image>
     </view>
-  </view>
-
-
-  <!-- 上传图片 -->
-  <view class="uploader">
-    <view class="uploader-text" bindtap="doUpload">
-      <text>上传图片</text>
+    <block wx:if="{{identity>1}}">
+      <view class="cu-bar bg-white">
+        <view class="action">
+          <text class="cuIcon-title text-olive"></text>我的数据
+        </view>
+      </view>
+      <view class="padding flex text-center text-grey bg-white margin-bottom shadow-warp">
+        <view class="flex flex-sub flex-direction solid-right">
+          <view class="text-xxl text-orange">{{adminInfo.ingNum}}</view>
+          <view class="margin-top-sm">
+            <text class="cuIcon-time"></text>正在进行</view>
+        </view>
+        <view class="flex flex-sub flex-direction solid-right">
+          <view class="text-xxl text-blue">{{adminInfo.completedNum}}</view>
+          <view class="margin-top-sm">
+            <text class="cuIcon-roundcheck"></text>已完成</view>
+        </view>
+        <view class="flex flex-sub flex-direction">
+          <view class="text-xxl text-green">{{adminInfo.totalNum}}</view>
+          <view class="margin-top-sm">
+            <text class="cuIcon-sort"></text>总共</view>
+        </view>
+      </view>
+    </block>
+    <view class="cu-bar bg-white">
+      <view class="action">
+        <text class="cuIcon-title text-olive"></text>我的应用
+      </view>
     </view>
-    <view class="uploader-container" wx:if="{{imgUrl}}">
-      <image class="uploader-image" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
+    <view class="cu-list grid col-4 shadow-warp">
+      <view class="cu-item" wx:for="{{list1}}" wx:key="index" bindtap="{{item.bindtap}}">
+        <view class="cuIcon-{{item.icon}} text-{{item.color}}">
+          <view class="cu-tag badge" wx:if="{{item.badge!=0}}">
+            <block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
+          </view>
+        </view>
+        <text>{{item.name}}</text>
+      </view>
+      <view class="cu-item" wx:for="{{list2}}" wx:key="index" bindtap="{{item.bindtap}}" wx:if="{{identity>=2}}">
+        <view class="cuIcon-{{item.icon}} text-{{item.color}}">
+        </view>
+        <text>{{item.name}}</text>
+      </view>
+      <view class="cu-item" wx:for="{{list3}}" wx:key="index" bindtap="{{item.bindtap}}" wx:if="{{identity==4 || identity == 6}}">
+        <view class="cuIcon-{{item.icon}} text-{{item.color}}">
+        </view>
+        <text>{{item.name}}</text>
+      </view>
     </view>
+    <view class="cu-list menu shadow-lg radius">
+      <view class="cu-item arrow">
+        <button class="cu-btn content" open-type="contact">
+          <text class="cuIcon-servicefill text-green"></text>
+          <text class="text-grey">咨询客服</text>
+        </button>
+        <view class="action">
+          <text class="text-grey text-sm">可以催单哦</text>
+        </view>
+      </view>
+      <view class="cu-item arrow">
+        <button class="cu-btn content" open-type="feedback">
+          <text class="cuIcon-writefill text-yellow"></text>
+          <text class="text-grey">bug反馈</text>
+        </button>
+        <view class="action">
+          <view class="content"></view>
+        </view>
+      </view>
+      <!-- <navigator class="cu-item arrow" url="/pages/aboutPage/discover/discover" hover-class="none"> -->
+      <view class="cu-item arrow" hover-class="none">
+        <button class="cu-btn content" bindtap="toDiscover">
+          <text class="cuIcon-discoverfill text-orange"></text>
+          <text class="text-grey">实验室</text>
+        </button>
+        <view class="action">
+          <view class="content">
+            <!-- <text class="text-grey">暂未开发</text> -->
+          </view>
+        </view>
+      </view>
+      <view class="cu-item arrow">
+        <navigator class="content" url="/pages/aboutPage/about/about" hover-class="none">
+          <image src="cloud://demo-vr23l.6465-demo-vr23l-1259081600/image/logo.png" class="png" mode="aspectFit"></image>
+          <text class="text-grey">关于</text>
+        </navigator>
+      </view>
+
+    </view>
+    <view class="cu-tabbar-height"></view>
+  </scroll-view>
+</block>
+
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="navChange" data-cur="home">
+    <view class="cuIcon-cu-image">
+      <image src="/colorui/images/tabbar/basics{{curPage=='home'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{curPage=='home'?'text-green':'text-gray'}}">首页</view>
   </view>
 
-
-  <!-- 操作数据库 -->
-  <view class="uploader">
-    <navigator url="../databaseGuide/databaseGuide" open-type="navigate" class="uploader-text">
-      <text>前端操作数据库</text>
-    </navigator>
+  <view class="action" bindtap="navChange" data-cur="about">
+    <view class="cuIcon-cu-image">
+      <image src="/colorui/images/tabbar/about{{curPage=='about'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{curPage=='about'?'text-green':'text-gray'}}">我的</view>
   </view>
-
-  <!-- 即时通信 -->
-  <view class="uploader">
-    <navigator url="../im/im" open-type="navigate" class="uploader-text">
-      <text>即时通信 Demo</text>
-    </navigator>
-  </view>
-
-  <!-- 新建云函数 -->
-  <view class="uploader">
-    <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
-      <text>快速新建云函数</text>
-    </navigator>
-  </view>
-
-  <!-- 云调用 -->
-  <view class="uploader">
-    <navigator url="../openapi/openapi" open-type="navigate" class="uploader-text">
-      <text>云调用</text>
-    </navigator>
-  </view>
-
 
 </view>

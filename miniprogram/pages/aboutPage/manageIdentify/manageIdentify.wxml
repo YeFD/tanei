@@ -1,0 +1,38 @@
+<!--miniprogram/pages/aboutPage/manageIdentify/manageIdentify.wxml-->
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">认证管理</view>
+  <view class="action" slot="right">
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+  </view>
+</cu-custom>
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-title text-green"></text>二次认证
+  </view>
+  <view class="action">
+    <text wx:if="{{update}}" class="text-green">开启</text>
+    <text wx:else class="text-red">关闭</text>
+  </view>
+</view>
+<view class="cu-bar bg-white margin-top">
+  <view class="action">
+    <text class="cuIcon-title text-green"></text>认证密匙
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="title">干事</view>
+  <view class="action">{{password.password2}}</view>
+</view>
+<view class="cu-form-group">
+  <view class="title">部长</view>
+  <view class="action">{{password.password3}}</view>
+</view>
+<view class="cu-form-group">
+  <view class="title">会长</view>
+  <view class="action">{{password.password4}}</view>
+</view>
+<view class="cu-form-group">
+  <view class="title">老人</view>
+  <view class="action">{{password.password5}}</view>
+</view>

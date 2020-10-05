@@ -1,0 +1,166 @@
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">详细报单</view>
+  <view class="action" slot="right">
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+  </view>
+</cu-custom>
+<view class="cu-timeline">
+  <view class="cu-time">{{create.year}}</view>
+  <view class="cu-time">{{create.date}}</view>
+  <view class="cu-item text-blue">
+    <view class="bg-blue content shadow-blur">
+      <text>{{create.time}}  已提交报单</text>
+    </view>
+  </view>
+</view>
+<view class="cu-timeline" wx:if="{{!!receive}}">
+  <view class="cu-time" wx:if="{{receive.date!==create.date}}">{{receive.date}}</view>
+  <view class="cu-item text-olive cuIcon-timefill">
+    <view class="content bg-olive shadow-blur">
+      <text>{{receive.time}}  已接单</text>
+    </view>
+  </view>
+</view>
+
+<view class="cu-timeline" wx:if="{{!!complete}}">
+  <view class="cu-time" wx:if="{{receive.date!==complete.date}}">{{complete.date}}</view>
+  <view class="cu-item text-green cuIcon-roundcheckfill">
+    <view class="content bg-green shadow-blur">
+      <text>{{complete.time}}  已完成</text>
+    </view>
+  </view>
+</view>
+
+<view class="cu-timeline" wx:if="{{!!cancel}}">
+  <view class="cu-time" wx:if="{{cancel.date!==create.date}}">{{cancel.date}}</view>
+  <view class="cu-item text-red cuIcon-roundclosefill">
+    <view class="content bg-red shadow-blur">
+      <text>{{cancel.time}}  已取消</text>
+    </view>
+  </view>
+</view>
+
+<view class="cu-timeline" wx:if="{{!!feedback}}">
+  <view class="cu-time" wx:if="{{feedback.date!==complete.date}}">{{feedback.date}}</view>
+  <view class="cu-item text-orange cuIcon-emojifill">
+    <view class="content bg-orange shadow-blur">
+      <text>{{feedback.time}}  已写评价</text>
+    </view>
+  </view>
+</view>
+
+<view class="cu-timeline" wx:if="{{!!summary}}">
+  <view class="cu-time" wx:if="{{!feedback && summary.date!==complete.date}}">{{summary.date}}</view>
+  <view class="cu-time" wx:if="{{!!feedback && summary.date!==feedback.date}}">{{summary.date}}</view>
+  <view class="cu-item text-yellow cuIcon-commentfill">
+    <view class="content shadow-blur">
+      <text>{{summary.time}}  已写总结</text>
+    </view>
+  </view>
+</view>
+  
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-title text-pink"></text>联系信息
+      <text class="text-grey text-sm">（点击复制）</text>
+    </view>
+  </view>
+  <view class="cu-form-group" bindtap="copyData" data-data="{{sheet.userName}}">
+    <view class="text-black">姓名</view>
+    <text>{{sheet.userName}}</text>
+  </view>
+  <view class="cu-form-group" bindtap="copyData" data-data="{{sheet.userPhone}}">
+    <view class="text-black">手机</view>
+    <text>{{sheet.userPhone}}</text>
+  </view>
+  <view class="cu-form-group" bindtap="copyData" data-data="{{sheet.userWechat}}">
+    <view class=" text-black">微信</view>
+    <text>{{sheet.userWechat}}</text>
+  </view>
+  <view class="cu-form-group">
+    <view class="text-black">宿舍</view>
+    <text>{{sheet.userAddress}}</text>
+  </view>
+
+  <view class="cu-bar bg-white solid-top">
+    <view class="action">
+      <text class="cuIcon-title text-pink"></text>
+      <text class="text-black">报修类型</text>
+    </view>
+    <view class="action">{{sheet.computerType}}</view>
+  </view>
+
+<!-- userName, userPhone, userAddress, userWechat, computerType, repairType, faultType, faultDetail, repairman, repairmanId -->
+  
+  <view class="cu-bar bg-white solid-top">
+    <view class="action">
+      <text class="cuIcon-title text-pink"></text>
+      <text class="text-black">故障类型</text>
+    </view>
+    <view class="action">{{sheet.faultType}}</view>
+  </view>
+  
+  <view class="cu-bar bg-white solid-top">
+    <view class="action">
+      <text class="cuIcon-title text-pink"></text>
+      <text class="text-black">故障描述</text>
+    </view>
+  </view>
+  <view class="content">
+    <view class="cu-form-group">{{sheet.faultDetail}}</view>
+  </view>
+
+  <view class="cu-bar bg-white solid-top">
+    <view class="action">
+      <text class="cuIcon-title text-pink"></text>
+      <text class="text-black">服务类型</text>
+    </view>
+    <view class="action">{{sheet.repairType}}</view>
+  </view>
+
+  <view class="cu-bar bg-white solid-top">
+    <view class="action">
+      <text class="cuIcon-title text-pink"></text>维修人员信息
+      <text class="text-grey text-sm">（点击复制）</text>
+    </view>
+    <!-- <view class="action">{{sheet.wechat}}</view> -->
+    <!-- <view class="action" wx:else>{{sheet.repairman}}</view> -->
+  </view>
+  <view class="cu-form-group" bindtap="copyData" data-data="{{sheet.repairman}}">
+    <view class=" text-black">姓名</view>
+    <view class="action" wx:if="{{!!sheet.nickName}}">{{sheet.nickName}}
+      <text class="text-grey text-sm">（{{sheet.repairman}}）</text>
+    </view>
+    <view class="action" wx:else>{{sheet.repairman}}</view>
+  </view>
+  <view class="cu-form-group" bindtap="copyData" data-data="{{sheet.wechat}}">
+    <view class="text-black">微信</view>
+    <text>{{sheet.wechat}}</text>
+  </view>
+<block wx:if="{{!!sheet.feedback}}">
+  <view class="cu-bar bg-white solid-top">
+    <view class="action">
+      <text class="cuIcon-title text-pink"></text>
+      <text class="text-black">评价</text>
+    </view>
+    <view class="action">
+      <text wx:for="{{scoreStar}}" wx:key="index" class="cuIcon-favor{{index<=sheet.score-1?'fill':''}} text-{{scoreStar[sheet.score-1].color}}"></text>
+    </view>
+  </view>
+  <view class="content">
+    <view class="cu-form-group">{{sheet.feedback}}</view>
+  </view>
+
+</block>
+<block wx:if="{{!!sheet.summary}}">
+  <view class="cu-bar bg-white solid-top">
+    <view class="action">
+      <text class="cuIcon-title text-pink"></text>
+      <text class="text-black">总结</text>
+    </view>
+  </view>
+  <view class="content">
+    <view class="cu-form-group">{{sheet.summary}}</view>
+  </view>
+</block>

@@ -1,0 +1,140 @@
+<!--miniprogram/pages/aboutPage/messageBox/messageBox.wxml-->
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">消息盒子</view>
+  <view class="action" slot="right">
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+  </view>
+</cu-custom>
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{index==isRead?'text-green cur':''}}" wx:for="{{switchArray}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
+      {{switchArray[index]}}
+    </view>
+  </view>
+</scroll-view>
+<scroll-view scroll-y>
+  <view class="cu-card dynamic no-card" wx:if="{{isRead==0}}">
+    <view class="cu-load {{!isLoad?'loading':''}}"></view>
+    <view class="cu-load {{unreadArray.length == 0 && !!isLoad?'over':''}}"></view>
+    <view class="cu-item shadow solid-bottom" wx:for="{{unreadArray}}" wx:key="index">
+      <view class="cu-list menu-avatar">
+        <view class="cu-item">
+          <view class="cu-avatar round lg" style="background-image:url({{item.senderAvatarUrl}});"></view>
+          <view class="content flex-sub">
+            <view>{{item.senderName}}</view>
+            <view class="text-gray text-sm flex justify-between">{{item.time}}</view>
+          </view>
+          <view class="action" wx:if="{{item.read}}">
+              <view wx:if="{{item.type=='下线申请' || item.type=='上线申请'}}" class="text-grey text-sm">
+                {{item.resultMsg}}
+              </view>
+              <view wx:else class="text-grey text-sm">已读</view>
+            </view>
+        </view>
+      </view>
+      <block wx:if="{{item.type==='通知'}}">
+        <view class="text-content">{{item.message}}</view>
+        <view class="text-gray text-sm text-right padding">
+          <block wx:if="{{!item.read}}">
+            <button class="cu-btn bg-gray margin-left" bindtap="tapRead" data-index="{{index}}">标记为已读</button>
+          </block>
+        </view>
+      </block>
+      <block wx:if="{{item.type==='报单管理'}}">
+        <view class="text-content">{{item.message}}</view>
+        <view class="text-gray text-sm text-right padding">
+          <block wx:if="{{!item.read}}">
+            <button class="cu-btn bg-gray margin-left" bindtap="tapRead" data-index="{{index}}">标记为已读</button>
+            <button class="cu-btn bg-green margin-left" bindtap="tapReceived" data-index="{{index}}">去接单</button>
+          </block>
+        </view>
+      </block>
+      <block wx:if="{{item.type==='报单评价'}}">
+        <view class="text-content">{{item.message}}</view>
+        <view class="text-gray text-sm text-right padding">
+          <block wx:if="{{!item.read}}">
+            <button class="cu-btn bg-gray margin-left" bindtap="tapRead" data-index="{{index}}">标记为已读</button>
+            <button class="cu-btn bg-yellow margin-left" bindtap="tapFeedback" data-index="{{index}}">去评价</button>
+          </block>
+        </view>
+      </block>
+      <block wx:if="{{item.type==='下线申请'}}">
+        <view class="text-content">{{item.message}}</view>
+        <view class="text-gray text-sm text-right padding">
+          <block wx:if="{{!item.read}}">
+            <button class="cu-btn line-red text-red margin-left" bindtap="tapOfflineReject" data-index="{{index}}">否决</button>
+            <button class="cu-btn bg-green margin-left" bindtap="tapOfflineAgree" data-index="{{index}}">批准</button>
+          </block>
+        </view>
+      </block>
+      <block wx:if="{{item.type==='上线申请'}}">
+        <view class="text-content">{{item.message}}</view>
+        <view class="text-gray text-sm text-right padding">
+          <block wx:if="{{!item.read}}">
+            <button class="cu-btn line-red text-red margin-left" bindtap="tapOnlineReject" data-index="{{index}}">否决</button>
+            <button class="cu-btn bg-green margin-left" bindtap="tapOnlineAgree" data-index="{{index}}">批准</button>
+          </block>
+        </view>
+      </block>
+
+      <block wx:if="{{item.type==='修改昵称'}}">
+        <view class="text-content">{{item.message}}</view>
+        <view class="text-gray text-sm text-right padding">
+          <block wx:if="{{!item.read}}">
+            <button class="cu-btn line-red text-red margin-left" bindtap="tapNickNameReject" data-index="{{index}}">否决</button>
+            <button class="cu-btn bg-green margin-left" bindtap="tapNickNameAgree" data-index="{{index}}">批准</button>
+          </block>
+        </view>
+      </block>
+    </view>
+  </view>
+  
+  <view class="cu-card dynamic no-card" wx:if="{{isRead==1}}">
+    <view class="cu-load {{!isLoad?'loading':''}}"></view>
+    <view class="cu-load {{curReadArray.length == 0 && !!isLoad?'over':''}}"></view>
+    <view class="cu-item shadow solid-bottom" wx:for="{{curReadArray}}" wx:key="index">
+      <view class="cu-list menu-avatar">
+        <view class="cu-item">
+          <view class="cu-avatar round lg" style="background-image:url({{item.senderAvatarUrl}});"></view>
+            <view class="content flex-sub">
+              <view>{{item.senderName}}</view>
+              <view class="text-gray text-sm flex justify-between">{{item.time}}</view>
+            </view>
+            <view class="action">
+              <view wx:if="{{item.type=='下线申请' || item.type=='上线申请' || item.type=='修改昵称'}}" class="text-grey text-sm">
+                {{item.resultMsg}}
+              </view>
+              <view wx:else class="text-grey text-sm">已读</view>
+            </view>
+        </view>
+      </view>
+      <view class="text-content">{{item.message}}</view>
+      <!-- <block wx:if="{{item.type=='通知'}}">
+        <view class="text-content">{{item.message}}</view>
+      </block>
+      <block wx:if="{{item.type=='报单管理'}}">
+        <view class="text-content">{{item.message}}</view>
+      </block>
+      <block wx:if="{{item.type=='报单评价'}}">
+        <view class="text-content">{{item.message}}</view>
+      </block>
+      <block wx:if="{{item.type=='下线申请' || item.type=='上线申请' || item.type=='修改昵称'}}">
+        <view class="text-content">{{item.message}}
+        </view>
+      </block> -->
+    </view>
+    
+    <view class="padding flex flex-wrap justify-between align-center bg-white" wx:if="{{pageNum > 0}}">
+      <button class="cu-btn bg-green" bindtap="lastPage">上一页</button>
+      <picker range="{{pageArray}}" value="{{curPage - 1}}" bindchange="pageChange">
+        <text>{{curPage}}</text>
+        <text class="cuIcon-triangledownfill"></text>
+        <text class="text-gray">/{{pageNum}}</text>
+      </picker>
+      <button class="cu-btn bg-green" bindtap="nextPage">下一页</button>
+    </view>
+  </view>
+</scroll-view>
+
+

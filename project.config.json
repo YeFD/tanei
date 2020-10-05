@@ -37,6 +37,7 @@
   "libVersion": "2.8.1",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "search": {
       "current": -1,
@@ -53,13 +54,81 @@
     "game": {
       "list": []
     },
+    "gamePlugin": {
+      "current": -1,
+      "list": []
+    },
     "miniprogram": {
       "current": 0,
       "list": [
         {
           "id": -1,
           "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide"
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "pages/aboutPage/messageBox/messageBox",
+          "pathName": "pages/aboutPage/messageBox/messageBox",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "test",
+          "pathName": "pages/testPage/test",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "myRepairSheet",
+          "pathName": "pages/aboutPage/myRepairSheet/myRepairSheet",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "myReceivedRepairSheet",
+          "pathName": "pages/aboutPage/myReceivedRepairSheet/myReceivedRepairSheet",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "repairSheet",
+          "pathName": "pages/homePage/repairSheet/repairSheet",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "detailSheet",
+          "pathName": "pages/aboutPage/detailSheet/detailSheet",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "allSheets",
+          "pathName": "pages/aboutPage/allSheets/allSheets",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "discover",
+          "pathName": "pages/aboutPage/discover/discover",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 9,
+          "name": "update",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -1,0 +1,43 @@
+<!--miniprogram/pages/aboutPage/identify/identify.wxml-->
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">身份认证</view>
+</cu-custom>
+<form bindsubmit="identify">
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-pink"></text>个人信息
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">姓名</view>
+    <input placeholder="真实姓名" name="name"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">邮箱</view>
+    <input placeholder="邮箱" name="email"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">微信</view>
+    <input placeholder="微信" name="wechat"></input>
+  </view>
+
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-pink"></text>认证部门
+    </view>
+  </view>
+  <radio-group class="block" bindchange="departmentChange" name="department">
+    <view class="cu-form-group" wx:for="{{department}}" wx:key>
+      <view class="title">{{item}}</view>
+      <radio class="pink" value="{{item}}" checked></radio>
+    </view>
+  </radio-group>
+  <view class="cu-form-group margin-top">
+    <view class="title">密钥  </view>
+    <input placeholder="" name="password"></input>
+  </view>
+  <view class="padding flex flex-direction">
+    <button form-type="submit" class="cu-btn bg-pink lg">提交</button>
+  </view>
+</form>

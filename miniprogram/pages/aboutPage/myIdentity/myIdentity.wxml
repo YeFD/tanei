@@ -1,0 +1,164 @@
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">我的认证</view>
+  <view class="action" slot="right">
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+  </view>
+</cu-custom>
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-title text-mauve"></text>认证信息
+  </view>
+</view>
+<view class="cu-list menu-avatar">
+  <view class="cu-item {{move=='move'?'move-cur':''}}" bindtouchstart="listTouchStart" bindtouchmove="listTouchMove" bindtouchend="listTouchEnd" data-target="move">
+    <view class="cu-avatar round lg" style="background-image:url({{avatarUrl}})">
+    </view>
+    <view class="content">
+      <view>
+        <view class="cu-tag bg-{{identityColor[identity]}}">{{adminInfo.identity}}</view>
+      </view>
+      <view class="text-lg">{{adminInfo.name}}</view>
+    </view>
+    <view class="action" wx:if="{{adminInfo.identity==='干事' || adminInfo.identity==='部长' || adminInfo.identity==='会长'}}">
+      <view wx:if="{{adminInfo.online}}" class="text-green margin-right-sm text-sm">已上线</view>
+      <view wx:else class="text-red margin-right-sm text-sm">已下线</view>
+    </view>
+    <view class="move">
+      <view class="bg-grey" bindtap="showModal" data-target="update">更新认证</view>
+      <block wx:if="{{adminInfo.identity==='干事'}}">
+        <view class="bg-red" bindtap="showModal" wx:if="{{adminInfo.online}}" data-target="offline" bindlongpress="showRevoke">申请下线</view>
+        <view class="bg-green" wx:else bindtap="showModal" data-target="online"  bindlongpress="showRevoke">申请上线</view>
+      </block>
+      <block wx:if="{{adminInfo.identity==='部长' || adminInfo.identity==='会长'}}">
+        <view class="bg-red" bindtap="tapOffline2" wx:if="{{adminInfo.online}}">下线</view>
+        <view class="bg-green" wx:else bindtap="tapOnline2">上线</view>
+      </block>
+    </view>
+  </view>
+</view>
+
+<view class="cu-modal {{modalName=='offline'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">申请下线</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      你的申请将由部长同意后生效，确定提交申请吗？
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-red text-ted" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="tapOffline">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='online'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">申请上线</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      你的申请将由部长同意后生效，确定提交申请吗？
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-red text-ted" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="tapOnline">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='update'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">更新认证</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      <input bindinput="inputPassword" placeholder="输入认证密钥" disabled="{{modalName!='update'}}" value="{{password}}"></input>
+    </view>
+    <!-- <view class="action">
+      <view class="text-red">*你的昵称将由部长批准后生效</view>
+    </view> -->
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-red text-ted" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="tapUpdate">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='nickName'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">修改昵称</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      <input bindinput="inputNickName" placeholder="请输入昵称" disabled="{{modalName!='nickName'}}" value="{{nickName}}"></input>
+    </view>
+    <view class="action" wx:if="{{identity == 2}}">
+      <view class="text-red">*你的昵称将由部长批准后生效</view>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-red text-ted" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="tapNickName">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="title">展示昵称</view>
+  <view class="action">
+    <text wx:if="{{!!adminInfo.nickName}}">{{adminInfo.nickName}}</text>
+    <text wx:else>{{adminInfo.name}}</text>
+    <button class="cu-btn line-mauve margin-left sm" bindtap="showModal" data-target="nickName" bindlongpress="showRevoke">修改</button>
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="title">电子邮箱</view>
+  <view class="action">
+    <text>{{adminInfo.email}}</text>
+    <button class="cu-btn line-mauve margin-left sm" bindtap="tapEmail">修改</button>
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="title">微信</view>
+  <view class="action">
+    <text>{{adminInfo.wechat}}</text>
+    <button class="cu-btn line-mauve margin-left sm" bindtap="tapWechat">修改</button>
+  </view>
+</view>
+
+<view class="cu-modal {{modalName=='revoke'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">撤销申请</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      确定要撤销申请吗？
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-red text-ted" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="tapRevoke">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

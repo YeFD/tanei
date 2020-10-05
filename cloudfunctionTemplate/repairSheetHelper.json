@@ -1,0 +1,49 @@
+[
+  {
+    "name": "sheet",
+    "value": {
+      "action": "postSheet",
+      "userName": "Yip",
+      "userPhone": "123456",
+      "userAddress": "东十九",
+      "userWechat": "asd",
+      "computerType": "笔记本",
+      "repairType": "上门",
+      "faultType": "蓝屏",
+      "faultDetail": "蓝屏",
+      "repairman": "yip"
+    }
+  },
+  {
+    "name": "getDetailSheet",
+    "value": {
+      "action": "getDetailSheet",
+      "sheetId": "7498b5fe5f3f7e00001047142e4d25cc"
+    }
+  },
+  {
+    "name": "getRepairmanSheets",
+    "value": {
+      "action": "getRepairmanSheets",
+      "pageSize": "10"
+    }
+  },
+  {
+    "name": "getStatistics",
+    "value": {
+      "action": "getStatistics"
+    }
+  },
+  {
+    "name": "getAdminStatistics",
+    "value": {
+      "action": "getAdminStatistics"
+    }
+  },
+  {
+    "name": "getUserFeedback",
+    "value": {
+      "action": "getUserFeedback"
+    }
+  }
+]
