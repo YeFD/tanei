@@ -143,10 +143,10 @@
       </view>
     </view>
     <view class="padding">
-      <view>提交成功，维修人员看到报单后会尽快处理，建议你主动联系哦~</view>
+      <view>提交成功，维修人员看到报单后会尽快处理，建议你主动联系。另外接收订阅消息能第一时间收到报单动态哦~</view>
     </view>
     <view class="cu-bar bg-white justify-end">
-      <view class="action flex-sub text-green" bindtap="hideModal">我知道了
+      <view class="action flex-sub text-green" bindtap="showSubMsg">我知道了
       </view>
     </view>
   </view>

@@ -1,7 +1,9 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 cloud.init({
-  env: "dist-3gfsowkhc324384b"
+  //env: "dist-3gfsowkhc324384b"
+  // env: "demo-vr23l"
+  env: cloud.DYNAMIC_CURRENT_ENV
 })
 const db = cloud.database()
 const _ = db.command
@@ -232,15 +234,19 @@ const repairSheetHelper = {
       }
     }
     const {avatarUrl} = event
+    var completeTime = new Date()
+    let temp = new Date(completeTime.getTime() + 8*60*60*1000).toISOString().split("T")
+    let completeTime_S = temp[0] + " " + temp[1].split(".")[0]
+    console.log(completeTime_S)
     await collection.doc(event._id).update({
       data: {
         state: 2,
-        completeTime: db.serverDate(),
+        completeTime: completeTime,
         completeBy: wxContext.OPENID
       }
     })
     const messageCollection = db.collection("message")
-    await messageCollection.add({
+    const result = await messageCollection.add({
       data: {
         type: "报单评价",
         senderId: wxContext.OPENID,
@@ -255,9 +261,32 @@ const repairSheetHelper = {
         sheetId: sheet._id
       }
     })
-    return {
-      code: 0,
-      message: "complete successfully"
+    if (result.errMsg == "collection.add:ok") {
+      await cloud.openapi.subscribeMessage.send({
+        touser: sheet.userId,
+        templateId: "VNFzvWf4iAIv_K1uaJn61lQ8XWH4wQmU31PXcyXRgmI",
+        page: "/pages/aboutPage/myRepairSheet/myRepairSheet",
+        data: {
+          "thing9": {
+            "value": "已完成"
+          },
+          "thing5": {
+            "value": "你的反馈对我们非常重要，快去评价一下吧～"
+          },
+          "date4": {
+            "value": completeTime_S
+          }
+        }
+      })
+      return {
+        code: 0,
+        message: "complete successfully"
+      }
+    } else {
+      return {
+        code: 1,
+        message: "add error"
+      }
     }
   },
   async postFeedback(event, wxContext) {
@@ -425,7 +454,9 @@ const repairSheetHelper = {
         userAvatarUrl: sheets[i].userAvatarUrl,
         computerType: sheets[i].computerType,
         faultType: sheets[i].faultType,
-        repairType: sheets[i].repairType
+        repairType: sheets[i].repairType,
+        repairman: sheets[i].repairman,
+        nickName: sheets[i].nickName
       }
       completedSheets.push(sheet)
     }
@@ -576,6 +607,7 @@ const repairSheetHelper = {
         score: sheets[i].score,
         feedback: sheets[i].feedback,
         repairman: sheets[i].repairman,
+        nickName: sheets[i].nickName,
         avatarUrl: sheets[i].userAvatarUrl,
         userName: "用户" + sheets[i].userId.slice(sheets[i].userId.length - 5)
       })
@@ -590,7 +622,8 @@ const repairSheetHelper = {
     const adminArray = (await adminCollection
       .where({
         id: 1,
-        department: "技术部"
+        department: "技术部",
+        identity: _.or(_.eq("部长"), _.eq("干事"), _.eq("会长"))
       })
       .get()
     ).data

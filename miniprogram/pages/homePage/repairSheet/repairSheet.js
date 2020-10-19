@@ -431,5 +431,36 @@ Page({
         })
       }
     })
+  },
+  showSubMsg: async function(e) {
+    var tmplId = "VNFzvWf4iAIv_K1uaJn61lQ8XWH4wQmU31PXcyXRgmI"
+    wx.requestSubscribeMessage({
+      tmplIds: [tmplId],
+      success: res => {
+        console.log(res)
+        if (res[tmplId] == "accept") {
+          wx.showToast({
+            title: '订阅成功',
+            icon: "success"
+          })
+        } else {
+          wx.showToast({
+            title: '订阅失败',
+            icon: "success"
+          })
+        }
+      },
+      fail: e => {
+        console.log(e)
+        wx.showToast({
+          title: '订阅错误',
+          icon: "none"
+        })
+      }
+    })
+    this.setData({
+      detailMsg: "请详细描述故障以便我们提供更好的帮助",
+      modalName: null
+    })
   }
 })

@@ -7,7 +7,7 @@ Page({
    */
   data: {
     curPage: "home",
-    refresh: true,
+    // refresh: true,
     userInfo: null,
     identity: 0,
     identityColor: ["gray", "gray", "blue", "pink", "red", "yellow", "mauve"],

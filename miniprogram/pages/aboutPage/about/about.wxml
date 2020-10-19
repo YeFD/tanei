@@ -1,6 +1,9 @@
 <cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content">关于塔内</view>
+  <view class="action" slot="right">
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+  </view>
 </cu-custom>
 <scroll-view scroll-y>
   <swiper class="card-swiper round-dot margin-bottom" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper">
@@ -10,14 +13,14 @@
       </view>
     </swiper-item>
   </swiper>
-  <swiper class="screen-swiper round-dot margin-bottom" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-    <swiper-item wx:for="{{4}}">
-      <image src="cloud://demo-vr23l.6465-demo-vr23l-1259081600/image/{{index+5}}.png" mode="aspectFill"></image>
-    </swiper-item>
-  </swiper>
+
   <view class="padding-sm">
     <view class="text-center">
-      <text class="text-grey text-sm">Version 1.6.0</text>
+      <text class="text-grey text-lg">version 1.7.0</text>
+    </view>
+    <view class="text-center">
+      <text class="cuIcon-footprint text-grey margin-right-sm">{{total}}</text>
+      <text class="cuIcon-group text-grey margin-left-sm">{{userNum}}</text>
     </view>
   </view>
 </scroll-view>

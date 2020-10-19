@@ -17,8 +17,11 @@
             <view>{{item.userName}}</view>
             <view class="text-gray text-sm flex justify-between">{{item.time}}</view>
           </view>
-          <view class="">
-            <text wx:for="{{scoreStar}}" wx:key="index" wx:for-item="i" class="cuIcon-favor{{index<=item.score-1?'fill':''}} text-{{scoreStar[item.score-1].color}} text-sm" decode="{{true}}" space="{{true}}">&nbsp;</text>
+          <view class=" text-right">
+            <view class="text-grey margin-right-xs text-sm" wx:if="{{!!item.nickName}}">@{{item.nickName}}</view>
+            <view class="text-grey margin-right-xs text-sm" wx:else>@{{item.repairman}}</view>
+            
+            <text wx:for="{{scoreStar}}" wx:key="index" wx:for-item="i" class="cuIcon-favor{{index<=item.score-1?'fill':''}} text-{{scoreStar[item.score-1].color}} text-sm text-right" decode="{{true}}" space="{{true}}">&nbsp;</text>
           </view>
         </view>
         <!-- <view class="cu-item"> -->

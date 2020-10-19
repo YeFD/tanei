@@ -1,7 +1,9 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 cloud.init({
-  env: "dist-3gfsowkhc324384b"
+  //env: "dist-3gfsowkhc324384b"
+  // env: "demo-vr23l"
+  env: cloud.DYNAMIC_CURRENT_ENV
 })
 const db = cloud.database()
 const _ = db.command
@@ -83,11 +85,15 @@ const statisticsHelper = {
       })
       .get()
     ).data
+    const usersCollection = db.collection("users")
+    const userNum = (await usersCollection.count()).total
+    console.log(userNum)
     if (!!data) {
       return {
         code: 0,
         message: "get successfully",
-        total: data.totalVisitors
+        total: data.totalVisitors,
+        userNum
       }
     } else {
       return {

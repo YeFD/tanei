@@ -24,17 +24,22 @@
             <view>{{item.userName}}</view>
             <view class="text-gray text-sm flex justify-between">{{item.create}}</view>
           </view>
-          <view class="action">
-            <button class="cu-btn round icon bg-white" bindtap="tapDetail" data-index="{{index}}">...
+          <view class="action" bindtap="tapDetail" data-index="{{index}}">
+            <button class="cu-btn round icon bg-white">...
             </button>
             <view class="text-{{stateMsg[item.state+1]['color']}} text-sm">{{stateMsg[item.state+1]['msg']}}</view>
           </view>
-        </view>
-
-        
-        <view class="cu-item">
-          <view class="content">{{item.computerType}}, {{item.faultType}}, {{item.repairType}}</view>
-        </view>
+        </view>        
+        <!-- <view class="cu-item"> -->
+          <view class="padding bg-white">
+            <view class="flex flex-wrap justify-end">
+              <view class="basis-xl margin-right">{{item.computerType}}, {{item.faultType}}, {{item.repairType}}, 
+            <text wx:if="{{!!item.nickName}}">@{{item.nickName}}</text>
+            <text wx:else>@{{item.repairman}}</text>
+              </view>
+            </view>
+          </view>
+        <!-- </view> -->
       </view>
     </view>
   </view>
@@ -50,16 +55,23 @@
             <view>{{item.userName}}</view>
             <view class="text-gray text-sm flex justify-between">{{item.create}}</view>
           </view>
-          <view class="action">
-            <button class="cu-btn round icon bg-white" bindtap="tapDetail" data-index="{{index}}">...
+          <view class="action" bindtap="tapDetail" data-index="{{index}}">
+            <button class="cu-btn round icon bg-white">...
             </button>
             <view class="text-{{stateMsg[item.state+1]['color']}} text-sm">{{stateMsg[item.state+1]['msg']}}</view>
           </view>
         </view>
-
-        <view class="cu-item">
-          <view class="content">{{item.computerType}}, {{item.faultType}}, {{item.repairType}}</view>
-        </view>
+        <!-- <view class="cu-item"> -->
+          <view class="padding bg-white">
+            <view class="flex flex-wrap justify-end">
+              <view class="basis-xl margin-right">{{item.computerType}}, {{item.faultType}}, {{item.repairType}}, 
+            <text wx:if="{{!!item.nickName}}">@{{item.nickName}}</text>
+            <text wx:else>@{{item.repairman}}</text>
+              </view>
+            </view>
+          </view>
+          <!-- <view class="content">{{item.computerType}}, {{item.faultType}}, {{item.repairType}}</view> -->
+        <!-- </view> -->
       </view>
     </view>
     <view class="padding flex flex-wrap justify-between align-center bg-white"  wx:if="{{pageNum > 0}}">
