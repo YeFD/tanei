@@ -177,6 +177,9 @@ Page({
       })
       return
     }
+    this.setData({
+      submitFlag: true
+    })
     console.log("submit", e.detail)
     let params = e.detail.value
     if (!this.WxValidate.checkForm(params)) {
@@ -184,6 +187,9 @@ Page({
       wx.showToast({
         title: error.msg,
         icon: "none"
+      })
+      this.setData({
+        submitFlag: false
       })
       return false
     } else {
@@ -214,6 +220,7 @@ Page({
         icon: "none"
       })
       this.setData({
+        submitFlag: false,
         loading: false
       })
     })
@@ -237,6 +244,7 @@ Page({
         icon: "none"
       })
       this.setData({
+        submitFlag: false,
         loading: false
       })
     }

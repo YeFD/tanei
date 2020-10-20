@@ -72,12 +72,10 @@
       <view class="cu-avatar round lg" wx:else style="background-image:url(https://tx-free-imgs.acfun.cn/style/image/defaultAvatar.jpg)"></view>
       <view class="content">
         <view class="">
-          <view class="cu-tag bg-{{item.identity=='SA'?'mauve':'yellow'}}" wx:if="{{!!item.nickName}}">{{item.nickName}}</view>
-          <view class="cu-tag bg-{{item.identity=='SA'?'mauve':'yellow'}}" wx:else>{{item.department}}</view>
+          <view class="cu-tag bg-{{item.identity=='SA'?'mauve':'yellow'}}">{{item.identity}}</view>
         </view>
-        <view class="text-lg">{{item.name}}
-          <!-- <view class="text-grey" wx:if="{{!!item.nickName}}">({{item.nickName}})</view> -->
-        </view>
+        <view class="text-lg"wx:if="{{!!item.nickName}}">{{item.nickName}}</view>
+        <view class="text-lg" wx:else>({{item.name}})</view>
       </view>
     </view>
   </view>

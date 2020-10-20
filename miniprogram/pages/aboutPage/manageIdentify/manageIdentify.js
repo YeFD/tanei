@@ -8,14 +8,14 @@ Page({
   data: {
     update: false,
     password: null,
-
+    identity: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
-    if (app.globalData.identity != 4 && app.globalData.identity != 6) {
+    if (app.globalData.identity <= 1) {
       wx.showToast({
         title: '权限不足',
         icon: "none"
@@ -24,6 +24,9 @@ Page({
         delta: 1,
       })
     }
+    this.setData({
+      identity: app.globalData.identity
+    })
     const {result} = await wx.cloud.callFunction({
       name: "adminHelper",
       data: {

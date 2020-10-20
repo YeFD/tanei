@@ -9,7 +9,9 @@
         
         <view class="margin-left">
           <view class="cu-capsule margin-top-xl">
-            <view class="cu-tag radius bg-grey">未登陆用户</view>
+            <view class="cu-tag radius bg-grey">未登陆用户
+              <text class="cu-load load-icon {{!isLoad?'loading':'over'}}"></text>
+            </view>
           </view>
           <view class="text-xl margin-top-sm">
             <text class="margin-top-sm" style="font-weight:bold;">阿卡林</text>
@@ -96,11 +98,6 @@
         <text>{{item.name}}</text>
       </view>
       <view class="cu-item" wx:for="{{list2}}" wx:key="index" bindtap="{{item.bindtap}}" wx:if="{{identity>=2}}">
-        <view class="cuIcon-{{item.icon}} text-{{item.color}}">
-        </view>
-        <text>{{item.name}}</text>
-      </view>
-      <view class="cu-item" wx:for="{{list3}}" wx:key="index" bindtap="{{item.bindtap}}" wx:if="{{identity==4 || identity == 6}}">
         <view class="cuIcon-{{item.icon}} text-{{item.color}}">
         </view>
         <text>{{item.name}}</text>

@@ -262,25 +262,33 @@ const repairSheetHelper = {
       }
     })
     if (result.errMsg == "collection.add:ok") {
-      await cloud.openapi.subscribeMessage.send({
-        touser: sheet.userId,
-        templateId: "VNFzvWf4iAIv_K1uaJn61lQ8XWH4wQmU31PXcyXRgmI",
-        page: "/pages/aboutPage/myRepairSheet/myRepairSheet",
-        data: {
-          "thing9": {
-            "value": "已完成"
-          },
-          "thing5": {
-            "value": "你的反馈对我们非常重要，快去评价一下吧～"
-          },
-          "date4": {
-            "value": completeTime_S
+      try {
+        await cloud.openapi.subscribeMessage.send({
+          touser: sheet.userId,
+          templateId: "VNFzvWf4iAIv_K1uaJn61lQ8XWH4wQmU31PXcyXRgmI",
+          page: "/pages/aboutPage/myRepairSheet/myRepairSheet",
+          data: {
+            "thing9": {
+              "value": "已完成"
+            },
+            "thing5": {
+              "value": "你的反馈对我们非常重要，快去评价一下吧～"
+            },
+            "date4": {
+              "value": completeTime_S
+            }
           }
+        })
+        return {
+          code: 0,
+          message: "complete successfully"
         }
-      })
-      return {
-        code: 0,
-        message: "complete successfully"
+      } catch (e) {
+        console.log(e)
+        return {
+          code: 1,
+          message: "add error"
+        }
       }
     } else {
       return {

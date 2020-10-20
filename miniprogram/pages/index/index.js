@@ -54,9 +54,7 @@ Page({
         color: "red",
         name: "塔内成员",
         bindtap: "toManageMember"
-      }
-    ],
-    list3: [
+      },
       {
         icon: "lock",
         color: "cyan",
@@ -102,12 +100,14 @@ Page({
         if (app.globalData.identity <= 1) {
           this.setData({
             list1,
+            isLoad: true,
             identity: app.globalData.identity,
             userInfo: app.globalData.userInfo
           })
         } else {
           this.setData({
             list1,
+            isLoad: true,
             identity: app.globalData.identity,
             userInfo: app.globalData.userInfo,
             adminInfo: app.globalData.adminInfo
@@ -122,6 +122,9 @@ Page({
       wx.showToast({
         title: '获取信息失败',
         icon: "none"
+      })
+      this.setData({
+        isLoad: true
       })
     })
   },

@@ -22,17 +22,29 @@
 </view>
 <view class="cu-form-group">
   <view class="title">干事</view>
-  <view class="action">{{password.password2}}</view>
+  <view class="action">
+    <text wx:if="{{!isLoad || identity == 5}}">******</text>
+    <text wx:else>{{password.password2}}</text>
+  </view>
 </view>
 <view class="cu-form-group">
   <view class="title">部长</view>
-  <view class="action">{{password.password3}}</view>
+  <view class="action">
+    <text wx:if="{{!isLoad || identity < 3 || identity == 5}}">******</text>
+    <text wx:else>{{password.password3}}</text>
+  </view>
 </view>
 <view class="cu-form-group">
   <view class="title">会长</view>
-  <view class="action">{{password.password4}}</view>
+  <view class="action">
+    <text wx:if="{{!isLoad || identity < 4 || identity == 5}}">******</text>
+    <text wx:else>{{password.password4}}</text>
+  </view>
 </view>
 <view class="cu-form-group">
   <view class="title">老人</view>
-  <view class="action">{{password.password5}}</view>
+  <view class="action">
+    <text wx:if="{{!isLoad || identity < 4}}">******</text>
+    <text wx:else>{{password.password5}}</text>
+  </view>
 </view>

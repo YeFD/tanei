@@ -14,13 +14,20 @@
     </swiper-item>
   </swiper>
 
-  <view class="padding-sm">
+  <view class="padding-sm" style="position:fixed; bottom:0px; width:100%;">
     <view class="text-center">
-      <text class="text-grey text-lg">version 1.7.0</text>
+      <text class="cuIcon-footprint text-grey margin-right-xs">
+        <text class="margin-left-xs">{{total}}</text>
+      </text>
+      <text class="cuIcon-group text-grey margin-left-xs text-lg">
+        <text class="margin-left-xs">{{userNum}}</text>
+      </text>
     </view>
     <view class="text-center">
-      <text class="cuIcon-footprint text-grey margin-right-sm">{{total}}</text>
-      <text class="cuIcon-group text-grey margin-left-sm">{{userNum}}</text>
+      <text class="text-grey text-lg">Version 1.7.0</text>
+    </view>
+    <view class="text-center">
+      <text class="text-grey text-sm">Author @小鸡</text>
     </view>
   </view>
 </scroll-view>
