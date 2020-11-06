@@ -62,7 +62,7 @@ Page({
     })
     if (result.code === 0) {
       var pageArray = []
-      for (let i = 1; i<= Math.ceil(result.total / 10); i++) {
+      for (let i = 1; i<= Math.ceil(result.feedback.length / 10); i++) {
         pageArray.push(i)
       }
       var feedbackArray = result.feedback
@@ -173,8 +173,8 @@ Page({
       scrollTop: true,
     })
   },
-  nextPage: function(e) {
-    if (this.data.curPage >= this.data.pageNum) {
+  lastPage: function(e) {
+    if (this.data.curPage <= 1) {
       return
     }
     this.setData({

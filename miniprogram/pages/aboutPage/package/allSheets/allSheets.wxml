@@ -64,9 +64,17 @@
         <!-- <view class="cu-item"> -->
           <view class="padding bg-white">
             <view class="flex flex-wrap justify-end">
-              <view class="basis-xl margin-right">{{item.computerType}}, {{item.faultType}}, {{item.repairType}}, 
-            <text wx:if="{{!!item.nickName}}">@{{item.nickName}}</text>
-            <text wx:else>@{{item.repairman}}</text>
+              <view class="basis-xl margin-right">
+                {{item.computerType}}, {{item.faultType}}, {{item.repairType}}, 
+                <text wx:if="{{!!item.nickName}}">@{{item.nickName}}</text>
+                <text wx:else>@{{item.repairman}}</text>
+              </view>
+            </view>
+            <view class="flex flex-wrap justify-end" wx:if="{{!!item.summary}}">
+              <view class="basis-xl margin-right">
+                <view class="padding bg-gray margin-top-sm radius text-sm">总结：
+                  {{item.summary}}
+                </view>
               </view>
             </view>
           </view>

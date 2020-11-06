@@ -2,6 +2,8 @@
 <block wx:if="{{curPage==='about'}}">
   <scroll-view scroll-y class="scrollPage">
     <view class="UCenter-bg">
+      <!-- <image src="/colorui/images/bg0.png" class="" style="width:100%;height:486rpx"></image> -->
+
       <block wx:if="{{identity===0}}">
         <view class="cu-avatar round xxl" style="background-image:url(https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg)">
         <!-- <open-data type="userAvatarUrl" -->
@@ -91,7 +93,7 @@
     <view class="cu-list grid col-4 shadow-warp">
       <view class="cu-item" wx:for="{{list1}}" wx:key="index" bindtap="{{item.bindtap}}">
         <view class="cuIcon-{{item.icon}} text-{{item.color}}">
-          <view class="cu-tag badge" wx:if="{{item.badge!=0}}">
+          <view class="cu-tag badge" wx:if="{{!!item.badge&&item.badge!=0}}">
             <block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
           </view>
         </view>
@@ -99,6 +101,9 @@
       </view>
       <view class="cu-item" wx:for="{{list2}}" wx:key="index" bindtap="{{item.bindtap}}" wx:if="{{identity>=2}}">
         <view class="cuIcon-{{item.icon}} text-{{item.color}}">
+          <view class="cu-tag badge" wx:if="{{!!item.badge&&item.badge!=0}}">
+            <block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
+          </view>
         </view>
         <text>{{item.name}}</text>
       </view>
@@ -145,20 +150,13 @@
     <view class="cu-tabbar-height"></view>
   </scroll-view>
 </block>
-
 <view class="cu-bar tabbar bg-white shadow foot">
-  <view class="action" bindtap="navChange" data-cur="home">
-    <view class="cuIcon-cu-image">
-      <image src="/colorui/images/tabbar/basics{{curPage=='home'?'_cur':''}}.png"></image>
-    </view>
-    <view class="{{curPage=='home'?'text-green':'text-gray'}}">首页</view>
+  <view class="action navbar__item -blue" bindtap="navChange" data-cur="home">
+    <view class='cuIcon-home text-bold navbar__icon icon'></view>
+    <view class="cu-avatar sm round avatar -blue shadow"><text class="text-balck cuIcon-name text-sm" style="margin-bottom:-85rpx;font-size:20rpx;color:#303030">首页</text></view>
   </view>
-
-  <view class="action" bindtap="navChange" data-cur="about">
-    <view class="cuIcon-cu-image">
-      <image src="/colorui/images/tabbar/about{{curPage=='about'?'_cur':''}}.png"></image>
-    </view>
-    <view class="{{curPage=='about'?'text-green':'text-gray'}}">我的</view>
+  <view class="action navbar__item -green" bindtap="navChange" data-cur="about">
+    <view class='cuIcon-my text-bold navbar__icon icon'></view>
+    <view class="cu-avatar sm round avatar -green shadow"><text class="text-balck cuIcon-name text-sm" style="margin-bottom:-85rpx;font-size:20rpx;color:#303030">我的</text></view>
   </view>
-
 </view>

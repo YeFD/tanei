@@ -25,7 +25,6 @@ Page({
       {
         icon: "form",
         color: "purple",
-        badge: 0,
         name: "我的报修",
         bindtap: "toMyRepairSheet"
       }
@@ -41,6 +40,7 @@ Page({
         icon: "repair",
         color: "blue",
         name: "我的维修",
+        badge: 0,
         bindtap: "toMyReceivedRepairSheet"
       },
       {
@@ -105,8 +105,41 @@ Page({
             userInfo: app.globalData.userInfo
           })
         } else {
+          var list2 = [
+            {
+              icon: "profile",
+              color: "pink",
+              name: "认证信息",
+              bindtap: "toMyIdentity"
+            },
+            {
+              icon: "repair",
+              color: "blue",
+              name: "我的维修",
+              badge: app.globalData.adminInfo.ingNum,
+              bindtap: "toMyReceivedRepairSheet"
+            },
+            {
+              icon: "list",
+              color: "orange",
+              name: "所有报单",
+              bindtap: "toAllSheets"
+            },
+            {
+              icon: "group",
+              color: "red",
+              name: "塔内成员",
+              bindtap: "toManageMember"
+            },
+            {
+              icon: "lock",
+              color: "cyan",
+              name: "认证管理",
+              bindtap: "toManageIdentify"
+            }
+          ]
           this.setData({
-            list1,
+            list1, list2,
             isLoad: true,
             identity: app.globalData.identity,
             userInfo: app.globalData.userInfo,
@@ -140,7 +173,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("onshow")
     var list1 = [
       {
         icon: "notice",
@@ -164,8 +196,41 @@ Page({
         userInfo: app.globalData.userInfo
       })
     } else {
+      var list2 = [
+        {
+          icon: "profile",
+          color: "pink",
+          name: "认证信息",
+          bindtap: "toMyIdentity"
+        },
+        {
+          icon: "repair",
+          color: "blue",
+          name: "我的维修",
+          badge: app.globalData.adminInfo.ingNum,
+          bindtap: "toMyReceivedRepairSheet"
+        },
+        {
+          icon: "list",
+          color: "orange",
+          name: "所有报单",
+          bindtap: "toAllSheets"
+        },
+        {
+          icon: "group",
+          color: "red",
+          name: "塔内成员",
+          bindtap: "toManageMember"
+        },
+        {
+          icon: "lock",
+          color: "cyan",
+          name: "认证管理",
+          bindtap: "toManageIdentify"
+        }
+      ]
       this.setData({
-        list1,
+        list1, list2,
         identity: app.globalData.identity,
         userInfo: app.globalData.userInfo,
         adminInfo: app.globalData.adminInfo
@@ -312,7 +377,6 @@ Page({
           {
             icon: "form",
             color: "purple",
-            badge: 0,
             name: "我的报修",
             bindtap: "toMyRepairSheet"
           }
@@ -333,7 +397,7 @@ Page({
   // },
   toManageMember() {
     wx.navigateTo({
-      url: '/pages/aboutPage/manageMember/manageMember',
+      url: '/pages/aboutPage/package/manageMember/manageMember',
     })
   },
   toMessageBox() {
@@ -351,17 +415,17 @@ Page({
       return
     }
     wx.navigateTo({
-      url: '/pages/aboutPage/identify/identify',
+      url: '/pages/aboutPage/package2/identify/identify',
     })
   },
   toMyIdentity() {
     wx.navigateTo({
-      url: '/pages/aboutPage/myIdentity/myIdentity',
+      url: '/pages/aboutPage/package/myIdentity/myIdentity',
     })
   },
   toMyReceivedRepairSheet() {
     wx.navigateTo({
-      url: '/pages/aboutPage/myReceivedRepairSheet/myReceivedRepairSheet',
+      url: '/pages/aboutPage/package/myReceivedRepairSheet/myReceivedRepairSheet',
     })
   },
   toMyRepairSheet() {
@@ -371,12 +435,12 @@ Page({
   },
   toAllSheets() {
     wx.navigateTo({
-      url: '/pages/aboutPage/allSheets/allSheets',
+      url: '/pages/aboutPage/package/allSheets/allSheets',
     })
   },
   toManageIdentify() {
     wx.navigateTo({
-      url: '/pages/aboutPage/manageIdentify/manageIdentify',
+      url: '/pages/aboutPage/package/manageIdentify/manageIdentify',
     })
   },
   toDiscover() {
@@ -385,7 +449,7 @@ Page({
     //   icon: "none"
     // })
     wx.navigateTo({
-      url: '/pages/aboutPage/discover/discover',
+      url: '/pages/aboutPage/package1/discover/discover',
     })
   }
 })

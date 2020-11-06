@@ -1,5 +1,5 @@
 const app = getApp()
-import WxValidate from "../../../utils/WxValidate"
+import WxValidate from "../../../../utils/WxValidate"
 // miniprogram/pages/aboutPage/identify/identify.js
 Page({
 

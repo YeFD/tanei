@@ -39,27 +39,16 @@
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
     "plugin": {
-      "current": -1,
       "list": []
     },
     "game": {
       "list": []
     },
     "gamePlugin": {
-      "current": -1,
       "list": []
     },
     "miniprogram": {
-      "current": -1,
       "list": [
         {
           "id": -1,
@@ -111,9 +100,8 @@
           "scene": null
         },
         {
-          "id": -1,
           "name": "discover",
-          "pathName": "pages/aboutPage/discover/discover",
+          "pathName": "pages/aboutPage/package1/discover/discover",
           "query": "",
           "scene": null
         },

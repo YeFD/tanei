@@ -26,14 +26,14 @@ Component({
         name: "statistics",
         color: "blue",
         icon: "news",
-        path: "statistics"
+        path: "package/statistics"
       },
       {
         title: "用户评价",
         name: "feedback",
         color: "orange",
         icon: "comment",
-        path: "feedback"
+        path: "package/feedback"
       }
     ],
   },

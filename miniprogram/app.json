@@ -3,18 +3,40 @@
     "pages/index/index",
     "pages/homePage/repairSheet/repairSheet",
     "pages/aboutPage/myRepairSheet/myRepairSheet",
-    "pages/aboutPage/myReceivedRepairSheet/myReceivedRepairSheet",
     "pages/aboutPage/messageBox/messageBox",
-    "pages/aboutPage/manageMember/manageMember",
-    "pages/aboutPage/identify/identify",
-    "pages/homePage/statistics/statistics",
-    "pages/aboutPage/detailSheet/detailSheet",
-    "pages/aboutPage/myIdentity/myIdentity",
-    "pages/aboutPage/allSheets/allSheets",
-    "pages/aboutPage/manageIdentify/manageIdentify",
-    "pages/aboutPage/discover/discover",
-    "pages/aboutPage/about/about",
-    "pages/homePage/feedback/feedback"
+    "pages/aboutPage/about/about"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/homePage/package",
+      "pages": [
+        "statistics/statistics",
+        "feedback/feedback"
+      ]
+    },
+    {
+      "root": "pages/aboutPage/package",
+      "pages": [
+        "allSheets/allSheets",
+        "detailSheet/detailSheet",
+        "manageIdentify/manageIdentify",
+        "manageMember/manageMember",
+        "myIdentity/myIdentity",
+        "myReceivedRepairSheet/myReceivedRepairSheet"
+      ]
+    },
+    {
+      "root": "pages/aboutPage/package2",
+      "pages": [
+        "identify/identify"
+      ]
+    },
+    {
+      "root": "pages/aboutPage/package1",
+      "pages": [
+        "discover/discover"
+      ]
+    }
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

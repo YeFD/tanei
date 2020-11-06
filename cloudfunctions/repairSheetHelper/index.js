@@ -119,52 +119,53 @@ const repairSheetHelper = {
     }
     
   },
-  // async test(event, wxContext) {
-  //   var nodemailer = require("nodemailer")
-  //   var config = {
-  //     host: 'smtp.163.com',
-  //     port: 25,
-  //     auth: {
-  //       user: "taneipc@163.com",
-  //       pass: "TN123456"
-  //     }
-  //   }
-  //   var repairman = "小鸡"
-  //   var userName = "test"
-  //   var transporter = nodemailer.createTransport(config)
-  //   var mail = {
-  //     from: "塔内计协小程序 <taneipc@163.com>",
-  //     subject: "您好，"+repairman + "，【" + userName + "】同学需要你的帮助~",
-  //     to: "xiaoji_owo@qq.com",
-  //     text: "详细报单请到塔内小程序查看，快去接单吧！（本邮件由塔内计协小程序自动发送）"
-  //   }
-  //   transporter.sendMail(mail)
-  //   const adminCollection = db.collection("admin")
-  //   const adminArray = (await adminCollection
-  //     .where({
-  //       id: 1,
-  //       identity: "部长"
-  //     })
-  //     .get()
-  //   ).data
-  //   // console.log(adminArray)
-  //   if (!!adminArray) {
-  //     var cc = ""
-  //     for (let i = 1; i < adminArray.length; i++) {
-  //       cc += adminArray[i].email + ","
-  //     }
-  //     var mail2 = {
-  //       from: "塔内计协小程序 <taneipc@163.com>",
-  //       subject: "技术部部长，您好！【" + repairman + "】接到新的报单啦~",
-  //       to: adminArray[0].email,
-  //       text: "详细报单请到塔内小程序查看，快去通知Ta吧！（本邮件由塔内计协小程序自动发送）",
-  //       cc: cc
-  //     }
-  //     console.log(adminArray[0].email, cc)
-  //     transporter.sendMail(mail2)
-  //   }
-  //   return
-  // },
+  async test(event, wxContext) {
+    var nodemailer = require("nodemailer")
+    var config = {
+      host: 'smtp.163.com',
+      port: 25,
+      auth: {
+        user: "taneipc@163.com",
+        pass: "TN123456"
+      }
+    }
+    var repairman = "小鸡"
+    var userName = "test"
+    var transporter = nodemailer.createTransport(config)
+    var mail = {
+      from: "塔内计协小程序 <taneipc@163.com>",
+      subject: "您好，"+repairman + "，【" + userName + "】同学需要你的帮助~",
+      to: "xiaoji_owo@qq.com",
+      text: "详细报单请到塔内小程序查看，快去接单吧！（本邮件由塔内计协小程序自动发送）",
+      html: "<img src='http://images.cnblogs.com/cnblogs_com/PeunZhang/286351/o_peunzhang_cnblogs_code.png' width='200' height='200'>"
+    }
+    transporter.sendMail(mail)
+    // const adminCollection = db.collection("admin")
+    // const adminArray = (await adminCollection
+    //   .where({
+    //     id: 1,
+    //     identity: "部长"
+    //   })
+    //   .get()
+    // ).data
+    // // console.log(adminArray)
+    // if (!!adminArray) {
+    //   var cc = ""
+    //   for (let i = 1; i < adminArray.length; i++) {
+    //     cc += adminArray[i].email + ","
+    //   }
+    //   var mail2 = {
+    //     from: "塔内计协小程序 <taneipc@163.com>",
+    //     subject: "技术部部长，您好！【" + repairman + "】接到新的报单啦~",
+    //     to: adminArray[0].email,
+    //     text: "详细报单请到塔内小程序查看，快去通知Ta吧！（本邮件由塔内计协小程序自动发送）",
+    //     cc: cc
+    //   }
+    //   console.log(adminArray[0].email, cc)
+    //   transporter.sendMail(mail2)
+    // }
+    // return
+  },
   async receive(event, wxContext) { //传入_id
     await collection.doc(event._id).update({
       data: {
@@ -272,23 +273,19 @@ const repairSheetHelper = {
               "value": "已完成"
             },
             "thing5": {
-              "value": "你的反馈对我们非常重要，快去评价一下吧～"
+              "value": "反馈报修体验，帮助我们更好提示服务"
             },
             "date4": {
               "value": completeTime_S
             }
           }
         })
-        return {
-          code: 0,
-          message: "complete successfully"
-        }
       } catch (e) {
         console.log(e)
-        return {
-          code: 1,
-          message: "add error"
-        }
+      }
+      return {
+        code: 0,
+        message: "complete successfully"
       }
     } else {
       return {
@@ -464,7 +461,8 @@ const repairSheetHelper = {
         faultType: sheets[i].faultType,
         repairType: sheets[i].repairType,
         repairman: sheets[i].repairman,
-        nickName: sheets[i].nickName
+        nickName: sheets[i].nickName,
+        summary: sheets[i].summary
       }
       completedSheets.push(sheet)
     }
