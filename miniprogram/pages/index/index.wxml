@@ -151,11 +151,11 @@
   </scroll-view>
 </block>
 <view class="cu-bar tabbar bg-white shadow foot">
-  <view class="action navbar__item -blue" bindtap="navChange" data-cur="home">
+  <view class="action navbar__item text-{{curPage=='home'?'blue':'gray'}}" bindtap="navChange" data-cur="home">
     <view class='cuIcon-home text-bold navbar__icon icon'></view>
     <view class="cu-avatar sm round avatar -blue shadow"><text class="text-balck cuIcon-name text-sm" style="margin-bottom:-85rpx;font-size:20rpx;color:#303030">首页</text></view>
   </view>
-  <view class="action navbar__item -green" bindtap="navChange" data-cur="about">
+  <view class="action navbar__item text-{{curPage=='about'?'green':'gray'}}" bindtap="navChange" data-cur="about">
     <view class='cuIcon-my text-bold navbar__icon icon'></view>
     <view class="cu-avatar sm round avatar -green shadow"><text class="text-balck cuIcon-name text-sm" style="margin-bottom:-85rpx;font-size:20rpx;color:#303030">我的</text></view>
   </view>

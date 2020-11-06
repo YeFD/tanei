@@ -19,21 +19,21 @@ Component({
         name: "repair",
         color: "pink",
         icon: "repair",
-        path: "repairSheet"
+        path: "repairSheet/repairSheet"
       },
       {
         title: "数据展示",
         name: "statistics",
         color: "blue",
         icon: "news",
-        path: "package/statistics"
+        path: "package/statistics/statistics"
       },
       {
         title: "用户评价",
         name: "feedback",
         color: "orange",
         icon: "comment",
-        path: "package/feedback"
+        path: "package/feedback/feedback"
       }
     ],
   },

@@ -4,7 +4,8 @@
     "pages/homePage/repairSheet/repairSheet",
     "pages/aboutPage/myRepairSheet/myRepairSheet",
     "pages/aboutPage/messageBox/messageBox",
-    "pages/aboutPage/about/about"
+    "pages/aboutPage/about/about",
+    "pages/aboutPage/detailSheet/detailSheet"
   ],
   "subpackages": [
     {
@@ -18,7 +19,6 @@
       "root": "pages/aboutPage/package",
       "pages": [
         "allSheets/allSheets",
-        "detailSheet/detailSheet",
         "manageIdentify/manageIdentify",
         "manageMember/manageMember",
         "myIdentity/myIdentity",
