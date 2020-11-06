@@ -1,0 +1,17 @@
+<view class="navigation-bar ext-class">
+    <view class="system-status-bar" style="height:{{statusBarHeight}}px;"></view>
+    <view class="navigator">
+        <view class="navigator-bd" style="height:{{title.height}}px;width: {{title.width}}px;margin:{{title.top}}px {{title.right}}px {{title.top}}px 0;">
+            <slot></slot>
+        </view>
+        <view class="navigator-hd {{navigationBarStyle}}" hidden="{{hide}}" style="height:{{menuBtn.height}}px;width:{{menuBtn.width}}px;margin:{{menuBtn.top}}px {{menuBtn.left}}px;">
+            <navigator class="navigator-item {{return}}" hoverClass="hover" hoverStartTime="10" openType="navigateBack" style="height:{{menuBtn.height}}px;">
+                <view class="iconfont icon-arrow-left"></view>
+            </navigator>
+            <span class="capsule-sep"></span>
+            <navigator class="navigator-item" hoverClass="hover" hoverStartTime="10" openType="{{navType}}" style="height:{{menuBtn.height}}px;" url="{{home}}">
+                <view class="iconfont icon-home"></view>
+            </navigator>
+        </view>
+    </view>
+</view>

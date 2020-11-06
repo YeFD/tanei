@@ -34,7 +34,8 @@
     {
       "root": "pages/aboutPage/package1",
       "pages": [
-        "discover/discover"
+        "discover/discover",
+        "algorithm/algorithm"
       ]
     }
   ],

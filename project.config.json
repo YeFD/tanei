@@ -34,7 +34,7 @@
   },
   "appid": "wx406f0470244a78c4",
   "projectname": "tanei",
-  "libVersion": "2.8.1",
+  "libVersion": "2.10.4",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
@@ -116,6 +116,12 @@
           "id": -1,
           "name": "about",
           "pathName": "pages/aboutPage/about/about",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "algorithm",
+          "pathName": "pages/aboutPage/package1/algorithm/algorithm",
           "query": "",
           "scene": null
         }
