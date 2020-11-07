@@ -4,7 +4,7 @@
   
 </cu-custom> -->
 <view>
-    <navigation-bar home="/pages/tabBar/index/index">
+    <navigation-bar home="/pages/index/index">
         <view class="weui-flex" style="width:{{menuW}}px;height:{{menuH}}px;border: 0.5px solid rgba(255, 255, 255, 0.25);background:rgba(0, 0, 0, 0.15);border-radius:{{menuH}}px;align-items:center;margin:0 auto;">
             <view bindtap="toSetting" class="weui-flex__item" hoverClass="hover" style="border-radius:{{menuH}}px 0 0 {{menuH}}rpx;{{setting[3]&&1===status?'pointer-events: none':''}}">
                 <view class="iconfont icon-content" style="line-height:{{menuH}}px;{{setting[3]&&1===status?'color: rgba(255, 255, 255, 0.18)':'color:var(--weui-BLUE)'}}"></view>
@@ -46,21 +46,21 @@
         <view class="weui-half-screen-dialog" style="width:45%;left:50%;top:0;z-index:99999;">
             <view class="weui-half-screen-dialog__hd">
                 <view bindtap="closeSetting" class="weui-half-screen-dialog__hd__side">
-                    <a class="weui-icon-btn">关闭
-            <i class="weui-icon-close-thin"></i>
-                    </a>
                 </view>
                 <view class="weui-half-screen-dialog__hd__main">
-                    <strong class="weui-half-screen-dialog__title">设置</strong>
+                    <strong class="weui-half-screen-dialog__title">算法可视化</strong>
                     <view class="weui-half-screen-dialog__subtitle">随机生成{{numbers[ setting[1] ]}}个数据,{{setting[3]?'延时'+delays[ setting[2] ]+'毫秒,':''}}{{setting[3]?'自动':'步进'}}执行{{sorts[ setting[0] ].name}}</view>
                 </view>
             </view>
-            <view class="weui-half-screen-dialog__bd" style="height:100%;">
+            <view class="weui-half-screen-dialog__bd" style="height:75%;">
                 <picker-view bindchange="setting" indicatorStyle="height: 50px;color:green;" style="width: 100%; height: 250px;" value="{{setting}}">
                     <picker-view-column>
                         <view style="line-height: 50px; text-align: center;" wx:for="{{sorts}}" wx:key="item">{{item.name}}</view>
                     </picker-view-column>
-                    <picker-view-column>
+                    <picker-view-column wx:if="{{setting[0]==3}}">
+                        <view style="line-height: 50px; text-align: center;" wx:for="{{numbers2}}" wx:key="item">{{item}}个</view>
+                    </picker-view-column>
+                    <picker-view-column wx:else>
                         <view style="line-height: 50px; text-align: center;" wx:for="{{numbers}}" wx:key="item">{{item}}个</view>
                     </picker-view-column>
                     <picker-view-column>
@@ -71,6 +71,9 @@
                         <view style="line-height: 50px; text-align: center;">自动</view>
                     </picker-view-column>
                 </picker-view>
+            </view>
+            <view class="weui-half-screen-dialog__ft">
+                <text class="">原创作者: @makerGYT</text>
             </view>
         </view>
     </view>

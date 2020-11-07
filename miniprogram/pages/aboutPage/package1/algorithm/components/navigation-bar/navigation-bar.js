@@ -46,14 +46,11 @@ Component({
         }
     },
     methods: {
-        _goBack: function() {
-            wx.navigateBack(), this.triggerEvent("back");
-        },
-        _goHome: function() {
-            var t = this.data;
-            wx.switchTab({
-                url: t.home
-            });
-        }
+        toHome(){
+            const app = getApp()
+            wx.reLaunch({
+                url: '/pages/index/index',
+            })
+      }
     }
 });

@@ -9,7 +9,7 @@
                 <view class="iconfont icon-arrow-left"></view>
             </navigator>
             <span class="capsule-sep"></span>
-            <navigator class="navigator-item" hoverClass="hover" hoverStartTime="10" openType="{{navType}}" style="height:{{menuBtn.height}}px;" url="{{home}}">
+            <navigator class="navigator-item" hoverClass="hover" hoverStartTime="10" openType="{{navType}}" style="height:{{menuBtn.height}}px;" url="{{home}}" bindtap="toHome">
                 <view class="iconfont icon-home"></view>
             </navigator>
         </view>

@@ -12,7 +12,8 @@ Page({
         setting: [ 0, 7, 0, 1 ],
         sorts: iiiiiii,
         numbers: ssssss(20, 3, 1),
-        delays: ssssss(20, 100, 100)
+        numbers2: ssssss(10, 4, 2),
+        delays: ssssss(10, 100, 100)
     },
     onLoad: function(t) {
         var e = this, s = wx.getMenuButtonBoundingClientRect(), i = wx.getSystemInfoSync(), o = i.safeArea, a = i.screenHeight, n = i.pixelRatio;
@@ -42,8 +43,7 @@ Page({
     },
     onShareAppMessage: function() {
         return {
-            title: "算法可视化",
-            imageUrl: "https://cdn.blog.makergyt.com/mini/assets/tool-algo_poster.png"
+            title: "算法可视化"
         };
     },
     toSetting: function() {
@@ -57,8 +57,14 @@ Page({
         });
     },
     setting: function(e) {
+        var setting = e.detail.value
+        if (setting[0] == 3 && this.data.setting[0] != 3) {
+            setting[1] = parseInt(this.data.setting[1] / 2)
+        } else if (this.data.setting[0] == 3 && setting[0] != 3) {
+            setting[1] = setting[1] * 2 + 1
+        }
         this.setData({
-            setting: e.detail.value
+            setting: setting
         }), this.reset();
     },
     toNext: function() {
@@ -85,15 +91,19 @@ Page({
         });
     },
     success: function() {
-        var t = wx.createInnerAudioContext();
-        t.autoplay = !0, t.src = "https://cdn.blog.makergyt.com/mini/assets/ding.mp3", this.setData({
+        this.setData({
             status: 0
         });
     },
     reset: function() {
         this.sort = iiiiiii[this.data.setting[0]], this.selectComponent("#code").setContent(this.sort.code), 
         this.selectComponent("#description").setContent(this.sort.description);
-        var t = eeeeeee(this.data.numbers[this.data.setting[1]], 180);
+        var t;
+        if (this.data.setting[0] == 3) {
+            t = eeeeeee(this.data.numbers2[this.data.setting[1]], 180)
+        } else {
+            t = eeeeeee(this.data.numbers[this.data.setting[1]], 180)
+        }
         this.variable = this.sort.init(t), this.draw(this.variable.array, -1, -1, -1), this.point(1), 
         this.setData({
             status: this.data.setting[3] ? -1 : 1
