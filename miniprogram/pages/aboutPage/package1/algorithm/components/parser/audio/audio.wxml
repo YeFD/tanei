@@ -1,0 +1,13 @@
+<view class="contain" wx:if="{{controls}}">
+    <slider activeColor="#585959" bindchange="_seeked" bindchanging="_seeking" blockSize="12" class="slider" disabled="{{error}}" value="{{value}}"></slider>
+    <view class="poster" style="background-image:url('{{poster}}')">
+        <view bindtap="{{playing?'pause':'play'}}" class="button">
+            <view class="{{playing?'pause':'play'}}"></view>
+        </view>
+    </view>
+    <view class="title">
+        <view class="name">{{name||'未知音频'}}</view>
+        <view class="author">{{author||'未知作者'}}</view>
+    </view>
+    <view class="time">{{time}}</view>
+</view>

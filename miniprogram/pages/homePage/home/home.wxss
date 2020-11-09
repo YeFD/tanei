@@ -1,1 +1,12 @@
-/* pages/homePage/home/home.wxss */
+.swiper_container {
+  height: 60rpx;
+  width: 80vw;
+}
+
+.swiper_item {
+  font-size: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 2px;
+}

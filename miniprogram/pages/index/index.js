@@ -1,13 +1,7 @@
-// miniprogram/pages/index/index.js
 const app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     curPage: "home",
-    // refresh: true,
     userInfo: null,
     identity: 0,
     identityColor: ["gray", "gray", "blue", "pink", "red", "yellow", "mauve"],
@@ -58,7 +52,7 @@ Page({
       {
         icon: "lock",
         color: "cyan",
-        name: "认证管理",
+        name: "管理",
         bindtap: "toManageIdentify"
       }
     ]
@@ -134,7 +128,7 @@ Page({
             {
               icon: "lock",
               color: "cyan",
-              name: "认证管理",
+              name: "管理",
               bindtap: "toManageIdentify"
             }
           ]
@@ -225,7 +219,7 @@ Page({
         {
           icon: "lock",
           color: "cyan",
-          name: "认证管理",
+          name: "管理",
           bindtap: "toManageIdentify"
         }
       ]
@@ -236,45 +230,7 @@ Page({
         adminInfo: app.globalData.adminInfo
       })
     }
-    // this.setData({
-    //   refresh: false
-    // })
-    // this.setData({
-    //   refresh: true
-    // })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
 
   },
@@ -390,11 +346,6 @@ Page({
       }
     }
   },
-  // toUserInfo() {
-  //   wx.navigateTo({
-  //     url: '/pages/aboutPage/userInfo/userInfo',
-  //   })
-  // },
   toManageMember() {
     wx.navigateTo({
       url: '/pages/aboutPage/package/manageMember/manageMember',
@@ -406,7 +357,6 @@ Page({
     })
   },
   toIdentify() {
-    console.log("identify page")
     if (this.data.identity !== 1) {
       wx.showToast({
         title: '已经存在认证',

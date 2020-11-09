@@ -43,5 +43,12 @@
     "value": {
       "action": "getOnlineAdminArray"
     }
+  },
+  {
+    "name": "setNotice",
+    "value": {
+      "action": "setNotice",
+      "notice": "撒打算打算的撒喜欢也好请问"
+    }
   }
 ]

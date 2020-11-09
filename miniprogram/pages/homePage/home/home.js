@@ -1,4 +1,5 @@
 // pages/homePage/home/home.js
+const app = getApp()
 Component({
   /**
    * 组件的属性列表
@@ -8,7 +9,9 @@ Component({
   },
   options: {
     addGlobalClass: true,
+    multipleSlots: true
   },
+
   /**
    * 组件的初始数据
    */
@@ -36,12 +39,69 @@ Component({
         path: "package/feedback/feedback"
       }
     ],
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
+    Custom: app.globalData.Custom,
+    notice: "",
+    msgList: []
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-
+    
+  },
+  lifetimes: {
+    attached: async function() {
+      const {result} = await wx.cloud.callFunction({
+        name: "adminHelper",
+        data: {
+          action: "getNotice"
+        }
+      }).catch(e => {
+        return
+      })
+      if (result.code == 0) {
+        const {notice} = result
+        var msgList = []
+        for (let i = 0; i*13 < notice.length; i++) {
+          msgList[i] = notice.substr(13*i, 13)
+        }
+        if (msgList.length == 1) {
+          msgList[1] = ""
+        }
+        this.setData({
+          notice,
+          msgList
+        })
+      }
+    }
+  },
+  pageLifetimes: {
+    show: async function() {
+      const {result} = await wx.cloud.callFunction({
+        name: "adminHelper",
+        data: {
+          action: "getNotice"
+        }
+      }).catch(e => {
+        return
+      })
+      if (result.code == 0) {
+        const {notice} = result
+        if (notice == this.data.notice) {
+          return
+        }
+        var msgList = []
+        for (let i = 0; i*13 < notice.length; i++) {
+          msgList[i] = notice.substr(13*i, 13)
+        }
+        this.setData({
+          notice,
+          msgList
+        })
+      }
+    }
   }
 })

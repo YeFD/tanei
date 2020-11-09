@@ -34,7 +34,7 @@
   },
   "appid": "wx406f0470244a78c4",
   "projectname": "tanei",
-  "libVersion": "2.8.1",
+  "libVersion": "2.12.2",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
@@ -117,6 +117,23 @@
           "name": "about",
           "pathName": "pages/aboutPage/about/about",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "algorithm",
+          "pathName": "pages/aboutPage/package1/algorithm/algorithm",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "manageIdentify",
+          "pathName": "pages/aboutPage/package/manageIdentify/manageIdentify",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "log",
+          "pathName": "pages/aboutPage/package1/log/log",
           "scene": null
         }
       ]

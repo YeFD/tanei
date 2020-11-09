@@ -626,6 +626,7 @@ const adminHelper = {
       })
       .get()
     ).data
+    // console.log(data)
     if (!!data) {
       return {
         code: 0,
@@ -636,13 +637,55 @@ const adminHelper = {
           password3: data.password3,
           password4: data.password4,
           password5: data.password5
-        }
+        },
+        notice: data.notice
       }
     } else {
       return {
         code: 1,
         message: "还没有设置"
       }
+    }
+  },
+  async getNotice(event, wxContext) {
+    const [data] = (await adminCollection
+      .where({
+        id: 0
+      })
+      .get()
+    ).data
+    if (!!data) {
+      return {
+        code: 0,
+        message: "ok",
+        notice: data.notice
+      }
+    } else {
+      return {
+        code: 1,
+        message: "还没有设置"
+      }
+    }
+  },
+  async setNotice(event, wxContext) {
+    const {notice} = event
+    const [data] = (await adminCollection
+      .where({
+        id: 0
+      })
+      .get()
+    ).data
+    // console.log(data, notice)
+    await adminCollection.doc(data._id).update({
+      data: {
+        notice: notice,
+        updatedTime: db.serverDate(),
+        updatedBy: wxContext.OPENID
+      }
+    })
+    return {
+      code: 0,
+      message: "ok"
     }
   },
   changeIdentity: async function(event, wxContext) {

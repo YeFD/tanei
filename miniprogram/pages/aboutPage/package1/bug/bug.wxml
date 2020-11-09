@@ -1,0 +1,29 @@
+<cu-custom id="custom" bgColor="bg-gradual-pink" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">bug实验室</view>
+</cu-custom>
+<scroll-view scroll-y class="scrollPage">
+
+
+  <view class="cu-bar bg-white">
+    <view class="action">
+      <text class="cuIcon-title text-pink"></text>已知bug
+    </view>
+    <view class="action">导航栏错位</view>
+  </view>
+  <view class="padding-sm bg-white">
+    <image src="cloud://dist-3gfsowkhc324384b.6469-dist-3gfsowkhc324384b-1259081600/bug0.jpg" mode="widthFix" style="width:100%; height: 100%"></image>
+  </view>
+  <view class="cu-bar bg-white">
+    <view class="action">
+      <text class="cuIcon-warn text-orange"></text>系统信息获取失败
+    </view>
+    <view class="action">
+      <button class="cu-btn line-orange" bindtap="tapRe">
+        <text class="cuIcon-forward"></text>复现
+      </button>
+      <button class="cu-btn bg-green margin-left" bindtap="tapFixBug">
+        <text class="cuIcon-safe"></text>修复</button>
+    </view>
+  </view>
+</scroll-view>
