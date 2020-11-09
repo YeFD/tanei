@@ -1,4 +1,3 @@
-// require("../@babel/runtime/helpers/Arrayincludes");
 
 var t = {}, e = require("../6.js"), i = wx.getFileSystemManager && wx.getFileSystemManager();
 

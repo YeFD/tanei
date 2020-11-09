@@ -1,37 +1,45 @@
-<cu-custom id="custom" bgColor="bg-gradual-pink" isBack="{{true}}">
-  <!-- <view slot="backText">返回</view> -->
-  <!-- <view slot="content">实验室</view> -->
-</cu-custom>
+<!-- <cu-custom id="custom" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">实验室</view>
+</cu-custom> -->
 <scroll-view scroll-y class="scrollPage">
-
-
   <view class="ripple-main {{isShow?'filter':''}}">
-	<view class="v-content">
-		<view class="tx" style="height: {{CustomBar-StatusBar}}px;padding-top: {{StatusBar}}px;line-height: {{CustomBar-StatusBar}}px;">仿酷安menu</view>
-		<view class="ripple" animation="{{animationData}}" hidden='{{hidden}}' style='{{myStyle}}'></view>
+		<view class="v-content">
+			<view class="cu-custom" style="height:{{CustomBar}}px">
+				<view class="cu-bar fixed text-white" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+					<view class="action text-xs">
+						<text class="cuIcon-back" bindtap="backPage"></text>
+					</view>
+					<view class="content" style="top:{{StatusBar}}px">实验室</view>
+				</view>
+			</view>
+			<view style="display: flex;justify-content: center;">
+				<view class="ripple" animation="{{animationData}}" hidden='{{hidden}}' style='{{myStyle}}'></view>
+			</view>
+		</view>
 	</view>
-</view>
 
-<view class='bar'>
-	<view class='tabicon'>
-		<view hidden='{{!isShow}}' class='menu' style='height:{{CustomBar}}px;padding-top:{{CustomBar}}px;'>分享生活的点滴，见证美好的明天</view>
-		<view class='bottom' hidden='{{!isShow}}'>
-			<view class='navlist' wx:for='{{nav}}' wx:for-item="i" wx:for-index="d">
-				<view class='item  {{isShow?"animation-nav":""}}' style='animation-delay: {{(index+1)*0.1}}s;' wx:for='{{i.navigation}}'>
-					<image mode='widthFix' src='cloud://dist-3gfsowkhc324384b.6469-dist-3gfsowkhc324384b-1259081600/5.png'></image>
-					<text class='string'>{{item.name}}</text>
+	<view class='bar'>
+		<view class='tabicon'>
+			<view hidden='{{!isShow}}' class='menu' style='height:{{CustomBar}}rpx;padding-top:{{CustomBar}}rpx;'>分享生活的点滴，见证美好的明天</view>
+			<view class='bottom' hidden='{{!isShow}}'>
+				<view class='navlist' wx:for='{{nav}}' wx:for-item="i" wx:for-index="d" wx:key="index">
+					<view class='item  {{isShow?"animation-nav":""}}' style='animation-delay: {{(index+1)*0.1}}s;' wx:for='{{i.navigation}}' wx:key="index" data-path="{{item.path}}" bindtap="navTo">
+						<image mode='widthFix' src='{{item.src}}'></image>
+						<!-- <view class="text"><text class="cuIcon-my"></text></view> -->
+						<text class='string'>{{item.name}}</text>
+					</view>
 				</view>
 			</view>
 		</view>
 	</view>
-</view>
-<view class="add1" hidden='{{isShow}}'>
-	<view class='send'></view>
-</view>
-<view class="add">
-	<view bindtap="onClickAdd">
-		<text class="iconfont icon-jia {{menuStyle}}"></text>
+	<view class="add1" hidden='{{isShow}}'>
+		<view class='send'></view>
 	</view>
-</view>
+	<view class="add">
+		<view bindtap="onClickAdd" class="text-xl">
+			<text class="cuIcon-add {{menuStyle}}"></text>
+		</view>
+	</view>
 
 </scroll-view>

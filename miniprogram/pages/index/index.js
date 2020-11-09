@@ -52,7 +52,7 @@ Page({
       {
         icon: "lock",
         color: "cyan",
-        name: "认证管理",
+        name: "管理",
         bindtap: "toManageIdentify"
       }
     ]
@@ -219,7 +219,7 @@ Page({
         {
           icon: "lock",
           color: "cyan",
-          name: "认证管理",
+          name: "管理",
           bindtap: "toManageIdentify"
         }
       ]

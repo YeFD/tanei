@@ -1,4 +1,4 @@
-require("@babel/runtime/helpers/Arrayincludes.js");
+// require("./Arrayincludes.js");
 
 var t = require("7.js"), i = t.blankChar, s = require("4.js"), e = wx.getSystemInfoSync().windowWidth;
 

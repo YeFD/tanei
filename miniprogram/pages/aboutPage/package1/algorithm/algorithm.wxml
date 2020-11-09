@@ -73,7 +73,7 @@
                 </picker-view>
             </view>
             <view class="weui-half-screen-dialog__ft">
-                <text class="">原创作者: @makerGYT</text>
+                <text class="">感谢原创作者: @makerGYT</text>
             </view>
         </view>
     </view>

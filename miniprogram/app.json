@@ -36,7 +36,8 @@
       "pages": [
         "discover/discover",
         "algorithm/algorithm",
-        "bug/bug"
+        "bug/bug",
+        "log/log"
       ]
     }
   ],

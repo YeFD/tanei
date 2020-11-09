@@ -2,54 +2,36 @@ const app = getApp()
 var isShow = false, animation, height = wx.getSystemInfoSync().windowHeight;
 Page({
   data: {
-    StatusBar: app.globalData.StatusBar, //状态栏高度
-    CustomBar: app.globalData.CustomBar, //titleBar高度
+    StatusBar: app.globalData.StatusBar,
+		CustomBar: app.globalData.CustomBar,
+		Custom: app.globalData.Custom,
     hidden: true, //默认为隐藏
     isShow,
     //默认为圆形    宽高为设备高度÷15      
 		myStyle: "border-radius: " +
 			height + "px;height: " +
 			height / 15 + "px;width: " +
-			height / 15 + "px;",
+			height / 15 + "px; ",
 		nav: [{
-			navigation: [{
-					name: '动态',
-					src: '../../img/1.png'
+			navigation: [
+				{
+					name: 'bug测试',
+					src: 'cloud://dist-3gfsowkhc324384b.6469-dist-3gfsowkhc324384b-1259081600/img/bug.png',
+					path: "bug/bug"
 				},
 				{
-					name: '酷图',
-					src: '../../img/2.png'
+					name: '算法可视化',
+					src: 'cloud://dist-3gfsowkhc324384b.6469-dist-3gfsowkhc324384b-1259081600/img/algorithm.png',
+					path: "algorithm/algorithm"
 				},
 				{
-					name: '应用集',
-					src: '../../img/3.png'
-				},
-				{
-					name: '扫一扫',
-					src: '../../img/4.png'
+					name: '日志',
+					src: 'cloud://dist-3gfsowkhc324384b.6469-dist-3gfsowkhc324384b-1259081600/img/log.png',
+					path: "log/log"
 				},
 
 			],
-		}, {
-			navigation: [{
-					name: '分享',
-					src: '../../img/5.png'
-				},
-				{
-					name: '图文',
-					src: '../../img/6.png'
-				},
-				{
-					name: '提问',
-					src: '../../img/7.png'
-				},
-				{
-					name: '话题',
-					src: '../../img/8.png'
-        },
-      ],
-
-    }]
+		}]
   },
   onLoad: function (options) {
     animation = wx.createAnimation({
@@ -92,4 +74,15 @@ Page({
 				isShow
 			})
 	},
+	backPage() {
+		wx.navigateBack({
+			delta: 1
+		});
+	},
+	navTo(e) {
+		const {path} = e.currentTarget.dataset
+		wx.navigateTo({
+			url: '/pages/aboutPage/package1/' + path
+		})
+	}
 })
