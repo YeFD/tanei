@@ -1,29 +1,37 @@
 <cu-custom id="custom" bgColor="bg-gradual-pink" isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">实验室</view>
+  <!-- <view slot="backText">返回</view> -->
+  <!-- <view slot="content">实验室</view> -->
 </cu-custom>
 <scroll-view scroll-y class="scrollPage">
 
 
-  <view class="cu-bar bg-white">
-    <view class="action">
-      <text class="cuIcon-title text-pink"></text>已知bug
-    </view>
-    <view class="action">导航栏错位</view>
-  </view>
-  <view class="padding-sm bg-white">
-    <image src="cloud://dist-3gfsowkhc324384b.6469-dist-3gfsowkhc324384b-1259081600/bug0.jpg" mode="widthFix" style="width:100%; height: 100%"></image>
-  </view>
-  <view class="cu-bar bg-white">
-    <view class="action">
-      <text class="cuIcon-warn text-orange"></text>系统信息获取失败
-    </view>
-    <view class="action">
-      <button class="cu-btn line-orange" bindtap="tapRe">
-        <text class="cuIcon-forward"></text>复现
-      </button>
-      <button class="cu-btn bg-green margin-left" bindtap="tapFixBug">
-        <text class="cuIcon-safe"></text>修复</button>
-    </view>
-  </view>
+  <view class="ripple-main {{isShow?'filter':''}}">
+	<view class="v-content">
+		<view class="tx" style="height: {{CustomBar-StatusBar}}px;padding-top: {{StatusBar}}px;line-height: {{CustomBar-StatusBar}}px;">仿酷安menu</view>
+		<view class="ripple" animation="{{animationData}}" hidden='{{hidden}}' style='{{myStyle}}'></view>
+	</view>
+</view>
+
+<view class='bar'>
+	<view class='tabicon'>
+		<view hidden='{{!isShow}}' class='menu' style='height:{{CustomBar}}px;padding-top:{{CustomBar}}px;'>分享生活的点滴，见证美好的明天</view>
+		<view class='bottom' hidden='{{!isShow}}'>
+			<view class='navlist' wx:for='{{nav}}' wx:for-item="i" wx:for-index="d">
+				<view class='item  {{isShow?"animation-nav":""}}' style='animation-delay: {{(index+1)*0.1}}s;' wx:for='{{i.navigation}}'>
+					<image mode='widthFix' src='cloud://dist-3gfsowkhc324384b.6469-dist-3gfsowkhc324384b-1259081600/5.png'></image>
+					<text class='string'>{{item.name}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+<view class="add1" hidden='{{isShow}}'>
+	<view class='send'></view>
+</view>
+<view class="add">
+	<view bindtap="onClickAdd">
+		<text class="iconfont icon-jia {{menuStyle}}"></text>
+	</view>
+</view>
+
 </scroll-view>
