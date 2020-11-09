@@ -68,6 +68,9 @@ Component({
         for (let i = 0; i*13 < notice.length; i++) {
           msgList[i] = notice.substr(13*i, 13)
         }
+        if (msgList.length == 1) {
+          msgList[1] = ""
+        }
         this.setData({
           notice,
           msgList

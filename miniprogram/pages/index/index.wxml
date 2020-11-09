@@ -3,12 +3,9 @@
   <scroll-view scroll-y class="scrollPage">
     <view class="UCenter-bg">
       <!-- <image src="/colorui/images/bg0.png" class="" style="width:100%;height:486rpx"></image> -->
-
       <block wx:if="{{identity===0}}">
         <view class="cu-avatar round xxl" style="background-image:url(https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg)">
-        <!-- <open-data type="userAvatarUrl" -->
         </view>
-        
         <view class="margin-left">
           <view class="cu-capsule margin-top-xl">
             <view class="cu-tag radius bg-grey">未登陆用户
@@ -17,7 +14,6 @@
           </view>
           <view class="text-xl margin-top-sm">
             <text class="margin-top-sm" style="font-weight:bold;">阿卡林</text>
-            <!-- <open-data type="userNickName"></open-data> -->
             <button class="cu-btn sm bg-white round line" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
               <text class="cuIcon-upload"></text>授权登陆
             </button>
@@ -28,7 +24,6 @@
         <view class="cu-avatar round xxl" style="background-image:url({{userInfo.avatarUrl}})" bindlongpress="toIdentify">
           <view class="cu-tag badge {{(userInfo.gender-1)%2==1?'cuIcon-female bg-pink':'cuIcon-male bg-blue'}}"></view>
         </view>
-          
         <view class="margin-left">
           <view class="cu-capsule margin-top-xl">
             <view class="cu-tag radius bg-white">普通用户</view>
@@ -45,7 +40,6 @@
         <view class="cu-avatar round xxl" style="background-image:url({{userInfo.avatarUrl}})" bindlongpress="toIdentify">
           <view class="cu-tag badge {{(userInfo.gender-1)%2==1?'cuIcon-female bg-pink':'cuIcon-male bg-blue'}}"></view>
         </view>
-
         <view class="margin-left">
           <view class="cu-capsule radius margin-top-xl">
             <view class="cu-tag bg-yellow">{{adminInfo.department}}</view>
@@ -127,7 +121,6 @@
           <view class="content"></view>
         </view>
       </view>
-      <!-- <navigator class="cu-item arrow" url="/pages/aboutPage/discover/discover" hover-class="none"> -->
       <view class="cu-item arrow" hover-class="none">
         <button class="cu-btn content" bindtap="toDiscover">
           <text class="cuIcon-discoverfill text-orange"></text>
@@ -135,7 +128,7 @@
         </button>
         <view class="action">
           <view class="content">
-            <text class="text-grey">有好玩的</text>
+            <text class="text-grey text-sm">_(:з」∠)_酷爱</text>
           </view>
         </view>
       </view>
