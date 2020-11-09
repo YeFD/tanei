@@ -3,11 +3,9 @@
   <view slot="content">bug实验室</view>
 </cu-custom>
 <scroll-view scroll-y class="scrollPage">
-
-
   <view class="cu-bar bg-white">
     <view class="action">
-      <text class="cuIcon-title text-pink"></text>已知bug
+      <text class="cuIcon-title text-pink"></text>bug0
     </view>
     <view class="action">导航栏错位</view>
   </view>
@@ -24,6 +22,17 @@
       </button>
       <button class="cu-btn bg-green margin-left" bindtap="tapFixBug">
         <text class="cuIcon-safe"></text>修复</button>
+    </view>
+  </view>
+  <view class="cu-bar bg-white">
+    <view class="action">
+      <text class="cuIcon-title text-pink"></text>bug1
+    </view>
+    <view class="action">实验室点击+后页面可下拉</view>
+  </view>
+  <view class="cu-bar bg-white">
+    <view class="action">
+      <text class="cuIcon-warn text-orange"></text>未知
     </view>
   </view>
 </scroll-view>
