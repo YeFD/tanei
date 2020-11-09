@@ -124,6 +124,11 @@
           "pathName": "pages/aboutPage/package1/algorithm/algorithm",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "manageIdentify",
+          "pathName": "pages/aboutPage/package/manageIdentify/manageIdentify",
+          "scene": null
         }
       ]
     }

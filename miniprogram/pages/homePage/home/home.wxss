@@ -4,7 +4,7 @@
 }
 
 .swiper_item {
-  font-size: 25rpx;
+  font-size: 30rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

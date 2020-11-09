@@ -135,7 +135,7 @@
         </button>
         <view class="action">
           <view class="content">
-            <!-- <text class="text-grey">暂未开发</text> -->
+            <text class="text-grey">有好玩的</text>
           </view>
         </view>
       </view>

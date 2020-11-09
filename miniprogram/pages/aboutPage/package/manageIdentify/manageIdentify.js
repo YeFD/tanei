@@ -8,7 +8,9 @@ Page({
   data: {
     update: false,
     password: null,
-    identity: 0
+    identity: 0,
+    notice: "",
+    msgList: []
   },
 
   /**
@@ -42,10 +44,17 @@ Page({
       })
     })
     if (result.code == 0) {
+      const {notice} = result
+      var msgList = []
+      for (let i = 0; i*13 < notice.length; i++) {
+        msgList[i] = notice.substr(13*i, 13)
+      }
       this.setData({
         isLoad: true,
         password: result.password,
-        update: result.update
+        update: result.update,
+        notice,
+        msgList
       })
     } else if (result.code == 1) {
       wx.showToast({
@@ -114,5 +123,72 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  setNotice: async function(e) {
+    if (this.data.identity <= 2 || this.data.identity == 5) {
+      wx.showToast({
+        title: '权限不足',
+        icon: "none"
+      })
+      return
+    }
+    wx.showLoading({
+      title: "加载中",
+      mask: true
+    })
+    const {result} = await wx.cloud.callFunction({
+      name: "adminHelper",
+      data: {
+        action: "setNotice",
+        notice: this.data.notice
+      }
+    }).catch(e => {
+      wx.showToast({
+        title: '网络错误',
+        icon: "none"
+      })
+      return
+    })
+    wx.hideLoading()
+    if (result.code == 0) {
+      wx.showToast({
+        title: '提交成功',
+        icon: "success"
+      })
+      this.hideModal()
+    } else {
+      wx.showToast({
+        title: '请求错误',
+        icon: "none"
+      })
+    }
+  },
+
+  inputNotice: function(e) {
+    var notice = e.detail.value
+    var msgList = []
+    for (let i = 0; i*13 < notice.length; i++) {
+      msgList[i] = notice.substr(13*i, 13)
+    }
+    this.setData({
+      notice, msgList
+    })
+  },
+  showModal: function(e) {
+    if (this.data.identity <= 2 || this.data.identity == 5) {
+      wx.showToast({
+        title: '权限不足',
+        icon: "none"
+      })
+      return
+    }
+    this.setData({
+      modalName: "notice"
+    })
+  },
+  hideModal: function(e) {
+    this.setData({
+      modalName: null
+    })
+  },
 })

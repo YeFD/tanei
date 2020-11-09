@@ -42,7 +42,7 @@ Component({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
-    text: "【单项成绩】页包含了详细的单项打分情况及成绩雷达图，直观地看出自己的弱项和强项。",
+    notice: "",
     msgList: []
   },
 
@@ -53,19 +53,52 @@ Component({
     
   },
   lifetimes: {
-    attached: function() {
-      var msgList = []
-      for (let i = 0; i*16 < this.data.text.length; i++) {
-        msgList[i] = this.data.text.substr(16*i, 16)
-      }
-      console.log(msgList)
-      this.setData({
-        msgList
+    attached: async function() {
+      const {result} = await wx.cloud.callFunction({
+        name: "adminHelper",
+        data: {
+          action: "getNotice"
+        }
+      }).catch(e => {
+        return
       })
+      if (result.code == 0) {
+        const {notice} = result
+        var msgList = []
+        for (let i = 0; i*13 < notice.length; i++) {
+          msgList[i] = notice.substr(13*i, 13)
+        }
+        this.setData({
+          notice,
+          msgList
+        })
+      }
     }
   },
   pageLifetimes: {
-    show: function() {
+    show: async function() {
+      const {result} = await wx.cloud.callFunction({
+        name: "adminHelper",
+        data: {
+          action: "getNotice"
+        }
+      }).catch(e => {
+        return
+      })
+      if (result.code == 0) {
+        const {notice} = result
+        if (notice == this.data.notice) {
+          return
+        }
+        var msgList = []
+        for (let i = 0; i*13 < notice.length; i++) {
+          msgList[i] = notice.substr(13*i, 13)
+        }
+        this.setData({
+          notice,
+          msgList
+        })
+      }
     }
   }
 })
