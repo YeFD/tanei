@@ -134,7 +134,7 @@ Page({
       mask: true
     })
     // var unreadArray = this.data.unreadArray
-    const {index} = e.target.dataset
+    const {index} = e.currentTarget.dataset
     const {result} = await wx.cloud.callFunction({
       name: "messageHelper",
       data: {
@@ -264,7 +264,7 @@ Page({
     })
   },
   tapOfflineReject: async function(e) {
-    const {index} = e.target.dataset
+    const {index} = e.currentTarget.dataset
     // var unreadArray = this.data.unreadArray
     wx.showLoading({
       title: '加载中',
@@ -321,7 +321,7 @@ Page({
     }
   },
   tapOfflineAgree: async function(e) {
-    const {index} = e.target.dataset
+    const {index} = e.currentTarget.dataset
     var unreadArray = this.data.unreadArray
     wx.showLoading({
       title: '加载中',
@@ -380,7 +380,7 @@ Page({
       title: '加载中',
       mask: true
     })
-    const {index} = e.target.dataset
+    const {index} = e.currentTarget.dataset
     var unreadArray = this.data.unreadArray
     const {result} = await wx.cloud.callFunction({
       name: "messageHelper",
@@ -436,7 +436,7 @@ Page({
       mask: true
     })
 
-    const {index} = e.target.dataset
+    const {index} = e.currentTarget.dataset
     var unreadArray = this.data.unreadArray
     const {result} = await wx.cloud.callFunction({
       name: "messageHelper",
@@ -489,7 +489,7 @@ Page({
       title: '加载中',
       mask: true
     })
-    const {index} = e.target.dataset
+    const {index} = e.currentTarget.dataset
     var unreadArray = this.data.unreadArray
     const {result} = await wx.cloud.callFunction({
       name: "messageHelper",
@@ -541,7 +541,7 @@ Page({
       title: '加载中',
       mask: true
     })
-    const {index} = e.target.dataset
+    const {index} = e.currentTarget.dataset
     var unreadArray = this.data.unreadArray
     const {result} = await wx.cloud.callFunction({
       name: "messageHelper",

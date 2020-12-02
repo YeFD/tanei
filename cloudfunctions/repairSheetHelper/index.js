@@ -1,7 +1,7 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 cloud.init({
-  //env: "dist-3gfsowkhc324384b"
+  // env: "dist-3gfsowkhc324384b"
   // env: "demo-vr23l"
   env: cloud.DYNAMIC_CURRENT_ENV
 })
@@ -120,7 +120,9 @@ const repairSheetHelper = {
     
   },
   async test(event, wxContext) {
+    console.log("test")
     var nodemailer = require("nodemailer")
+    console.log(nodemailer, "node")
     var config = {
       host: 'smtp.163.com',
       port: 25,
@@ -135,11 +137,11 @@ const repairSheetHelper = {
     var mail = {
       from: "塔内计协小程序 <taneipc@163.com>",
       subject: "您好，"+repairman + "，【" + userName + "】同学需要你的帮助~",
-      to: "xiaoji_owo@qq.com",
-      text: "详细报单请到塔内小程序查看，快去接单吧！（本邮件由塔内计协小程序自动发送）",
-      html: "<img src='http://images.cnblogs.com/cnblogs_com/PeunZhang/286351/o_peunzhang_cnblogs_code.png' width='200' height='200'>"
+      to: "huckowo@163.com",
+      text: "这个不是垃圾邮件啊啊啊啊啊啊啊啊",
     }
-    transporter.sendMail(mail)
+    console.log(config, mail)
+    // transporter.sendMail(mail)
     // const adminCollection = db.collection("admin")
     // const adminArray = (await adminCollection
     //   .where({
@@ -442,30 +444,40 @@ const repairSheetHelper = {
       .orderBy("createdTime", "desc")
       .get()
     ).data
-    const sheets = (await collection
+    const totalNum = (await collection
       .where({
         state: _.and(_.neq(0), _.neq(1))
       })
-      .orderBy("createdTime", "desc")
-      .get()
-    ).data
+      .count()
+    ).total
     var completedSheets = []
-    for (let i = 0; i < sheets.length; i++) {
-      let sheet = {
-        _id: sheets[i]._id,
-        createdTime: sheets[i].createdTime,
-        state: sheets[i].state,
-        userName: sheets[i].userName,
-        userAvatarUrl: sheets[i].userAvatarUrl,
-        computerType: sheets[i].computerType,
-        faultType: sheets[i].faultType,
-        repairType: sheets[i].repairType,
-        repairman: sheets[i].repairman,
-        nickName: sheets[i].nickName,
-        summary: sheets[i].summary
+    for (let j = 0; j <= totalNum / 100; j++) {
+      const sheets = (await collection
+        .where({
+          state: _.and(_.neq(0), _.neq(1))
+        })
+        .skip(j * 100)
+        .orderBy("createdTime", "desc")
+        .get()
+      ).data
+      for (let i = 0; i < sheets.length; i++) {
+        let sheet = {
+          _id: sheets[i]._id,
+          createdTime: sheets[i].createdTime,
+          state: sheets[i].state,
+          userName: sheets[i].userName,
+          userAvatarUrl: sheets[i].userAvatarUrl,
+          computerType: sheets[i].computerType,
+          faultType: sheets[i].faultType,
+          repairType: sheets[i].repairType,
+          repairman: sheets[i].repairman,
+          nickName: sheets[i].nickName,
+          summary: sheets[i].summary
+        }
+        completedSheets.push(sheet)
       }
-      completedSheets.push(sheet)
     }
+
     return {
       code: 0,
       ingSheets,
@@ -480,71 +492,33 @@ const repairSheetHelper = {
       .count()
     ).total
     const totalNum = (await collection.count()).total
-
-    const sheets = (await collection
-      .where({
-        state: _.and(_.neq(0), _.neq(1), _.neq(-1))
-      })
-      .get()
-    ).data
-    const completedNum = sheets.length
+    var completedNum = 0
     var completed1 = 0
     var completed3 = 0
     var completed7 = 0
-    for (let i = 0; i < sheets.length; i++) {
-      let msecNum = new Date(sheets[i].completeTime).getTime() - new Date(sheets[i].createdTime).getTime()
-      // console.log(msecNum, sheets[i].createdTime, sheets[i].completeTime)
-      if (msecNum <= 86400000 * 7) {
-        completed7 += 1
-        if (msecNum <= 86400000 * 3) {
-          completed3 += 1
-          if (msecNum <= 86400000) {
-            completed1 += 1
+    for (let j = 0; j <= totalNum / 100; j++) {
+      const sheets = (await collection
+        .where({
+          state: _.and(_.neq(0), _.neq(1), _.neq(-1))
+        })
+        .skip(j * 100)
+        .get()
+      ).data
+      completedNum += sheets.length
+      for (let i = 0; i < sheets.length; i++) {
+        let msecNum = new Date(sheets[i].completeTime).getTime() - new Date(sheets[i].createdTime).getTime()
+        // console.log(msecNum, sheets[i].createdTime, sheets[i].completeTime)
+        if (msecNum <= 86400000 * 7) {
+          completed7 += 1
+          if (msecNum <= 86400000 * 3) {
+            completed3 += 1
+            if (msecNum <= 86400000) {
+              completed1 += 1
+            }
           }
         }
       }
     }
-    // const adminCollection = db.collection("admin")
-    // const adminArray = (await adminCollection
-    //   .where({
-    //     id: 1,
-    //     department: "技术部"
-    //   })
-    //   .get()
-    // ).data
-    // var adminArray2 = []
-    // var adminArray34 = []
-    // var adminArray5 = []
-    // for (let i = 0; i < adminArray.length; i++) {
-    //   let cNum = (await collection
-    //     .where({
-    //       repairmanId: adminArray[i].openId,
-    //       state: _.and(_.neq(0), _.neq(1), _.neq(-1))
-    //     })
-    //     .count()
-    //   ).total
-    //   if (adminArray[i].identity == "干事") {
-    //     adminArray2.push({
-    //       name: adminArray[i].name,
-    //       nickName: adminArray[i].nickName,
-    //       completedNum: cNum
-    //     })
-    //   }
-    //   if (adminArray[i].identity == "部长" || adminArray[i].identity == "会长") {
-    //     adminArray34.push({
-    //       name: adminArray[i].name,
-    //       nickName: adminArray[i].nickName,
-    //       completedNum: cNum
-    //     })
-    //   }
-    //   if (adminArray[i].identity == "老人" || adminArray[i].identity == "SA") {
-    //     adminArray5.push({
-    //       name: adminArray[i].name,
-    //       nickName: adminArray[i].nickName,
-    //       completedNum: cNum
-    //     })
-    //   }
-    // }
     return {
       code: 0,
       ingNum, completedNum, totalNum, completed1, completed3, completed7,

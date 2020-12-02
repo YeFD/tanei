@@ -25,11 +25,15 @@ Page({
 					path: "algorithm/algorithm"
 				},
 				{
+					name: 'NLP',
+					src: 'cloud://dist-3gfsowkhc324384b.6469-dist-3gfsowkhc324384b-1259081600/img/nlp.png',
+					path: "nlp/nlp"
+				},
+				{
 					name: '日志',
 					src: 'cloud://dist-3gfsowkhc324384b.6469-dist-3gfsowkhc324384b-1259081600/img/log.png',
 					path: "log/log"
 				},
-
 			],
 		}]
   },
