@@ -101,5 +101,23 @@ const statisticsHelper = {
         message: "not inited"
       }
     }
+  },
+  async getParsingUrl(event, wxContext) {
+    const [data] = (await collection
+      .where({
+        id: 1
+      })
+      .get()
+    ).data
+    if (data.parsingFlag) {
+      return {
+        code: 0,
+        url: data.parsingUrl
+      }
+    } else {
+      return {
+        code: 1
+      }
+    }
   }
 }

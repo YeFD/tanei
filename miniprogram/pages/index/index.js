@@ -141,6 +141,9 @@ Page({
           })
         }
       } else if (res.result.code === 1) {
+        this.setData({
+          isLoad: true
+        })
         console.log("login", res.result)
       }
       console.log(app.globalData)

@@ -37,7 +37,8 @@
         "discover/discover",
         "algorithm/algorithm",
         "bug/bug",
-        "log/log"
+        "log/log",
+        "nlp/nlp"
       ]
     }
   ],

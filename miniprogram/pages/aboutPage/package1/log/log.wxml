@@ -11,12 +11,12 @@
         <view class="cu-tag line-white">2020/11/10</view>
       </view>
       <view class="margin-top-sm text-content">
-        <view>第三版上线</view>
+        <view>第三个线上版本</view>
         <view>1. 更新背景图片</view>
         <view>2. 首页增加可修改的公告栏</view>
         <view>3. 报单页显示总结</view>
         <view>4. 使用分包，优化启动速度</view>
-        <view>5. 实验室增加了一些个人认为非常cooooooool的功能</view>
+        <view>5. 实验室增加了一些个人认为非常cooooooool的功能✌(̿▀̿ ̿Ĺ̯̿̿▀̿ ̿)✌</view>
       </view>
     </view>   
   </view>
@@ -51,7 +51,7 @@
         <view class="cu-tag line-white">2020/10/20</view>
       </view>
       <view class="margin-top-sm text-content">
-        <view>第二版上线</view>
+        <view>第二个线上版本</view>
         <view>1. 新增订阅消息，报单完成后提醒机主评价；</view>
         <view>2. 优化了评价页和所有报单页的布局</view>
       </view>
@@ -63,7 +63,7 @@
         <view class="cu-tag bg-white text-green">v1.6.0</view>
         <view class="cu-tag line-white">2020/9/29</view>
       </view>
-      <view class="margin-top-sm text-content">第一版上线</view>
+      <view class="margin-top-sm text-content">第一个线上版本(⌯¤̴̶̷̀ω¤̴̶̷́)✧</view>
     </view>
   </view>
 </view>
