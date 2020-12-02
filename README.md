@@ -6,7 +6,7 @@ i塔内小程序
 i塔内小程序为scnu师生提供电脑义务维修服务
 
 ## 样式库
-该项目样式库使用的是[Color UI](https://github.com/weilanwl/ColorUI)，一个非常棒的样式及组件库，已用Color UI开发多个项目，建议大家去使用一下
+该项目样式库使用的是[Color UI](https://github.com/weilanwl/ColorUI)，一个非常棒的样式及组件库，建议大家去使用一下
 
 ## 更新说明
 - 1.6.0 
