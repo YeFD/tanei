@@ -1,11 +1,6 @@
-// miniprogram/pages/homePage/repairSheet/repairSheet.js
 import WxValidate from "../../../utils/WxValidate"
 const app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     loading: false,
     repairTypeCurIndex: 0,
@@ -39,8 +34,6 @@ Page({
         name: "手机/平板"
       }
     ],
-    // faultType: ["能开机能进系统", "能开机不能进系统", "不能开机"],
-    // computerType: ["笔记本", "台式电脑", "手机/平板"],
     repairmanCurIndex: 0,
     repairmanArray: null,
     submitFlag: false,
@@ -48,10 +41,6 @@ Page({
     identity: 0,
     detailMsg: "请详细描述故障以便我们提供更好的帮助"
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: async function (options) {
     this.initValidate()
     const {result} = await wx.cloud.callFunction({
@@ -103,55 +92,6 @@ Page({
       })
     }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
   submitSheet: async function(e) {
     if (this.data.identity == 0) {
       this.setData({
@@ -165,15 +105,6 @@ Page({
       wx.showToast({
         title: "请勿重复提交",
         icon: "none",
-        // success: (res) => {
-        //   setTimeout(
-        //     () => {
-        //       wx.navigateBack({
-        //         delta: 1,
-        //       })
-        //     }
-        //   , 1000)
-        // }
       })
       return
     }
@@ -350,7 +281,6 @@ Page({
     })
   },
   getUserInfo: async function(e) {
-    console.log(e)
     if (!!e.detail.userInfo) {
       wx.showLoading({
         title: '请稍后',
@@ -419,7 +349,6 @@ Page({
       }
     } else {
       this.setData({
-        
         modalName: null,
         detailMsg: "请详细描述故障以便我们提供更好的帮助"
       })

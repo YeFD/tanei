@@ -76,7 +76,7 @@ map,.mapBox{
 }
 
 .navbar__item:hover .avatar {
-  transform: translateY(-130%) scale(1.4);
+  transform: translateY(-130%) translateX(-2%) scale(1.4);
   opacity: 1;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1),
     -1px -1px 5px rgba(255, 255, 255, 1);

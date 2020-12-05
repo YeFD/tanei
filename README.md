@@ -1,12 +1,12 @@
 # i塔内
 
-i塔内小程序
-
 ## 关于本小程序
 i塔内小程序为scnu师生提供电脑义务维修服务
 
-## 样式库
-该项目样式库使用的是[Color UI](https://github.com/weilanwl/ColorUI)，一个非常棒的样式及组件库，建议大家去使用一下
+## 插件、库
+- [nodemailer](https://github.com/nodemailer/nodemailer) 云函数发送接单通知邮件
+- [WxValidate](https://github.com/wux-weapp/wx-extend/blob/master/docs/components/validate.md) 微信小程序表单验证插件
+- [Color UI](https://github.com/weilanwl/ColorUI)一个非常棒的样式及组件库，建议大家去使用一下
 
 ## 更新说明
 - 1.6.0 
@@ -32,6 +32,7 @@ i塔内小程序为scnu师生提供电脑义务维修服务
     - 实验室增加NLP
     - 增加拒绝授权时的提醒
     - 我的报单增加返回首页，以解决订阅消息不回退页面的问题
+    - 略微调整首页操作条图标的不对称性（还是没有完全对称）
 
 
 ### 参考文档

@@ -57,10 +57,6 @@ Page({
       }
     ]
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: async function (options) {
     await wx.cloud.callFunction({
       name: "usersHelper",
@@ -146,7 +142,6 @@ Page({
         })
         console.log("login", res.result)
       }
-      console.log(app.globalData)
     }).catch(res => {
       console.log("login error", res)
       wx.showToast({
@@ -243,6 +238,13 @@ Page({
     })
   },
   getUserInfo: async function(e) {
+    if (!e.detail.userInfo) {
+      wx.showToast({
+        title: '授权失败',
+        icon: "none"
+      })
+      return
+    }
     app.globalData.userInfo = e.detail.userInfo
     const {nickName, gender, avatarUrl} = e.detail.userInfo
     wx.showLoading({

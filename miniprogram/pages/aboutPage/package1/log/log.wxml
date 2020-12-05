@@ -4,6 +4,21 @@
 </cu-custom>
 <scroll-view scroll-y>
 <view class="cu-timeline">
+  <view class="cu-item text-blue">
+    <view class="bg-blue content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-blue">v1.9.0</view>
+        <view class="cu-tag line-white">2020/12/10</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>第四个线上版本</view>
+        <view>1. 实验室增加NLP</view>
+        <view>2. 增加拒绝授权时的提醒</view>
+        <view>3. 我的报单增加返回首页，以解决订阅消息不回退页面的问题</view>
+        <view>4. 略微调整首页操作条图标的不对称性</view>
+      </view>
+    </view>   
+  </view>
   <view class="cu-item text-mauve">
     <view class="bg-mauve content shadow">
       <view class="cu-capsule radius">
@@ -33,17 +48,6 @@
       </view>
     </view>
   </view>
-  <!-- <view class="cu-item text-gray">
-    <view class="bg-gray content shadow">
-      <view class="cu-capsule radius">
-        <view class="cu-tag bg-white">v1.7.1</view>
-        <view class="cu-tag bg-grey">2020/11/6</view>
-      </view>
-      <view class="margin-top-sm text-content">
-        <view>bug fixes and performance improvements.</view>
-      </view>
-    </view>
-  </view> -->
   <view class="cu-item text-pink">
     <view class="bg-pink content shadow">
       <view class="cu-capsule radius">

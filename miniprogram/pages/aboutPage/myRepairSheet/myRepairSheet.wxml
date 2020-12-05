@@ -1,5 +1,5 @@
-<cu-custom bgColor="bg-gradual-purple" isBack="{{true}}">
-  <view slot="backText">返回</view>
+<cu-custom bgColor="bg-gradual-purple" isCustom="{{true}}">
+  <!-- <view slot="backText">返回</view> -->
   <view slot="content">我的报修</view>
   <view class="action" slot="right">
     <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>

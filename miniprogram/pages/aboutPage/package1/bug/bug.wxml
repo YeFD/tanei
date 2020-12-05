@@ -24,7 +24,7 @@
         <text class="cuIcon-safe"></text>修复</button>
     </view>
   </view>
-  <view class="cu-bar bg-white">
+  <view class="cu-bar bg-white margin-top">
     <view class="action">
       <text class="cuIcon-title text-pink"></text>bug1
     </view>
