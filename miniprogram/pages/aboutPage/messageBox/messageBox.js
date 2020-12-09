@@ -1,10 +1,5 @@
-// miniprogram/pages/aboutPage/messageBox/messageBox.js
 const app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     isRead: 0,
     switchArray: ["未读", "已读"],
@@ -16,10 +11,6 @@ Page({
     pageArray: null,
     pageNum: 0
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: async function (options) {
     // wx.showLoading({
     //   title: '加载中',
@@ -79,55 +70,6 @@ Page({
       })
     }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
   tapRead: async function(e) {
     wx.showLoading({
       title: '加载中',
@@ -170,7 +112,7 @@ Page({
   tapReceived: async function(e) {
     this.tapRead(e)
     wx.navigateTo({
-      url: '/pages/aboutPage/myReceivedRepairSheet/myReceivedRepairSheet',
+      url: '/pages/aboutPage/package/myReceivedRepairSheet/myReceivedRepairSheet',
     })
   },
   tapFeedback: async function(e) {
@@ -185,7 +127,6 @@ Page({
     })
   },
   pageChange: async function(e) {
-    // console.log(e.detail.value, Number(e.detail) + 1)
     this.setData({
       isLoad: false
     })
@@ -199,37 +140,11 @@ Page({
     wx.pageScrollTo({
       scrollTop: true,
     })
-    // const {result} = await wx.cloud.callFunction({
-    //   name: "messageHelper",
-    //   data: {
-    //     action: "getReadMessageArray",
-    //     curPage,
-    //     pageSize: this.data.pageSize,
-    //     unreadMessageNum: this.data.unreadMessageNum
-    //   }
-    // })
-    // if (result.code === 0) {
-    //   console.log(result)
-    //   var readArray = result.messageArray
-    //   for (let i in readArray) {
-    //     let sentTime = new Date(new Date(readArray[i].sentTime).getTime() + 8*60*60*1000).toISOString()
-    //     let temp = sentTime.split("T")
-    //     let time = temp[0] + " " + temp[1].split(".")[0]
-    //     readArray[i].time = time
-    //   }
-    //   this.setData({
-    //     curPage: curPage,
-    //     readArray: readArray
-    //   })
-    // }
   },
   nextPage: async function(e) {
     if (this.data.curPage >= this.data.pageNum) {
       return
     }
-    // wx.showLoading({
-    //   title: '加载中',
-    // })
     this.setData({
       isLoad: false
     })
@@ -292,8 +207,6 @@ Page({
         title: '操作成功',
         icon: "success"
       })
-      // unreadArray[index].resultMsg = result.resultMsg
-      // unreadArray[index].read = true
       var unreadArrayResultMsg = "unreadArray[" + index + "].resultMsg"
       var unreadArrayRead = "unreadArray[" + index + "].read"
       this.setData({

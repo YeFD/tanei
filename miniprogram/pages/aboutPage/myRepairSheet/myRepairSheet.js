@@ -1,8 +1,4 @@
-// miniprogram/pages/aboutPage/myRepairSheet/myRepairSheet.js
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     sheetArray: [],
     curSheets: [],
@@ -63,10 +59,6 @@ Page({
       }
     ]
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: async function (options) {
     const {result} = await wx.cloud.callFunction({
       name: "repairSheetHelper",
@@ -96,7 +88,7 @@ Page({
         sheetArray[i].create = create
       }
       var curSheets = sheetArray.slice(0, this.data.pageSize)
-      console.log(curSheets, result.mySheets)
+      // console.log(curSheets, result.mySheets)
       this.setData({
         isLoad: true,
         pageNum: Math.ceil(result.total / 10),
@@ -114,55 +106,6 @@ Page({
         icon: "none"
       })
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   },
   pageChange: async function(e) {
     this.setData({
@@ -344,20 +287,6 @@ Page({
     })
     wx.hideLoading()
     if (result.code == 0) {
-      // var curSheets = this.data.curSheets
-      // var sheetArray = this.data.sheetArray
-      // curSheets[this.data.curIndex]['feedback'] = this.data.feedback
-      // sheetArray[(this.data.curPage-1)*10+this.data.curIndex]['feedback'] = this.data.feedback
-      // curSheets[this.data.curIndex]['state'] = 3
-      // sheetArray[(this.data.curPage-1)*10+this.data.curIndex]['state'] = 3
-      // this.setData({
-      //   feedback: null,
-      //   curIndex: null,
-      //   modalName: null,
-      //   score: 5,
-      //   curSheets: curSheets,
-      //   sheetArray: sheetArray
-      // })
       var curSheetsFeedback = "curSheets[" + this.data.curIndex + "].feedback"
       var curSheetsScore = "curSheets[" + this.data.curIndex + "].score"
       var curSheetsState = "curSheets[" + this.data.curIndex + "].state"

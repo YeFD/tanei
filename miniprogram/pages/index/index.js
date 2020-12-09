@@ -153,17 +153,6 @@ Page({
       })
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     var list1 = [
       {
@@ -326,7 +315,6 @@ Page({
         app.globalData.userInfo = result.userInfo
         app.globalData.adminInfo = result.adminInfo
         app.globalData.msgNum = result.msgNum
-        // app.globalData.adminArray = res.result.adminArray
         var list1 = [
           {
             icon: "notice",
@@ -399,10 +387,6 @@ Page({
     })
   },
   toDiscover() {
-    // wx.showToast({
-    //   title: "暂未开放",
-    //   icon: "none"
-    // })
     wx.navigateTo({
       url: '/pages/aboutPage/package1/discover/discover',
     })

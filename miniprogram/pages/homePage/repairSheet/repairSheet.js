@@ -126,10 +126,6 @@ Page({
     } else {
       console.log("ok")
     }
-    // wx.showLoading({
-    //   title: '请稍后',
-    //   mask: true
-    // })
     this.setData({
       loading: true
     })
@@ -156,10 +152,6 @@ Page({
       })
     })
     if (result.code === 0) {
-      // wx.showToast({
-      //   title: "提交成功！",
-      //   icon: "success"
-      // })
       this.setData({
         loading: false,
         modalName: "wechat",

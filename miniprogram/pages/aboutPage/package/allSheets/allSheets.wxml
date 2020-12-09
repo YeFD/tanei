@@ -30,20 +30,17 @@
             <view class="text-{{stateMsg[item.state+1]['color']}} text-sm">{{stateMsg[item.state+1]['msg']}}</view>
           </view>
         </view>        
-        <!-- <view class="cu-item"> -->
-          <view class="padding bg-white">
-            <view class="flex flex-wrap justify-end">
-              <view class="basis-xl margin-right">{{item.computerType}}, {{item.faultType}}, {{item.repairType}}, 
-            <text wx:if="{{!!item.nickName}}">@{{item.nickName}}</text>
-            <text wx:else>@{{item.repairman}}</text>
-              </view>
+        <view class="padding bg-white">
+          <view class="flex flex-wrap justify-end">
+            <view class="basis-xl margin-right">{{item.computerType}}, {{item.faultType}}, {{item.repairType}}, 
+          <text wx:if="{{!!item.nickName}}">@{{item.nickName}}</text>
+          <text wx:else>@{{item.repairman}}</text>
             </view>
           </view>
-        <!-- </view> -->
+        </view>
       </view>
     </view>
   </view>
-  
   <view class="cu-card dynamic no-card" wx:if="{{tabIndex==1}}">
     <view class="cu-load {{!isLoad?'loading':''}}"></view>
     <view class="cu-load {{curSheets.lenth == 0 && !!isLoad?'over':''}}"></view>
@@ -61,7 +58,6 @@
             <view class="text-{{stateMsg[item.state+1]['color']}} text-sm">{{stateMsg[item.state+1]['msg']}}</view>
           </view>
         </view>
-        <!-- <view class="cu-item"> -->
           <view class="padding bg-white">
             <view class="flex flex-wrap justify-end">
               <view class="basis-xl margin-right">
@@ -78,8 +74,6 @@
               </view>
             </view>
           </view>
-          <!-- <view class="content">{{item.computerType}}, {{item.faultType}}, {{item.repairType}}</view> -->
-        <!-- </view> -->
       </view>
     </view>
     <view class="padding flex flex-wrap justify-between align-center bg-white"  wx:if="{{pageNum > 0}}">

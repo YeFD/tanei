@@ -8,10 +8,6 @@
             <view class="swiper_item text-orange">{{item}}</view>
           </swiper-item>
       </swiper>
-
-      <!-- <view class="content" style="top:{{StatusBar}}px">
-        <view name="content">test</view>
-      </view> -->
     </view>
   </view>
 
