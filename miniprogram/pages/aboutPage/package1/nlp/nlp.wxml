@@ -66,6 +66,9 @@
   <view class="cu-tabbar-height"></view>
 </scroll-view>
 <view class="padding-sm" style="position:fixed; bottom:0px; width:100%;">
+  <view class="text-center text-grey">
+    基于BM和CFG的中文自然语言分析
+  </view>
   <view class="text-center" bindtap="copyData">
       <text class="text-grey text-sm">访问网页版</text>
   </view>

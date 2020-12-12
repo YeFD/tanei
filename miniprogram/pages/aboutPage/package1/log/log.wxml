@@ -8,7 +8,7 @@
     <view class="bg-blue content shadow">
       <view class="cu-capsule radius">
         <view class="cu-tag bg-white text-blue">v1.9.0</view>
-        <view class="cu-tag line-white">2020/12/10</view>
+        <view class="cu-tag line-white">2020/12/12</view>
       </view>
       <view class="margin-top-sm text-content">
         <view>第四个线上版本</view>

@@ -141,6 +141,13 @@
         {
           "name": "nlp",
           "pathName": "pages/aboutPage/package1/nlp/nlp",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "report",
+          "pathName": "pages/aboutPage/package1/report/report",
+          "query": "",
           "scene": null
         }
       ]

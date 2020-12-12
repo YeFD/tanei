@@ -1,7 +1,3 @@
-<!-- <cu-custom id="custom" isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">实验室</view>
-</cu-custom> -->
 <scroll-view scroll-y class="scrollPage">
   <view class="ripple-main {{isShow?'filter':''}}">
 		<view class="v-content">
@@ -11,6 +7,27 @@
 						<text class="cuIcon-back" bindtap="backPage"></text>
 					</view>
 					<view class="content" style="top:{{StatusBar}}px">实验室</view>
+				</view>
+			</view>
+			<view>
+				<view class="components-ancube">
+					<view class="box" style="display: flex;justify-content: center;">
+						<view class="cube">
+							<view class="front" style="background-image: linear-gradient(45deg, #f43f3b, #ec008c);"></view>
+							<view class="back" style="background-image: linear-gradient(45deg, #ff7612, #ff571c);"></view>
+							<view class="left" style="background-image: linear-gradient(45deg, #7FD02B, #9ddb47);"></view>
+							<view class="right" style="background-image: linear-gradient(45deg, #9000ff, #5e00ff);"></view>
+							<view class="top" style="background-image: linear-gradient(45deg, #6F68DF, #ec008c);"></view>
+							<view class="bottom2" style="background-image: linear-gradient(45deg, #0070FF, #19CF8A);"></view>
+
+							<view class="in-front"></view>
+							<view class="in-back"></view>
+							<view class="in-left"></view>
+							<view class="in-right"></view>
+							<view class="in-top"></view>
+							<view class="in-bottom"></view>
+						</view>
+					</view>
 				</view>
 			</view>
 			<view style="display: flex;justify-content: center;">

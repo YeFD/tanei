@@ -36,7 +36,7 @@
   <view class="cu-time" wx:if="{{cancel.date!==create.date}}">{{cancel.date}}</view>
   <view class="cu-item text-red cuIcon-roundclosefill">
     <view class="content bg-red shadow-blur">
-      <text>{{cancel.time}}  已取消</text>
+      <text>{{cancel.time}}  {{sheet.cancelBy==sheet.userId?'用户':'维修人员'}}已取消</text>
     </view>
   </view>
 </view>

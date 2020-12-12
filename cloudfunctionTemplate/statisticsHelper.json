@@ -4,5 +4,17 @@
     "value": {
       "action": "getStatistics"
     }
+  },
+  {
+    "name": "getTokenUrl",
+    "value": {
+      "action": "getTokenUrl"
+    }
+  },
+  {
+    "name": "getReportData",
+    "value": {
+      "action": "getReportData"
+    }
   }
 ]

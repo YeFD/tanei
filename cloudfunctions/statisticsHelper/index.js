@@ -1,5 +1,6 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
+var request = require('request')
 cloud.init({
   //env: "dist-3gfsowkhc324384b"
   // env: "demo-vr23l"
@@ -118,6 +119,78 @@ const statisticsHelper = {
       return {
         code: 1
       }
+    }
+  },
+  async getTokenUrl(event, wxContext) {
+    const [data] = (await collection
+      .where({
+        id: 1
+      })
+      .get()
+    ).data
+    const {APIKey, SecretKey} = data
+    var tokenUrl = `https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=${APIKey}&client_secret=${SecretKey}`
+    console.log(tokenUrl)
+    return {
+      code: 0,
+      tokenUrl: tokenUrl
+    }
+  },
+  async updateToken(event, wxContext) {
+    const {token} = wxContext
+  },
+  async getReportUrl(event, wxContext) {
+    const [data] = (await collection
+      .where({
+        id: 1
+      })
+      .get()
+    ).data
+    if (!data.reportFlag) {
+      return {
+        code: 1,
+        message: "还未开放"
+      }
+    }
+    var url = `https://aip.baidubce.com/rpc/2.0/nlp/v2/comment_tag?access_token=${data.token}&charset=UTF-8`
+    return {
+      code: 0,
+      url: url
+    }
+  },
+  async getReportData(event, wxContext) {
+    var collection2 = db.collection("repairSheet")
+    const sheets = (await collection2
+      .where({
+        state: 3,
+        repairmanId: wxContext.OPENID,
+      })
+      .get()
+    ).data
+    var feedback = ""
+    for (let i = 0; i < sheets.length; i++) {
+      feedback += sheets[i].feedback + " "
+    }
+    const sheets2 = (await collection2
+      .where({
+        repairmanId: wxContext.OPENID,
+        state: _.and(_.neq(0), _.neq(1), _.neq(-1))
+      })
+      .get()
+    ).data
+    var minTime = 86400000
+    for (let i = 0; i < sheets2.length; i++) {
+      let t = sheets2[i].completeTime- sheets2[i].createdTime
+      if (t < minTime) {
+        minTime = t
+      }
+    }
+    let hour = Math.floor(minTime / 3600000)
+    let minute = Math.floor(minTime / 60000)
+    let second = Math.floor(minTime / 1000)
+    return {
+      code: 0,
+      feedback, hour, minute, second
     }
   }
 }
