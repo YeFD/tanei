@@ -4,6 +4,23 @@
 </cu-custom>
 <scroll-view scroll-y>
 <view class="cu-timeline">
+  <view class="cu-item text-yellow">
+    <view class="bg-orange content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-orange">v1.9.1</view>
+        <view class="cu-tag line-white">2021/3/14</view>
+      </view>
+      <view class="margin-top-sm text-content text-white">
+        <view>第五个线上版本</view>
+        <view>1. 管理员可以取消报单</view>
+        <view>2. 修改getUserInfo相关代码</view>
+        <view>3. 其它优化</view>
+        <view>
+          <image src="cloud://dist-3gfsowkhc324384b.6469-dist-3gfsowkhc324384b-1259081600/img/sbwx.gif" mode="widthFix" style="width:100%; height: 100%"></image>
+        </view>
+      </view>
+    </view>   
+  </view>
   <view class="cu-item text-blue">
     <view class="bg-blue content shadow">
       <view class="cu-capsule radius">

@@ -35,8 +35,9 @@
 <view class="cu-timeline" wx:if="{{!!cancel}}">
   <view class="cu-time" wx:if="{{cancel.date!==create.date}}">{{cancel.date}}</view>
   <view class="cu-item text-red cuIcon-roundclosefill">
-    <view class="content bg-red shadow-blur">
-      <text>{{cancel.time}}  {{sheet.cancelBy==sheet.userId?'用户':'维修人员'}}已取消</text>
+    <view class="content bg-red shadow-blue">
+      <text wx:if="{{!!sheet.cancelByAdmin}}">{{cancel.time}}  管理员已取消</text>
+      <text wx:else>{{cancel.time}}  {{sheet.cancelBy==sheet.userId?'用户':'维修人员'}}已取消</text>
     </view>
   </view>
 </view>
@@ -158,3 +159,9 @@
     <view class="cu-form-group">{{sheet.summary}}</view>
   </view>
 </block>
+<view class="padding flex flex-direction" wx:if="{{identity >= 3 && identity != 5 && (sheet.state == 0 || sheet.state == 1)}}">
+  <button bindtap="tapCancel" class="cu-btn bg-pink lg">
+    <text class="cuIcon-loading2 iconfont-spin" wx:if="{{loading}}"></text>
+      取消报单
+  </button>
+</view>

@@ -276,14 +276,6 @@ Page({
       mask: true
     })
     var index = e.currentTarget.dataset['index']
-    if (typeof(index) == "undefined") {
-      console.log(e, e.currentTarget.dataset, index)
-      wx.showToast({
-        title: '出现罕见bug_0，再点一次吧',
-        icon: "none"
-      })
-      return
-    }
     const {result} = await wx.cloud.callFunction({
       name: "repairSheetHelper",
       data: {

@@ -228,6 +228,47 @@ const repairSheetHelper = {
       message: "ok"
     }
   },
+  async cancelByAdmin(event, wxContext) {
+    if (event.repairmanId == wxContext.OPENID) {
+      await collection.doc(event._id).update({
+        data: {
+          state: -1,
+          cancelBy: wxContext.OPENID,
+          cancelTime: db.serverDate(),
+        }
+      })
+    } else {
+      await collection.doc(event._id).update({
+        data: {
+          state: -1,
+          cancelBy: wxContext.OPENID,
+          cancelTime: db.serverDate(),
+          cancelByAdmin: true
+        }
+      })
+    }
+    const messageCollection = db.collection("message")
+    const [message] = (await messageCollection
+      .where({
+        sheetId: event._id,
+        type: "报单管理",
+        read: false
+      })
+      .get()
+    ).data
+    if (!!message) {
+      await messageCollection.doc(message._id).update({
+        data: {
+          read: true,
+          receivedTime: db.serverDate()
+        }
+      })
+    }
+    return {
+      code: 0,
+      message: "ok"
+    }
+  },
   async complete(event, wxContext) {
     const sheet = (await collection.doc(event._id).get()).data
     if (!sheet) {

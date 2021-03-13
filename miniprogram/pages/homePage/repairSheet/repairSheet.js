@@ -272,14 +272,24 @@ Page({
       modalName: null
     })
   },
-  getUserInfo: async function(e) {
-    if (!!e.detail.userInfo) {
+  getUserInfo: async function() {
+    const result = await wx.getUserProfile({
+      desc: "获取用户信息"
+    }).catch(e => {
+      wx.showToast({
+        title: '获取失败',
+        icon: "none"
+      })
+      return
+    })
+    if (!!result.userInfo) {
+      app.globalData.userInfo = result.userInfo
       wx.showLoading({
         title: '请稍后',
         mask: true
       })
-      app.globalData.userInfo = e.detail.userInfo
-      const {nickName, gender, avatarUrl} = e.detail.userInfo
+      app.globalData.userInfo = result.userInfo
+      const {nickName, gender, avatarUrl} = result.userInfo
       // identity = 1
       if (app.globalData.identity >= 1) {
         //更新
@@ -349,7 +359,6 @@ Page({
         icon: "none"
       })
     }
-    // app.globalData.userInfo = e.detail.userInfo
   },
   copyData(e) {
     wx.setClipboardData({

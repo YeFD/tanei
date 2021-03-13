@@ -14,7 +14,7 @@
           </view>
           <view class="text-xl margin-top-sm">
             <text class="margin-top-sm" style="font-weight:bold;">阿卡林</text>
-            <button class="cu-btn sm bg-white round line" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+            <button class="cu-btn sm bg-white round line" bindtap="getUserInfo">
               <text class="cuIcon-upload"></text>授权登陆
             </button>
           </view>
@@ -30,7 +30,7 @@
           </view>
           <view class="text-xl margin-top-sm">
             <text class="margin-top-sm" style="font-weight:bold;">{{userInfo.nickName}}</text>
-            <button class="cu-btn sm bg-white round line" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+            <button class="cu-btn sm bg-white round line" bindtap="getUserInfo">
               <text class="cuIcon-upload"></text>更新
             </button>
           </view>
@@ -47,7 +47,7 @@
           </view>
           <view class="text-xl margin-top-sm">
             <text class="margin-top-sm" style="font-weight:bold;">{{adminInfo.name}}</text>
-            <button class="cu-btn sm bg-white round line" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+            <button class="cu-btn sm bg-white round line" bindtap="getUserInfo">
               <text class="cuIcon-upload"></text>更新
             </button>
           </view>

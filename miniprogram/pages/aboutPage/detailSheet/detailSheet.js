@@ -1,5 +1,7 @@
+const app = getApp()
 Page({
   data: {
+    identity: 0,
     sheet: null,
     create: null,
     cancel: null,
@@ -34,6 +36,9 @@ Page({
     ],
   },
   onLoad: async function (options) {
+    this.setData({
+      identity: app.globalData.identity
+    })
     var sheetId = options.sheetId
     const {result} = await wx.cloud.callFunction({
       name: "repairSheetHelper",
@@ -129,5 +134,75 @@ Page({
         })
       }
     })
-  }
+  },
+
+  tapCancel: async function(e) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    const {result} = await wx.cloud.callFunction({
+      name: "repairSheetHelper",
+      data: {
+        action: "cancelByAdmin",
+        repairmanId: this.data.sheet.repairmanId,
+        _id: this.data.sheet._id
+      }
+    }).catch(e => {
+      wx.showToast({
+        title: "网络错误",
+        icon: "none"
+      })
+      return
+    })
+    wx.hideLoading()
+    if (result.code === 0) {
+      wx.showToast({
+        title: '取消成功',
+        icon: "success"
+      })
+      const {result} = await wx.cloud.callFunction({
+        name: "repairSheetHelper",
+        data: {
+          action: "getDetailSheet",
+          sheetId: this.data.sheet._id
+        }
+      }).catch(e => {
+        this.setData({
+          isLoad: true
+        })
+        wx.showToast({
+          title: '网络错误',
+          icon: "none"
+        })
+        return
+      })
+      if (result.code === 0) {
+        var cancel = null
+        if (!!result.sheet.cancelTime) {
+          let temp = new Date(new Date(result.sheet.cancelTime).getTime() + 8*60*60*1000).toISOString().split("T")
+          cancel = {
+            year: temp[0].slice(0, 4),
+            date: temp[0].slice(5),
+            time: temp[1].split(".")[0]
+          }
+        }
+        this.setData({
+          sheet: result.sheet,
+          cancel
+        })
+      } else {
+        wx.showToast({
+          title: "获取失败",
+          icon: "none"
+        })
+      }
+    } else {
+      console.log(result)
+      wx.showToast({
+        title: '返回错误',
+        icon: "none"
+      })
+    }
+  },
 })

@@ -122,7 +122,7 @@
     <view class="cu-bar bg-white justify-end">
       <view class="action">
         <button class="cu-btn line-red text-ted" bindtap="hideModal">取消</button>
-        <button class="cu-btn bg-green margin-left" bindtap="tapRevoke" open-type="getUserInfo" bindgetuserinfo="getUserInfo">确定</button>
+        <button class="cu-btn bg-green margin-left" bindtap="tapRevoke" bindtap="getUserInfo">确定</button>
       </view>
     </view>
   </view>

@@ -227,15 +227,24 @@ Page({
     })
   },
   getUserInfo: async function(e) {
-    if (!e.detail.userInfo) {
+    const result = await wx.getUserProfile({
+      desc: "获取用户信息"
+    }).catch(e => {
+      wx.showToast({
+        title: '获取失败',
+        icon: "none"
+      })
+      return
+    })
+    if (!result.userInfo) {
       wx.showToast({
         title: '授权失败',
         icon: "none"
       })
       return
     }
-    app.globalData.userInfo = e.detail.userInfo
-    const {nickName, gender, avatarUrl} = e.detail.userInfo
+    app.globalData.userInfo = result.userInfo
+    const {nickName, gender, avatarUrl} = app.globalData.userInfo
     wx.showLoading({
       title: '请稍后',
       mask: true
@@ -269,7 +278,7 @@ Page({
           icon: "success"
         })
         this.setData({
-          userInfo: e.detail.userInfo,
+          userInfo: app.globalData.userInfo,
           identity: identity
         })
       } else {
