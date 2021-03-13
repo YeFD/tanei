@@ -9,6 +9,7 @@ Page({
     tabIndex: 0,
     tabArray: ["干事", "管理层", "老人"],
     move: "",
+    identity: 0,
     adminArray2: null,
     adminArray34: null,
     adminArray5: null,
@@ -19,7 +20,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
-
+    this.setData({
+      identity: app.globalData.identity
+    })
     const {result} = await wx.cloud.callFunction({
       name: "adminHelper",
       data: {
@@ -108,16 +111,35 @@ Page({
   },
   listTouchStart(e) {
     //开始
+    if (this.data.tabIndex == 0) {
+      if (this.data.identity < 3 || this.data.identity == 5) return
+    }
+    if (this.data.tabIndex == 1) {
+      if (this.data.identity < 4 || this.data.identity == 5) return
+    }
+    console.log("listTouchStart", this.data)
     this.setData({
       listTouchStart: e.touches[0].pageX
     })
   },
   listTouchMove(e) {
+    if (this.data.tabIndex == 0) {
+      if (this.data.identity < 3 || this.data.identity == 5) return
+    }
+    if (this.data.tabIndex == 1) {
+      if (this.data.identity < 4 || this.data.identity == 5) return
+    }
     this.setData({
       listTouchDirection: e.touches[0].pageX - this.data.listTouchStart > 0 ? 'right' :'left'
     })
   },
   listTouchEnd(e) {
+    if (this.data.tabIndex == 0) {
+      if (this.data.identity < 3 || this.data.identity == 5) return
+    }
+    if (this.data.tabIndex == 1) {
+      if (this.data.identity < 4 || this.data.identity == 5) return
+    }
     if (this.data.listTouchDirection == 'left') {
       this.setData({
         move: e.currentTarget.dataset.target

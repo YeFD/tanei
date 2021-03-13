@@ -28,15 +28,17 @@
           <text class="text-grey" wx:if="{{!!item.nickName}}">({{item.nickName}})</text>
         </view>
       </view>
-      <view class="action">
-        <view wx:if="{{item.online}}" class="text-green">已上线</view>
-        <view wx:else class="text-red">已下线</view>
-      </view>
-      <view class="move">
-        <view class="bg-grey" bindtap="showModal" data-target="update" data-index="{{index}}">更新</view>
-        <view class="bg-red" wx:if="{{item.online}}" bindtap="tapOffline" data-index="{{index}}">下线</view>
-        <view class="bg-green" wx:else="{{!item.online}}" bindtap="tapOnline" data-index="{{index}}">上线</view>
-      </view>
+      <block wx:if="{{identity >= 3 && identity != 5}}">
+        <view class="action">
+          <view wx:if="{{item.online}}" class="text-green">已上线</view>
+          <view wx:else class="text-red">已下线</view>
+        </view>
+        <view class="move">
+          <view class="bg-grey" bindtap="showModal" data-target="update" data-index="{{index}}">更新</view>
+          <view class="bg-red" wx:if="{{item.online}}" bindtap="tapOffline" data-index="{{index}}">下线</view>
+          <view class="bg-green" wx:else="{{!item.online}}" bindtap="tapOnline" data-index="{{index}}">上线</view>
+        </view>
+      </block>
     </view>
   </view>
 
@@ -54,13 +56,15 @@
           <text class="text-grey" wx:if="{{!!item.nickName}}">({{item.nickName}})</text>
         </view>
       </view>
-      <view class="action">
-        <view wx:if="{{item.online}}" class="text-green">已上线</view>
-        <view wx:else class="text-red">已下线</view>
-      </view>
-      <view class="move">
-        <view class="bg-grey" bindtap="showModal" data-target="update" data-index="{{index}}">更新</view>
-      </view>
+      <block wx:if="{{identity >= 4 && identity != 5}}">
+        <view class="action">
+          <view wx:if="{{item.online}}" class="text-green">已上线</view>
+          <view wx:else class="text-red">已下线</view>
+        </view>
+        <view class="move">
+          <view class="bg-grey" bindtap="showModal" data-target="update" data-index="{{index}}">更新</view>
+        </view>
+      </block>
     </view>
   </view>
 
