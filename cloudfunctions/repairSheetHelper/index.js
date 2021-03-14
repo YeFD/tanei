@@ -138,10 +138,10 @@ const repairSheetHelper = {
       from: "塔内计协小程序 <taneipc@163.com>",
       subject: "您好，"+repairman + "，【" + userName + "】同学需要你的帮助~",
       to: "huckowo@163.com",
-      text: "这个不是垃圾邮件啊啊啊啊啊啊啊啊",
+      text: "test",
     }
-    console.log(config, mail, transporter)
-    // transporter.sendMail(mail)
+    console.log(config, mail, nodemailer)
+    transporter.sendMail(mail)
     // const adminCollection = db.collection("admin")
     // const adminArray = (await adminCollection
     //   .where({
