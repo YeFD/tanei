@@ -448,13 +448,13 @@ Page({
   },
   tapEmail: function(e) {
     wx.showToast({
-      title: "权限不足",
+      title: "请联系部长/会长修改",
       icon: "none"
     })
   },
   tapWechat: function(e) {
     wx.showToast({
-      title: "权限不足",
+      title: "请联系部长/会长修改",
       icon: "none"
     })
   },
@@ -567,5 +567,15 @@ Page({
         icon: "none"
       })
     }
-  }
+  },
+  copyData(e) {
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.data,
+      success: res => {
+        wx.showToast({
+          title: '已复制',
+        })
+      }
+    })
+  },
 })

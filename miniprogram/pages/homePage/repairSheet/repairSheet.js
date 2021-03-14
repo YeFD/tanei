@@ -282,7 +282,7 @@ Page({
       })
       return
     })
-    if (!!result.userInfo) {
+    if (!!result) {
       app.globalData.userInfo = result.userInfo
       wx.showLoading({
         title: '请稍后',

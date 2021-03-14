@@ -140,7 +140,7 @@ const repairSheetHelper = {
       to: "huckowo@163.com",
       text: "这个不是垃圾邮件啊啊啊啊啊啊啊啊",
     }
-    console.log(config, mail)
+    console.log(config, mail, transporter)
     // transporter.sendMail(mail)
     // const adminCollection = db.collection("admin")
     // const adminArray = (await adminCollection
@@ -660,7 +660,8 @@ const repairSheetHelper = {
       adminStatistics.push({
         name: adminArray[i].name,
         nickName: adminArray[i].nickName,
-        completedNum: cNum
+        completedNum: cNum,
+        identity: adminArray[i].identity
       })
     }
     adminStatistics.sort((a, b) => {

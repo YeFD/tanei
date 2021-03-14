@@ -236,7 +236,8 @@ Page({
       })
       return
     })
-    if (!result.userInfo) {
+    console.log(result)
+    if (!result) {
       wx.showToast({
         title: '授权失败',
         icon: "none"

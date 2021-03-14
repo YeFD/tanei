@@ -9,6 +9,9 @@
   <view class="action">
     <text class="cuIcon-title text-mauve"></text>认证信息
   </view>
+  <view class="action">
+    <button class="cu-btn line-mauve margin-left sm" bindtap="showModal" data-target="card" bindlongpress="showRevoke">修机名片</button>
+</view>
 </view>
 <view class="cu-list menu-avatar">
   <view class="cu-item {{move=='move'?'move-cur':''}}" bindtouchstart="listTouchStart" bindtouchmove="listTouchMove" bindtouchend="listTouchEnd" data-target="move">
@@ -132,14 +135,14 @@
   <view class="title">电子邮箱</view>
   <view class="action">
     <text>{{adminInfo.email}}</text>
-    <button class="cu-btn line-mauve margin-left sm" bindtap="tapEmail">修改</button>
+    <!-- <button class="cu-btn line-mauve margin-left sm" bindtap="tapEmail">修改</button> -->
   </view>
 </view>
 <view class="cu-form-group">
   <view class="title">微信</view>
   <view class="action">
     <text>{{adminInfo.wechat}}</text>
-    <button class="cu-btn line-mauve margin-left sm" bindtap="tapWechat">修改</button>
+    <!-- <button class="cu-btn line-mauve margin-left sm" bindtap="tapWechat">修改</button> -->
   </view>
 </view>
 
@@ -158,6 +161,31 @@
       <view class="action">
         <button class="cu-btn line-red text-ted" bindtap="hideModal">取消</button>
         <button class="cu-btn bg-green margin-left" bindtap="tapRevoke">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="cu-modal {{modalName=='card'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="padding-xxl flex" bindtap="copyData" data-data="{{adminInfo.wechat}}">
+    <!-- <view class="cu-item justify-sub"> -->
+      <view class="cu-avatar radius lg margin-right-xs margin-left margin-top" style="background-image:url({{avatarUrl}});"></view>
+      <view class="">
+        <view class="text-black text-left margin-top-lg margin-bottom-xs" style="font-weight:bold;">
+          <text class="text-cut" wx:if="{{!!adminInfo.nickName}}">{{adminInfo.nickName}}<text class="text-sm text-grey">（{{adminInfo.name}}）</text></text>
+          <text class="text-cut" wx:else>{{adminInfo.name}}</text>
+        </view>
+        <view class="text-black">
+          <text class="text-cut">微信号：{{adminInfo.wechat}}</text><text class="text-sm text-grey">（点击复制）</text>
+        </view>
+      </view>
+    </view>
+    <view class="padding">
+      <view>提交成功，维修人员看到报单后会尽快处理，建议你主动联系。另外接收订阅消息能第一时间收到报单动态哦~</view>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action flex-sub text-green" bindtap="hideModal">关闭
       </view>
     </view>
   </view>

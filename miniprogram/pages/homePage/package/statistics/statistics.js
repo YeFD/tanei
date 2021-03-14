@@ -12,19 +12,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
-    // wx.showToast({
-    //   title: "暂未开放",
-    //   icon: "none",
-    //   success: (res) => {
-    //     setTimeout(
-    //       () => {
-    //         wx.navigateBack({
-    //           delta: 1,
-    //         })
-    //       }
-    //     , 1500)
-    //   }
-    // })
     const {result} = await wx.cloud.callFunction({
       name: "repairSheetHelper",
       data: {
@@ -72,9 +59,15 @@ Page({
     const result2 = result_.result
     console.log(result2)
     if (result2.code == 0) {
+      var adminStatistics2 = []
+      for (let i = 0; i < result2.adminStatistics.length; i++) {
+        if (result2.adminStatistics[i].identity == '干事')
+          adminStatistics2.push(result2.adminStatistics[i])
+      }
       this.setData({
         isLoad: true,
-        adminStatistics: result2.adminStatistics
+        adminStatistics: result2.adminStatistics,
+        adminStatistics2
       })
     } else {
       wx.showToast({
