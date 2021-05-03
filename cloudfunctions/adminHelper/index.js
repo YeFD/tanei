@@ -1,13 +1,14 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 cloud.init({
-  //env: "dist-3gfsowkhc324384b"
+  env: "dist-3gfsowkhc324384b"
   // env: "demo-vr23l"
-  env: cloud.DYNAMIC_CURRENT_ENV
+  // env: cloud.DYNAMIC_CURRENT_ENV
 })
 const db = cloud.database()
 const _ = db.command
 const adminCollection = db.collection("admin")
+var request = require('request-promise')
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -72,7 +73,7 @@ const adminHelper = {
     }
   },
   async identify(event, wxContext) {
-    const {password, name, department, email, avatarUrl, wechat} = event
+    var {password, name, department, email, avatarUrl, wechat} = event
     const userCollection = db.collection("users")
     const [user] = (await userCollection
       .where({
@@ -98,6 +99,8 @@ const adminHelper = {
         message: "已经存在认证"
       }
     } else {
+      var res = await this.uploadAvatar(avatarUrl, wxContext.OPENID)
+      avatarUrl = res.avatarUrl
       const [data] = (await adminCollection
         .where({
           id: 0
@@ -728,5 +731,38 @@ const adminHelper = {
       code: 0,
       message: "ok"
     }
-  }
+  },
+
+  async uploadAvatar(avatarUrl, OpenId) { //上传头像
+    var avatarBuffer, newUrl
+    await request({
+      url: avatarUrl,
+      method: 'GET',
+      encoding: null,
+    }).catch(e => {
+      console.error(e)
+    }).then(res => {
+      console.log(res)
+      avatarBuffer = res
+    })
+    if (avatarBuffer.length < 512) {
+      console.error("ivalid avatar")
+      newUrl = "https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg"
+    } else {
+      await cloud.uploadFile({
+        cloudPath: 'userAvatar/' + OpenId + '.png',
+        fileContent: avatarBuffer,
+      }).catch(e => {
+        console.error(e)
+      }).then(res => {
+        console.log(res)
+        if (res.fileID[9] == 'i') { // env dist
+          newUrl = "https://6469-dist-3gfsowkhc324384b-1259081600.tcb.qcloud.la/userAvatar/" + OpenId + ".png"
+        } else if(res.fileID[9] == 'e') { //env demo
+          newUrl = "https://6465-demo-vr23l-1259081600.tcb.qcloud.la/userAvatar/" + OpenId + ".png"
+        }
+      })
+    }
+    return {code: 0, avatarUrl: newUrl}
+  },
 }

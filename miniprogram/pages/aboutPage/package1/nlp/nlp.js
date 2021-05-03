@@ -337,6 +337,7 @@ Page({
       extra_word: this.data.sample[this.data.arr[curSample]].extra_word,
       extra_flag: this.data.sample[this.data.arr[curSample]].extra_flag
     })
+    // this.uploadAllAvatar()
   },
   changeExtra: function(e) {
     this.setData({
@@ -352,5 +353,56 @@ Page({
         })
       }
     })
+  },
+
+  async uploadAllAvatar() {
+    console.log("begin")
+    const {result} = await wx.cloud.callFunction({
+      name: "usersHelper",
+      data: {
+        action: "getAllUser"
+      }
+    }).catch(e => {
+      this.setData({
+        isLoad: true
+      })
+      wx.showToast({
+        title: '网络错误',
+        icon: "none"
+      })
+      return
+    })
+    console.log(result)
+    if (result.code != 0) {
+      console.error("error")
+      return
+    }
+    for (let i = 0; i < result.total; i++) {
+      var {_id, openId, avatarUrl, adminId} = result.userArray[i]
+      console.log(i, _id, openId, avatarUrl)
+      if (!avatarUrl) continue
+      const res = await wx.cloud.callFunction({
+        name: "usersHelper",
+        data: {
+          action: "uploadAvatar2",
+          _id, openId, avatarUrl, adminId
+        }
+      }).catch(e => {
+        this.setData({
+          isLoad: true
+        })
+        wx.showToast({
+          title: '网络错误',
+          icon: "none"
+        })
+        return
+      })
+      var result2 = res.result
+      if (result2.code != 0) {
+        console.error("=======error=======", i)
+      } else {
+        console.log("|||success||||", result2.avatarUrl)
+      }
+    }
   }
 })

@@ -9,6 +9,8 @@ const db = cloud.database()
 const _ = db.command
 const usersCollection = db.collection("users")
 
+var request = require('request-promise')
+
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
@@ -161,14 +163,16 @@ const usersHelper = {
     }
   },
   async register(event, wxContext) {
-    const {nickName, avatarUrl, gender} = event
+    var {nickName, avatarUrl, gender} = event
     const [userInfo] = (await usersCollection
       .where({
         openId: wxContext.OPENID
       })
       .get()
     ).data
-    if (!!userInfo) {
+    var res = await this.uploadAvatar(avatarUrl, wxContext.OPENID)
+    avatarUrl = res.avatarUrl
+    if (!!userInfo) { // 有注册信息
       if (userInfo.identity <= 1) {
         await usersCollection.doc(userInfo._id).update({
           data: {
@@ -244,7 +248,7 @@ const usersHelper = {
           }
         }
       }
-    } else {
+    } else { //新用户
       await usersCollection.add({
         data: {
           openId: wxContext.OPENID,
@@ -267,7 +271,9 @@ const usersHelper = {
   },
   async updateUserInfo(event, wxContext) {
     console.log(event)
-    const {nickName, avatarUrl, gender, adminId} = event
+    var {nickName, avatarUrl, gender, adminId} = event
+    var res = await this.uploadAvatar(avatarUrl, wxContext.OPENID)
+    avatarUrl = res.avatarUrl
     const [userInfo] = (await usersCollection
       .where({
         openId: wxContext.OPENID
@@ -315,6 +321,222 @@ const usersHelper = {
         code: 0,
         message: "update successfully"
       }
+    }
+  },
+  async test(event, wxContext) {
+    var avatarUrl = "https://thirdwx.qlogo.cn/mmopen/vi_32/XYy5P1KibeQ4IvoArSOls2oK6cxIYNYcf2Fx3FjqnTKia5TdGMxht285ceBiagWcHBJbNzNhUzL2r6Df4gOr3pF7g/132"
+    console.log("test", wxContext.OPENID)
+    var res = await this.uploadAvatar(avatarUrl, wxContext.OPENID)
+    console.log("res", res.avatarUrl)
+  },
+  async uploadAvatar(avatarUrl, OpenId) { //上传头像
+    var avatarBuffer, newUrl
+    await request({
+      url: avatarUrl,
+      method: 'GET',
+      encoding: null,
+    }).catch(e => {
+      console.error(e)
+    }).then(res => {
+      console.log(res)
+      avatarBuffer = res
+    })
+    if (avatarBuffer.length < 512) {
+      console.error("ivalid avatar")
+      newUrl = "https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg"
+    } else {
+      await cloud.uploadFile({
+        cloudPath: 'userAvatar/' + OpenId + '.png',
+        fileContent: avatarBuffer,
+      }).catch(e => {
+        console.error(e)
+      }).then(res => {
+        console.log(res)
+        if (res.fileID[9] == 'i') { // env dist
+          newUrl = "https://6469-dist-3gfsowkhc324384b-1259081600.tcb.qcloud.la/userAvatar/" + OpenId + ".png"
+        } else if(res.fileID[9] == 'e') { //env demo
+          newUrl = "https://6465-demo-vr23l-1259081600.tcb.qcloud.la/userAvatar/" + OpenId + ".png"
+        }
+      })
+    }
+    return {code: 0, avatarUrl: newUrl}
+  },
+  async uploadAvatar2(event, wxContext) { // 含验证是否无效
+    var {_id, avatarUrl, openId, adminId} = event
+    var invalidUrl = "https://thirdwx.qlogo.cn/mmopen/vi_32/rA9vCD8iar9oP7dl2j3tGpSiado2W5CMdOxFfQ0aoBiahiaP9xvLbuD2r7wk9FicxFneAztcJKLAg1MWicy7kPSJpl8g/132"
+    var avatarBuffer, invalidAvatar, newUrl
+    await request({
+      url: avatarUrl,
+      method: 'GET',
+      encoding: null,
+    }).catch(e => {
+      console.error(e)
+    }).then(res => {
+      avatarBuffer = res
+    })
+    await request({
+      url: invalidUrl,
+      method: 'GET',
+      encoding: null,
+    }).catch(e => {
+      console.error(e)
+    }).then(res => {
+      invalidAvatar = res
+    })
+    if (!avatarBuffer || avatarBuffer.length < 512 || avatarBuffer.equals(invalidAvatar)) {
+      console.error("ivalid avatar")
+      newUrl = "https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg"
+    } else {
+      await cloud.uploadFile({
+        cloudPath: 'userAvatar/' + openId + '.png',
+        fileContent: avatarBuffer,
+      }).catch(e => {
+        console.error(e)
+      }).then(res => {
+        console.log(res)
+        if (res.fileID[9] == 'i') { // env dist
+          newUrl = "https://6469-dist-3gfsowkhc324384b-1259081600.tcb.qcloud.la/userAvatar/" + openId + ".png"
+        } else if(res.fileID[9] == 'e') { //env demo
+          newUrl = "https://6465-demo-vr23l-1259081600.tcb.qcloud.la/userAvatar/" + openId + ".png"
+        }
+      })
+    }
+    await usersCollection.doc(_id).update({
+      data: {
+        avatarUrl: newUrl,
+        updatedTime: db.serverDate()
+      }
+    })
+    if (!!adminId) {
+      const adminCollection = db.collection("admin")
+      console.log("admin", adminId)
+      // const data = await adminCollection.doc(adminId).get()
+      // console.log(data)
+      await adminCollection.doc(adminId).update({
+        data: {
+          avatarUrl: newUrl,
+          updatedTime: db.serverDate()
+        }
+      })
+    }
+    return {code: 0, avatarUrl: newUrl}
+  },
+  async uploadAllAvatar() { //disable
+    var invalidUrl = "https://thirdwx.qlogo.cn/mmopen/vi_32/rA9vCD8iar9oP7dl2j3tGpSiado2W5CMdOxFfQ0aoBiahiaP9xvLbuD2r7wk9FicxFneAztcJKLAg1MWicy7kPSJpl8g/132"
+    var invalidAvatar
+    await request({
+      url: invalidUrl,
+      method: 'GET',
+      encoding: null,
+    }).catch(e => {
+      console.error(e)
+    }).then(res => {
+      invalidAvatar = res
+    })
+    const totalNum = (await usersCollection
+      .where({
+        identity: _.neq(0)
+      })
+      .count()
+    ).total
+    for (let i = 0; i <= totalNum / 100; i++) {
+      const array = (await usersCollection
+        .where({
+          identity: _.neq(0)
+        })
+        .skip(i * 100)
+        .get()
+      ).data
+      for (let j = 0; j < array.length; j++) {
+        var {_id, openId, avatarUrl, adminId} = array[j]
+        if (!avatarUrl) continue
+        console.log(i, j, _id, openId, avatarUrl)
+        let avatarBuffer
+        await request({
+          url: avatarUrl,
+          method: 'GET',
+          encoding: null,
+        }).catch(e => {
+          console.error(e)
+        }).then(res => {
+          avatarBuffer = res
+        })
+        if (!avatarBuffer || avatarBuffer.length < 512 || avatarBuffer.equals(invalidAvatar)) {
+          console.error("ivalid avatar")
+          avatarUrl = "https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg"
+        } else {
+          await cloud.uploadFile({
+            cloudPath: 'userAvatar/' + openId + '.png',
+            fileContent: avatarBuffer,
+          }).catch(e => {
+            console.error(e)
+          }).then(res => {
+            // console.log(res)
+            if (res.fileID[9] == 'i') { // env dist
+              avatarUrl = "https://6469-dist-3gfsowkhc324384b-1259081600.tcb.qcloud.la/userAvatar/" + openId + ".png"
+            } else if(res.fileID[9] == 'e') { //env demo
+              avatarUrl = "https://6465-demo-vr23l-1259081600.tcb.qcloud.la/userAvatar/" + openId + ".png"
+            }
+          })
+        }
+        await usersCollection.doc(_id).update({
+          data: {
+            avatarUrl: avatarUrl
+          }
+        })
+        if (!!adminId) {
+          const adminCollection = db.collection("admin")
+          console.log("admin", adminId)
+          // const data = await adminCollection.doc(adminId).get()
+          // console.log(data)
+          await adminCollection.doc(adminId).update({
+            data: {
+              avatarUrl: avatarUrl
+            }
+          })
+        }
+        console.log(i, j, _id, openId, avatarUrl)
+      }
+    }
+  },
+  async updateUserAvatar(event, wxContext) { //disable
+    const {_id, openId, avatarUrl, adminId} = event
+    await usersCollection.doc(_id).update({
+      data: {
+        avatarUrl
+      }
+    })
+    if (!!adminId) {
+      const adminCollection = db.collection("admin")
+      await adminCollection.doc(adminId).update({
+        data: {
+          avatarUrl: avatarUrl
+        }
+      })
+    }
+    return {
+      code: 0,
+      message: "update user avatar"
+    }
+  },
+  async getAllUser(event, wxContext) {
+    const totalNum = (await usersCollection
+      .count()
+    ).total
+    var userArray = []
+    for (let i = 0; i <= totalNum / 100; i++) {
+      const array = (await usersCollection
+        .skip(i * 100)
+        .get()
+      ).data
+      for (let j = 0; j < array.length; j++) {
+        userArray.push(array[j])
+      }
+    }
+    return {
+      code: 0,
+      total: totalNum,
+      userArray
     }
   }
 }
