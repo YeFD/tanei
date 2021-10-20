@@ -39,9 +39,26 @@ Page({
     submitFlag: false,
     isLoad: false,
     identity: 0,
-    detailMsg: "请详细描述故障以便我们提供更好的帮助"
+    detailMsg: "请详细描述故障以便我们提供更好的帮助",
+    modalName: null,
+    sec: 5,
   },
   onLoad: async function (options) {
+    // 注意事项
+    this.setData({
+      modalName: 'DialogModal'
+    });
+    let that = this;
+    function countdown(){
+      that.setData({
+        sec: that.data.sec-1
+      });
+      if(that.data.sec > 0) {
+        setTimeout(countdown, 1000);
+      }
+    }
+    setTimeout(countdown, 1500)
+
     this.initValidate()
     const {result} = await wx.cloud.callFunction({
       name: "adminHelper",
@@ -400,5 +417,15 @@ Page({
       detailMsg: "请详细描述故障以便我们提供更好的帮助",
       modalName: null
     })
+  },
+  hideModal: function () {
+    if (this.data.sec > 0)
+      return
+    this.setData({
+      modalName: null
+    })
+  },
+  backToHome: function () {
+    wx.navigateBack()
   }
 })
