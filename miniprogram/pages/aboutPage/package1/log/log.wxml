@@ -4,6 +4,17 @@
 </cu-custom>
 <scroll-view scroll-y>
 <view class="cu-timeline">
+  <view class="cu-item text-cyan">
+    <view class="bg-cyan content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-blue">v1.9.2</view>
+        <view class="cu-tag line-white">2021/10/20</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>1. 增加了报单前的注意事项提醒</view>
+      </view>
+    </view>   
+  </view>
   <view class="cu-item text-yellow">
     <view class="bg-orange content shadow">
       <view class="cu-capsule radius">
