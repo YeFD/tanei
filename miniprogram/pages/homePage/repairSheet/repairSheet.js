@@ -40,13 +40,12 @@ Page({
     isLoad: false,
     identity: 0,
     detailMsg: "请详细描述故障以便我们提供更好的帮助",
-    modalName: null,
     sec: 5,
   },
   onLoad: async function (options) {
     // 注意事项
     this.setData({
-      modalName: 'DialogModal'
+      modalName: 'showAttention'
     });
     let that = this;
     function countdown(){
