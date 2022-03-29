@@ -164,41 +164,6 @@ Page({
     })
   },
   pageChange: async function(e) {
-    // this.setData({
-    //   isLoad: false
-    // })
-    // var curPage = Number(e.detail.value) + 1
-    // const {result} = await wx.cloud.callFunction({
-    //   name: "repairSheetHelper",
-    //   data: {
-    //     action: "getRepairSheets2",
-    //     curPage: curPage,
-    //     pageSize: 10
-    //   }
-    // }).catch(e => {
-    //   this.setData({
-    //     isLoad: true
-    //   })
-    //   wx.showToast({
-    //     title: '网络错误',
-    //     icon: "none"
-    //   })
-    // })
-    // if (result.code === 0) {
-    //   this.setData({
-    //     isLoad: true,
-    //     curPage: curPage,
-    //     completedSheets: result.sheets
-    //   })
-    // } else {
-    //   this.setData({
-    //     isLoad: true
-    //   })
-    //   wx.showToast({
-    //     title: '请求错误',
-    //     icon: "none"
-    //   })
-    // }
     this.setData({
       isLoad: false
     })

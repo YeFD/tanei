@@ -186,7 +186,7 @@ const usersHelper = {
         })
         return {
           code: 0,
-          message: "register (update) successfully"
+          message: "register (update) successfully", avatarUrl
         }
       } else {
         // 有管理员信息管理员
@@ -294,7 +294,7 @@ const usersHelper = {
       })
       return {
         code: 1,
-        message: "login and register successfully"
+        message: "login(register) successfully", avatarUrl
       }
     } else {
       await usersCollection.doc(userInfo._id).update({
@@ -361,7 +361,8 @@ const usersHelper = {
     }
     return {code: 0, avatarUrl: newUrl}
   },
-  async uploadAvatar2(event, wxContext) { // 含验证是否无效
+  /* // @Deprecated
+  async uploadAvatar2(event, wxContext) { // 含验证是否无效 @Deprecated
     var {_id, avatarUrl, openId, adminId} = event
     var invalidUrl = "https://thirdwx.qlogo.cn/mmopen/vi_32/rA9vCD8iar9oP7dl2j3tGpSiado2W5CMdOxFfQ0aoBiahiaP9xvLbuD2r7wk9FicxFneAztcJKLAg1MWicy7kPSJpl8g/132"
     var avatarBuffer, invalidAvatar, newUrl
@@ -421,7 +422,7 @@ const usersHelper = {
     }
     return {code: 0, avatarUrl: newUrl}
   },
-  async uploadAllAvatar() { //disable
+  async uploadAllAvatar() { //@Deprecated
     var invalidUrl = "https://thirdwx.qlogo.cn/mmopen/vi_32/rA9vCD8iar9oP7dl2j3tGpSiado2W5CMdOxFfQ0aoBiahiaP9xvLbuD2r7wk9FicxFneAztcJKLAg1MWicy7kPSJpl8g/132"
     var invalidAvatar
     await request({
@@ -499,6 +500,7 @@ const usersHelper = {
       }
     }
   },
+  */
   async updateUserAvatar(event, wxContext) { //disable
     const {_id, openId, avatarUrl, adminId} = event
     await usersCollection.doc(_id).update({

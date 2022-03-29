@@ -13,7 +13,7 @@
       <view class="cu-list menu-avatar solid-top">
         <view class="cu-item">
           <view class="cu-avatar round lg" style="background-image:url({{item.avatarUrl}});"></view>
-          <view class="content flex-sub" bindtap="tapDetail" data-index="{{index}}">
+          <view class="content flex-sub" data-index="{{index}}">
             <view>{{item.userName}}</view>
             <view class="text-gray text-sm flex justify-between">{{item.time}}</view>
           </view>
@@ -24,24 +24,22 @@
             <text wx:for="{{scoreStar}}" wx:key="index" wx:for-item="i" class="cuIcon-favor{{index<=item.score-1?'fill':''}} text-{{scoreStar[item.score-1].color}} text-sm text-right" decode="{{true}}" space="{{true}}">&nbsp;</text>
           </view>
         </view>
-        <!-- <view class="cu-item"> -->
-          <view class="padding bg-white">
-            <view class="flex flex-wrap justify-end">
-              <view class="basis-xl margin-right">{{item.feedback}}</view>
-            </view>
-          </view> 
-        <!-- </view> -->
+        <view class="padding bg-white">
+          <view class="flex flex-wrap justify-end">
+            <view class="basis-xl margin-right">{{item.feedback}}</view>
+          </view>
+        </view> 
       </view>
     </view>
   </view>
 
   <view class="padding flex flex-wrap justify-between align-center bg-white" wx:if="{{pageNum > 0}}">
-      <button class="cu-btn bg-purple" bindtap="lastPage">上一页</button>
-      <picker range="{{pageArray}}" value="{{curPage - 1}}" bindchange="pageChange">
-        <text>{{curPage}}</text>
-        <text class="cuIcon-triangledownfill"></text>
-        <text class="text-gray">/{{pageNum}}</text>
-      </picker>
-      <button class="cu-btn bg-purple" bindtap="nextPage">下一页</button>
-    </view>
+    <button style="visibility: {{curPage>1?'':'hidden'}};" class="cu-btn bg-purple" bindtap="lastPage">上一页</button>
+    <picker range="{{pageArray}}" value="{{curPage - 1}}" bindchange="pageChange">
+      <text>{{curPage}}</text>
+      <text class="cuIcon-triangledownfill"></text>
+      <text class="text-gray">/{{pageNum}}</text>
+    </picker>
+    <button style="visibility: {{curPage<pageNum?'':'hidden'}};" class="cu-btn bg-purple" bindtap="nextPage">下一页</button>
+  </view>
 </scroll-view>

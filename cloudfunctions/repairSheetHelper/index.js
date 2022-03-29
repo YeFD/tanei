@@ -24,13 +24,21 @@ exports.main = async (event, context) => {
 }
 const repairSheetHelper = {
   async postSheet(event, wxContext) {
-    const {userName, userPhone, userAddress, userWechat, computerType, repairType, faultType, faultDetail, repairman, repairmanId, userAvatarUrl, email, identity, wechat} = event
-    var {nickName} = event
+    const {userName, userPhone, userAddress, userWechat, computerType, repairType, faultType, faultDetail, repairman, repairmanId, email, identity, wechat} = event
+    var {nickName, userAvatarUrl} = event
     if (nickName == repairman) {
       nickName = null
     }
     const userId = wxContext.OPENID
-    console.log(userId)
+    const usersCollection = db.collection("users")
+    const [userInfo] = (await usersCollection
+      .where({
+        openId: userId
+      })
+      .get()
+    ).data
+    userAvatarUrl = userInfo.avatarUrl
+    // console.log(userId)
     const sheet = await collection.add({
       data: {
         userId,
@@ -62,15 +70,15 @@ const repairSheetHelper = {
         port: 25,
         auth: {
           user: "taneipc@163.com",
-          pass: "TN123456"
+          pass: "APFFUXRYFTTGVFEC"
         }
       }
       var transporter = nodemailer.createTransport(config)
       var mail = {
-        from: "塔内计协小程序 <taneipc@163.com>",
+        from: "i塔内小程序 <taneipc@163.com>",
         subject: "您好，"+repairman + "，【" + userName + "】同学需要你的帮助~",
         to: email,
-        text: "详细报单请到塔内小程序查看，快去接单吧！（本邮件由塔内计协小程序自动发送）"
+        text: "详细报单请到i塔内小程序查看，快去接单吧！（本邮件由i塔内小程序自动发送）"
       }
       console.log(mail, identity)
       transporter.sendMail(mail)
@@ -90,20 +98,20 @@ const repairSheetHelper = {
               cc += adminArray[i].email + ","
             }
             var mail2 = {
-              from: "塔内计协小程序 <taneipc@163.com>",
+              from: "i塔内小程序 <taneipc@163.com>",
               subject: "技术部部长，您好！【" + repairman + "】接到新的报单啦~",
               to: adminArray[0].email,
-              text: "详细报单请到塔内小程序查看，快去通知Ta吧！（本邮件由塔内计协小程序自动发送）",
+              text: "详细报单请到i塔内小程序查看，快去通知Ta吧！（本邮件由i塔内小程序自动发送）",
               cc: cc
             }
             transporter.sendMail(mail2)
             console.log(mail2)
           } else {
             var mail2 = {
-              from: "塔内计协小程序 <taneipc@163.com>",
+              from: "i塔内小程序 <taneipc@163.com>",
               subject: "技术部部长，您好！【" + repairman + "】接到新的报单啦~",
               to: adminArray[0].email,
-              text: "详细报单请到塔内小程序查看，快去通知Ta吧！（本邮件由塔内计协小程序自动发送）"
+              text: "详细报单请到i塔内小程序查看，快去通知Ta吧！（本邮件由i塔内小程序自动发送）"
             }
             transporter.sendMail(mail2)
             console.log(mail2)
@@ -128,14 +136,14 @@ const repairSheetHelper = {
       port: 25,
       auth: {
         user: "taneipc@163.com",
-        pass: "TN123456"
+        pass: "APFFUXRYFTTGVFEC"
       }
     }
     var repairman = "小鸡"
     var userName = "test"
     var transporter = nodemailer.createTransport(config)
     var mail = {
-      from: "塔内计协小程序 <taneipc@163.com>",
+      from: "i塔内小程序 <taneipc@163.com>",
       subject: "您好，"+repairman + "，【" + userName + "】同学需要你的帮助~",
       to: "huckowo@163.com",
       text: "test",
@@ -478,20 +486,59 @@ const repairSheetHelper = {
     }
   },
   async getAllSheets (event, wxContext) {
-    const ingSheets = (await collection
-      .where({
-        state: _.or(_.eq(0), _.eq(1))
-      })
-      .orderBy("createdTime", "desc")
-      .get()
-    ).data
+    let {pageSize, skipPageNum, onLoad} = event
+    if (!event.pageSize) {
+      pageSize = 10
+      skipPageNum = 0
+      onLoad = true
+    }
+    var ingSheets = []
+    if (onLoad){
+      ingSheets = (await collection
+        .where({
+          state: _.or(_.eq(0), _.eq(1))
+        })
+        .orderBy("createdTime", "desc")
+        .get()
+      ).data
+    }
     const totalNum = (await collection
       .where({
         state: _.and(_.neq(0), _.neq(1))
       })
       .count()
     ).total
+    const num = (await collection
+      .where({
+        state: _.and(_.neq(0), _.neq(1))
+      }).count()
+    ).total
     var completedSheets = []
+    const sheets = (await collection
+      .where({
+        state: _.and(_.neq(0), _.neq(1))
+      })
+      .orderBy("createdTime", "desc")
+      .skip(pageSize * skipPageNum)
+      .get()
+    ).data
+    for (let i = 0; i < sheets.length; i++) {
+      let sheet = {
+        _id: sheets[i]._id,
+        createdTime: sheets[i].createdTime,
+        state: sheets[i].state,
+        userName: sheets[i].userName,
+        userAvatarUrl: sheets[i].userAvatarUrl,
+        computerType: sheets[i].computerType,
+        faultType: sheets[i].faultType,
+        repairType: sheets[i].repairType,
+        repairman: sheets[i].repairman,
+        nickName: sheets[i].nickName,
+        summary: sheets[i].summary
+      }
+      completedSheets.push(sheet)
+    }
+    /*
     for (let j = 0; j <= totalNum / 100; j++) {
       const sheets = (await collection
         .where({
@@ -501,28 +548,12 @@ const repairSheetHelper = {
         .orderBy("createdTime", "desc")
         .get()
       ).data
-      for (let i = 0; i < sheets.length; i++) {
-        let sheet = {
-          _id: sheets[i]._id,
-          createdTime: sheets[i].createdTime,
-          state: sheets[i].state,
-          userName: sheets[i].userName,
-          userAvatarUrl: sheets[i].userAvatarUrl,
-          computerType: sheets[i].computerType,
-          faultType: sheets[i].faultType,
-          repairType: sheets[i].repairType,
-          repairman: sheets[i].repairman,
-          nickName: sheets[i].nickName,
-          summary: sheets[i].summary
-        }
-        completedSheets.push(sheet)
-      }
     }
-
+    */
     return {
       code: 0,
       ingSheets,
-      completedSheets
+      completedSheets, num
     }
   },
   async getStatistics(event, wxContext) {
@@ -614,11 +645,22 @@ const repairSheetHelper = {
     }
   },
   async getUserFeedback(event, wxContext) {
+    let {pageSize, skipPageNum} = event
+    if (!event.pageSize) {
+      pageSize = 10
+      skipPageNum = 0
+    }
+    const num = (await collection
+      .where({
+        state: 3
+      }).count()
+    ).total
     const sheets = (await collection
       .where({
         state: 3
       })
       .orderBy("feedbackTime", "desc")
+      .skip(pageSize * skipPageNum)
       .get()
     ).data
     var feedback = []
@@ -635,7 +677,8 @@ const repairSheetHelper = {
     }
     return {
       code: 0,
-      feedback
+      feedback,
+      num
     }
   },
   async getAdminStatistics(event, wxContext) {
@@ -672,4 +715,38 @@ const repairSheetHelper = {
       adminStatistics
     }
   },
+  /*// @Deprecated
+  async updateAvatarUrl(event, wxContext) { // @Deprecated
+    let {n} = event
+    const usersCollection = db.collection("users")
+    const num = (await collection.count()
+    ).total
+    for (let i = n; i < n + 1 && i < num/50; i++) {
+      const array = (await collection
+        .skip(i * 50)
+        .get()
+      ).data
+      for (let j = 0; j < array.length; j++) {
+        console.log(j)
+        var {userAvatarUrl, userId, createdTime} = array[j]
+        const [userInfo] = (await usersCollection
+          .where({
+            openId: userId
+          })
+          .get()
+        ).data
+        if (!(userAvatarUrl == userInfo.avatarUrl)) {
+          await collection.doc(array[j]._id).update({
+            data: {
+              userAvatarUrl: userInfo.avatarUrl,
+              updatedTime: db.serverDate()
+            }
+          })
+          console.log(array[j]._id, " ", createdTime, " ", userAvatarUrl, "->", userInfo.avatarUrl)
+        }
+      }
+      console.log("======================", i, " finished!==============")
+    }
+  }
+  */
 }

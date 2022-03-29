@@ -1,6 +1,6 @@
 
 <scroll-view scroll-y class="scrollPage">
-  <view class="cu-custom" style="height:{{CustomBar}};pxposition:fixed;" wx:if="{{notice!=''}}">
+  <view class="cu-custom" style="height:{{CustomBar}};" wx:if="{{notice!=''}}">
     <view class="cu-bar fixed text-xl" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
       <text class="cuIcon-notificationfill text-orange margin-left margin-right-sm"></text>
       <swiper class="swiper_container margin-top-sm" vertical="true" autoplay="true" circular="true" interval="3000">

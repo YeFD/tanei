@@ -329,7 +329,7 @@ Page({
       extra_word: e.detail.value
     })
   },
-  tapRandom: function(e) {
+  tapRandom: async function(e) {
     var curSample = (this.data.curSample + 1) % this.data.arr.length
     this.setData({
       curSample: curSample,
@@ -337,7 +337,83 @@ Page({
       extra_word: this.data.sample[this.data.arr[curSample]].extra_word,
       extra_flag: this.data.sample[this.data.arr[curSample]].extra_flag
     })
-    // this.uploadAllAvatar()
+
+    var questions, cost
+    var reqTime = 0; //记录请求次数
+    const request = (params) => {
+        reqTime++;
+        //返回
+        return new Promise((resolve, reject) => {
+            wx.request({
+                //解构params获取请求参数
+                ...params,
+                success: (result) => {
+                    resolve(result);
+                },
+                fail: (err) => {
+                    reject(err);
+                },
+                complete: () => {
+                    reqTime--;
+                    //停止加载
+                }
+            });
+        });
+    }
+
+    let url = "https://nlp.xiaoji.icu/query_api/"
+    const res = await request({
+      url: url,
+      method: "POST",
+      data: {
+        question: "开机死机卡顿"
+      },
+    }).catch(e => {
+      this.setData({
+        isLoad: true
+      })
+      wx.showToast({
+        title: '服务器错误',
+        icon: "none"
+      })
+      return
+    })
+
+    if (!res.data.questions) {
+      wx.showToast({
+        title: '分析服务器错误',
+        icon: "none"
+      })
+      return
+    }
+    questions = res.data.questions
+    cost = res.data.cost
+    const {result} = await wx.cloud.callFunction({
+      name: "statisticsHelper",
+      data: {
+        action: "getAnwser",
+        question: questions[0][0]
+      }
+    }).catch(e => {
+      this.setData({
+        isLoad: true
+      })
+      wx.showToast({
+        title: '网络错误',
+        icon: "none"
+      })
+      return
+    })
+    if (result.code === 0) {
+      console.log(result)
+    } else {
+      wx.showToast({
+        title: '服务器失效',
+        icon: "none"
+      })
+    }
+  
+  
   },
   changeExtra: function(e) {
     this.setData({
@@ -354,55 +430,4 @@ Page({
       }
     })
   },
-
-  async uploadAllAvatar() {
-    console.log("begin")
-    const {result} = await wx.cloud.callFunction({
-      name: "usersHelper",
-      data: {
-        action: "getAllUser"
-      }
-    }).catch(e => {
-      this.setData({
-        isLoad: true
-      })
-      wx.showToast({
-        title: '网络错误',
-        icon: "none"
-      })
-      return
-    })
-    console.log(result)
-    if (result.code != 0) {
-      console.error("error")
-      return
-    }
-    for (let i = 0; i < result.total; i++) {
-      var {_id, openId, avatarUrl, adminId} = result.userArray[i]
-      console.log(i, _id, openId, avatarUrl)
-      if (!avatarUrl) continue
-      const res = await wx.cloud.callFunction({
-        name: "usersHelper",
-        data: {
-          action: "uploadAvatar2",
-          _id, openId, avatarUrl, adminId
-        }
-      }).catch(e => {
-        this.setData({
-          isLoad: true
-        })
-        wx.showToast({
-          title: '网络错误',
-          icon: "none"
-        })
-        return
-      })
-      var result2 = res.result
-      if (result2.code != 0) {
-        console.error("=======error=======", i)
-      } else {
-        console.log("|||success||||", result2.avatarUrl)
-      }
-    }
-  }
 })

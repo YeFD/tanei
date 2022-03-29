@@ -12,7 +12,8 @@
       "root": "pages/homePage/package",
       "pages": [
         "statistics/statistics",
-        "feedback/feedback"
+        "feedback/feedback",
+        "QASystem/QASystem"
       ]
     },
     {
@@ -53,5 +54,6 @@
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom"
-  }
+  },
+  "lazyCodeLoading": "requiredComponents"
 }

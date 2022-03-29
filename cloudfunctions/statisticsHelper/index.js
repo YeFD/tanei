@@ -192,5 +192,74 @@ const statisticsHelper = {
       code: 0,
       feedback, hour, minute, second
     }
+  },
+  async getQASystemInfo(event, wxContext) {
+    const [data] = (await collection
+      .where({
+        id: 1
+      })
+      .get()
+    ).data
+    const dataset = db.collection("dataset")
+    const num = (await dataset
+      .count()
+    ).total
+    function randomNums(n, min, max) {
+      var arr = [];
+      for (i = 0; i < n; i++) {
+        var ran = Math.floor(Math.random() * (max - min + 1) + min);
+        while (isExist(arr, ran)) {
+          ran = Math.floor(Math.random() * (max - min + 1) + min);
+        }
+        arr[i] = ran;
+      }
+      return arr;
+    }
+    function isExist(arr, ran) {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] == ran) {
+          return true;
+        }
+      }
+      return false;
+    }
+    let ids = randomNums(5, 0, num-1)
+    questions = []
+    for(let i=0; i<5; i++) {
+      const {data} = (await dataset.doc(ids[i]).get())
+      // console.log(ids[i], data)
+      questions.push(data.question)
+    }
+    return {
+      code: 0,
+      queryFlag: data.parsingFlag,
+      queryUrl: data.queryUrl,
+      queryTimes: data.queryTimes,
+      questions
+    }
+
+  },
+  async getAnwser(event, wxContext) {
+    const [data] = (await collection
+      .where({
+        id: 1
+      })
+      .get()
+    ).data
+    await collection.doc(data._id).update({
+      data: {
+        updatedTime: db.serverDate(),
+        updatedBy: wxContext.OPENID,
+        queryTimes: Number(data.queryTimes + 1),
+      }
+    })
+    const {question} = event
+    const dataset = db.collection("dataset")
+    const [anwser] = (await dataset
+      .where({
+        question
+      }).get()
+    ).data
+    return {code: 0, anwser}
   }
 }

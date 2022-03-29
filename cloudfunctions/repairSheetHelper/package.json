@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "nodemailer": "^6.5.0",
-    "wx-server-sdk": "^2.4.0"
+    "wx-server-sdk": "^2.6.1"
   }
 }

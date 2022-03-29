@@ -77,13 +77,13 @@
       </view>
     </view>
     <view class="padding flex flex-wrap justify-between align-center bg-white"  wx:if="{{pageNum > 0}}">
-      <button class="cu-btn bg-orange" bindtap="lastPage">上一页</button>
+      <button style="visibility: {{curPage>1?'':'hidden'}};"  class="cu-btn bg-orange" bindtap="lastPage">上一页</button>
       <picker range="{{pageArray}}" value="{{curPage - 1}}" bindchange="pageChange">
         <text>{{curPage}}</text>
         <text class="cuIcon-triangledownfill"></text>
         <text class="text-gray">/{{pageNum}}</text>
       </picker>
-      <button class="cu-btn bg-orange" bindtap="nextPage">下一页</button>
+      <button style="visibility: {{curPage<pageNum?'':'hidden'}};" class="cu-btn bg-orange" bindtap="nextPage">下一页</button>
     </view>
   </view>
 </scroll-view>

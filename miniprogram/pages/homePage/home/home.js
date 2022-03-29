@@ -29,6 +29,13 @@ Component({
         color: "orange",
         icon: "comment",
         path: "package/feedback/feedback"
+      },
+      {
+        title: "修机问答",
+        name: "QA System",
+        color: "green",
+        icon: "message",
+        path: "package/QASystem/QASystem"
       }
     ],
     StatusBar: app.globalData.StatusBar,

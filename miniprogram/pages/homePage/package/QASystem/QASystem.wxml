@@ -1,0 +1,48 @@
+<!--pages/homePage/package/QASystem.wxml-->
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">修机问答</view>
+  <view class="action" slot="right">
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+  </view>
+</cu-custom>
+<scroll-view scroll-y class="cu-chat">
+  <view class="cu-item" style="padding-bottom: 10px;">
+    <view class="cu-avatar radius" style="background-image: url({{botAvatarUrl}});"></view>
+      <view class="main" style="max-width: calc(100% - 240rpx);">
+        <view class="content shadow">欢迎使用智能修机问答系统，本系统基于BERT+FAISS实现</view>
+      </view>
+  </view>
+  <view class="cu-item {{item.isSelf?'self':''}}" wx:for="{{messages}}" wx:key="index">
+    <block wx:if="{{!item.isSelf}}">
+      <view class="cu-avatar radius" style="background-image: url({{botAvatarUrl}});"></view>
+      <view class="main" style="max-width: calc(100% - 240rpx);">
+        <view class="content shadow" style="word-break: break-all;">
+          
+          <text><text wx:if="{{!!item.cost}}">已找到问题"<text class="text-blue">{{item.question}}</text>"的答案(耗时{{item.cost}}, 相似度{{item.similarity}})：\n\n</text>{{item.message}}<text wx:for="{{item.otherQuestions}}" wx:for-item="question" wx:key="index" wx:for-index="idx" bindtap="tapQuestion">\n({{idx+1}}) <text class="text-blue">{{question}}</text></text>
+          </text>
+        </view>
+      </view>
+      <view class="date">{{item.date}}</view>
+    </block>
+    <block wx:else>
+      <view class="main">
+        <view class="action text-grey">
+          <text class="text-sm margin-left-sm"></text> 
+        </view>
+        <view class="content shadow">{{item.message}}</view>
+      </view>
+      <view class="cu-avatar radius" style="background-image: url({{avatarUrl}});"></view>
+      <view class="date">{{item.date}}</view>
+    </block>
+  </view>
+</scroll-view>
+
+<view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
+  <view class="action">
+    <text class="cuIcon-message text-grey"></text>
+  </view>
+  <input class="solid-bottom" value="{{curQuestion}}" bindinput="inputQuestion" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10"></input>
+
+  <button class="cu-btn bg-green shadow" bindtap="tapSubmit">发送</button>
+</view>

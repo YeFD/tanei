@@ -6,10 +6,10 @@ Page({
     repairTypeCurIndex: 0,
     repairType: [
       {
-        name: "送修",
+        name: "线上咨询",
         checked: true
       }, {
-        name: "上门"
+        name: "送修"
       }
     ],
     faultTypeCurIndex: 0,
@@ -328,6 +328,7 @@ Page({
             title: '更新成功',
             icon: "success"
           })
+          app.globalData.userInfo.avatarUrl = result.avatarUrl
           this.setData({
             modalName: null,
             identity: app.globalData.identity,
@@ -354,6 +355,7 @@ Page({
             title: '获取成功',
             icon: "success"
           })
+          app.globalData.userInfo.avatarUrl = result.avatarUrl
           this.setData({
             identity: 1,
             modalName: null,
