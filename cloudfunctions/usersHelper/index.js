@@ -87,7 +87,7 @@ const usersHelper = {
           userInfo: {
             nickName: userInfo.nickName,
             avatarUrl: userInfo.avatarUrl,
-            gender: userInfo.gender
+            // gender: userInfo.gender
           }
         }
       } else {
@@ -125,7 +125,7 @@ const usersHelper = {
           userInfo: {
             nickName: userInfo.nickName,
             avatarUrl: userInfo.avatarUrl,
-            gender: userInfo.gender
+            // gender: userInfo.gender
           },
           adminInfo: {
             _id: adminInfo._id,
@@ -163,7 +163,7 @@ const usersHelper = {
     }
   },
   async register(event, wxContext) {
-    var {nickName, avatarUrl, gender} = event
+    var {nickName, avatarUrl} = event
     const [userInfo] = (await usersCollection
       .where({
         openId: wxContext.OPENID
@@ -179,7 +179,7 @@ const usersHelper = {
             // logged: true,
             identity: 1,
             nickName,
-            gender,
+            // gender,
             avatarUrl,
             updatedTime: db.serverDate()
           }
@@ -232,7 +232,7 @@ const usersHelper = {
           userInfo: {
             nickName: userInfo.nickName,
             avatarUrl: userInfo.avatarUrl,
-            gender: userInfo.gender
+            // gender: userInfo.gender
           },
           adminInfo: {
             _id: adminInfo._id,
@@ -255,7 +255,7 @@ const usersHelper = {
           // logged: true,
           identity: 1,
           nickName,
-          gender,
+          // gender,
           avatarUrl,
           createdTime: db.serverDate(),
           updatedTime: db.serverDate()
@@ -271,7 +271,7 @@ const usersHelper = {
   },
   async updateUserInfo(event, wxContext) {
     console.log(event)
-    var {nickName, avatarUrl, gender, adminId} = event
+    var {nickName, avatarUrl, adminId} = event
     var res = await this.uploadAvatar(avatarUrl, wxContext.OPENID)
     avatarUrl = res.avatarUrl
     const [userInfo] = (await usersCollection
@@ -286,7 +286,7 @@ const usersHelper = {
           openId: wxContext.OPENID,
           logged: true,
           nickName,
-          gender,
+          // gender,
           avatarUrl,
           createdTime: db.serverDate(),
           updatedTime: db.serverDate()
@@ -300,7 +300,7 @@ const usersHelper = {
       await usersCollection.doc(userInfo._id).update({
         data: {
           nickName,
-          gender,
+          // gender,
           avatarUrl,
           updatedTime: db.serverDate()
         }

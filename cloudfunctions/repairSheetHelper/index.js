@@ -84,10 +84,17 @@ const repairSheetHelper = {
       transporter.sendMail(mail)
       if (identity == "干事") {
         const adminCollection = db.collection("admin")
+        const [data] = (await adminCollection
+          .where({
+            id: 0
+          })
+          .get()
+        ).data
         const adminArray = (await adminCollection
           .where({
             id: 1,
-            identity: "部长"
+            identity: "部长",
+            session: Number(data.curSession)
           })
           .get()
         ).data
@@ -597,53 +604,53 @@ const repairSheetHelper = {
       // adminArray2, adminArray34, adminArray5
     }
   },
-  async getAdminStatistics2(event, wxContext) {
-    const adminCollection = db.collection("admin")
-    const adminArray = (await adminCollection
-      .where({
-        id: 1,
-        department: "技术部"
-      })
-      .get()
-    ).data
-    var adminArray2 = []
-    var adminArray34 = []
-    var adminArray5 = []
-    for (let i = 0; i < adminArray.length; i++) {
-      let cNum = (await collection
-        .where({
-          repairmanId: adminArray[i].openId,
-          state: _.and(_.neq(0), _.neq(1), _.neq(-1))
-        })
-        .count()
-      ).total
-      if (adminArray[i].identity == "干事") {
-        adminArray2.push({
-          name: adminArray[i].name,
-          nickName: adminArray[i].nickName,
-          completedNum: cNum
-        })
-      }
-      if (adminArray[i].identity == "部长" || adminArray[i].identity == "会长") {
-        adminArray34.push({
-          name: adminArray[i].name,
-          nickName: adminArray[i].nickName,
-          completedNum: cNum
-        })
-      }
-      if (adminArray[i].identity == "老人" || adminArray[i].identity == "SA") {
-        adminArray5.push({
-          name: adminArray[i].name,
-          nickName: adminArray[i].nickName,
-          completedNum: cNum
-        })
-      }
-    }
-    return {
-      code: 0,
-      adminArray2, adminArray34, adminArray5
-    }
-  },
+  // async getAdminStatistics2(event, wxContext) {
+  //   const adminCollection = db.collection("admin")
+  //   const adminArray = (await adminCollection
+  //     .where({
+  //       id: 1,
+  //       department: "技术部"
+  //     })
+  //     .get()
+  //   ).data
+  //   var adminArray2 = []
+  //   var adminArray34 = []
+  //   var adminArray5 = []
+  //   for (let i = 0; i < adminArray.length; i++) {
+  //     let cNum = (await collection
+  //       .where({
+  //         repairmanId: adminArray[i].openId,
+  //         state: _.and(_.neq(0), _.neq(1), _.neq(-1))
+  //       })
+  //       .count()
+  //     ).total
+  //     if (adminArray[i].identity == "干事") {
+  //       adminArray2.push({
+  //         name: adminArray[i].name,
+  //         nickName: adminArray[i].nickName,
+  //         completedNum: cNum
+  //       })
+  //     }
+  //     if (adminArray[i].identity == "部长" || adminArray[i].identity == "会长") {
+  //       adminArray34.push({
+  //         name: adminArray[i].name,
+  //         nickName: adminArray[i].nickName,
+  //         completedNum: cNum
+  //       })
+  //     }
+  //     if (adminArray[i].identity == "老人" || adminArray[i].identity == "SA") {
+  //       adminArray5.push({
+  //         name: adminArray[i].name,
+  //         nickName: adminArray[i].nickName,
+  //         completedNum: cNum
+  //       })
+  //     }
+  //   }
+  //   return {
+  //     code: 0,
+  //     adminArray2, adminArray34, adminArray5
+  //   }
+  // },
   async getUserFeedback(event, wxContext) {
     let {pageSize, skipPageNum} = event
     if (!event.pageSize) {
@@ -683,6 +690,12 @@ const repairSheetHelper = {
   },
   async getAdminStatistics(event, wxContext) {
     const adminCollection = db.collection("admin")
+    const [data] = (await adminCollection
+      .where({
+        id: 0
+      })
+      .get()
+    ).data
     const adminArray = (await adminCollection
       .where({
         id: 1,
@@ -704,6 +717,7 @@ const repairSheetHelper = {
         name: adminArray[i].name,
         nickName: adminArray[i].nickName,
         completedNum: cNum,
+        session: adminArray[i].session,
         identity: adminArray[i].identity
       })
     }
@@ -712,7 +726,8 @@ const repairSheetHelper = {
     })
     return {
       code: 0,
-      adminStatistics
+      adminStatistics,
+      curSession: data.curSession
     }
   },
   /*// @Deprecated

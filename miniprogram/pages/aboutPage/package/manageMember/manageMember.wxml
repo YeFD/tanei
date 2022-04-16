@@ -1,11 +1,23 @@
 <!--miniprogram/pages/aboutPage/manageMember/manageMember.wxml-->
-<cu-custom bgColor="bg-gradual-red" isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">塔内成员</view>
-  <view class="action" slot="right">
-    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+<view class="cu-custom" style="height:{{CustomBar}}px">
+  <view class="cu-bar fixed bg-gradual-red" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="action" bindtap="BackPage">
+      <text class="cuIcon-back"></text>返回
+    </view>
+    <view class="action border-custom"  wx:if="{{isCustom}}" style="width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)">
+      <text class="cuIcon-back" bindtap="BackPage"></text>
+    </view>
+    <view class="content" style="top:{{StatusBar}}px">
+      <view>维修人员
+      </view>
+    </view>
+    <view class="action">
+      <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+      <button class="cu-btn icon bg-white round line" wx:if="{{!!isLoad}}" bindtap="showModal" data-target="setting"><text class="cuIcon-settingsfill"></text></button>
+    </view>
   </view>
-</cu-custom>
+</view>
+
 <scroll-view scroll-x class="bg-white nav">
   <view class="flex text-center">
     <view class="cu-item flex-sub {{index==tabIndex?'text-red cur':''}}" wx:for="{{tabArray}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
@@ -17,7 +29,7 @@
   <view class="cu-list menu-avatar" wx:if="{{tabIndex==0}}">
     <view class="cu-load {{!isLoad?'loading':''}}"></view>
     <view class="cu-load {{adminArray2.length == 0 && !!isLoad?'over':''}}"></view>
-    <view class="cu-item {{move=='move-'+index?'move-cur':''}}" wx:for="{{adminArray2}}" wx:key="index" bindtouchstart="listTouchStart" bindtouchmove="listTouchMove" bindtouchend="listTouchEnd" data-target="move-{{index}}">
+    <view class="cu-item {{move=='move-'+index?'move-cur':''}}" wx:for="{{adminArray2}}" wx:if="{{!item.session||item.session==curSession}}" wx:key="index" bindtouchstart="listTouchStart" bindtouchmove="listTouchMove" bindtouchend="listTouchEnd" data-target="move-{{index}}">
       <view class="cu-avatar round lg" wx:if="{{!!item.avatarUrl}}" style="background-image:url({{item.avatarUrl}})"></view>
       <view class="cu-avatar round lg" wx:else style="background-image:url(https://tx-free-imgs.acfun.cn/style/image/defaultAvatar.jpg)"></view>
       <view class="content">
@@ -30,13 +42,13 @@
       </view>
       <block wx:if="{{identity >= 3 && identity != 5}}">
         <view class="action">
-          <view wx:if="{{item.online}}" class="text-green">已上线</view>
+          <view wx:if="{{item.online&&item.session==sessions[0]}}" class="text-green">已上线</view>
           <view wx:else class="text-red">已下线</view>
         </view>
         <view class="move">
-          <view class="bg-grey" bindtap="showModal" data-target="update" data-index="{{index}}">更新</view>
-          <view class="bg-red" wx:if="{{item.online}}" bindtap="tapOffline" data-index="{{index}}">下线</view>
-          <view class="bg-green" wx:else="{{!item.online}}" bindtap="tapOnline" data-index="{{index}}">上线</view>
+          <view class="bg-red" wx:if="{{item.online&&item.session===sessions[0]}}" bindtap="tapOffline" data-index="{{index}}">下线</view>
+          <view class="bg-green" wx:if="{{!item.online&&item.session===sessions[0]}}" bindtap="tapOnline" data-index="{{index}}">上线</view>
+          <view class="bg-grey" wx:if="{{item.session!=sessions[0]}}" >已下线</view>
         </view>
       </block>
     </view>
@@ -45,7 +57,7 @@
   <view class="cu-list menu-avatar" wx:if="{{tabIndex==1}}">
     <view class="cu-load {{!isLoad?'loading':''}}"></view>
     <view class="cu-load {{adminArray34.length == 0 && !!isLoad?'over':''}}"></view>
-    <view class="cu-item {{move=='move-'+index?'move-cur':''}}" wx:for="{{adminArray34}}" wx:key="index" bindtouchstart="listTouchStart" bindtouchmove="listTouchMove" bindtouchend="listTouchEnd" data-target="move-{{index}}">
+    <view class="cu-item {{move=='move-'+index?'move-cur':''}}" wx:for="{{adminArray34}}"  wx:if="{{!item.session||item.session==curSession}}"  wx:key="index" bindtouchstart="listTouchStart" bindtouchmove="listTouchMove" bindtouchend="listTouchEnd" data-target="move-{{index}}">
       <view class="cu-avatar round lg" wx:if="{{!!item.avatarUrl}}" style="background-image:url({{item.avatarUrl}})"></view>
       <view class="cu-avatar round lg" wx:else style="background-image:url(https://tx-free-imgs.acfun.cn/style/image/defaultAvatar.jpg)"></view>
       <view class="content">
@@ -56,15 +68,10 @@
           <text class="text-grey" wx:if="{{!!item.nickName}}">({{item.nickName}})</text>
         </view>
       </view>
-      <block wx:if="{{identity >= 4 && identity != 5}}">
         <view class="action">
-          <view wx:if="{{item.online}}" class="text-green">已上线</view>
+          <view wx:if="{{item.online&&item.session==sessions[0]}}" class="text-green">已上线</view>
           <view wx:else class="text-red">已下线</view>
         </view>
-        <view class="move">
-          <view class="bg-grey" bindtap="showModal" data-target="update" data-index="{{index}}">更新</view>
-        </view>
-      </block>
     </view>
   </view>
 
@@ -73,7 +80,7 @@
     <view class="cu-load {{adminArray5.length == 0 && !!isLoad?'over':''}}"></view>
     <view class="cu-item {{move=='move-'+index?'move-cur':''}}" wx:for="{{adminArray5}}" wx:key="index">
       <view class="cu-avatar round lg" wx:if="{{!!item.avatarUrl}}" style="background-image:url({{item.avatarUrl}})"></view>
-      <view class="cu-avatar round lg" wx:else style="background-image:url(https://tx-free-imgs.acfun.cn/style/image/defaultAvatar.jpg)"></view>
+      <view class="cu-avatar round lg" wx:else style="background-image:url(https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg)"></view>
       <view class="content">
         <view class="">
           <view class="cu-tag bg-{{item.identity=='SA'?'mauve':'yellow'}}">{{item.identity}}</view>
@@ -84,22 +91,24 @@
     </view>
   </view>
 </scroll-view>
-<view class="cu-modal {{modalName=='update'?'show':''}}" bindtap="hideModal">
+
+<view class="cu-modal {{modalName=='setting'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
-      <view class="content">更改认证</view>
+      <view class="content">设置</view>
       <view class="action" bindtap="hideModal">
         <text class="cuIcon-close text-red"></text>
       </view>
     </view>
-    <view class="padding-xl">
-      确定要将Ta的认证更改为老人吗？
-    </view>
-    <view class="cu-bar bg-white justify-end">
-      <view class="action">
-        <button class="cu-btn line-red text-ted" bindtap="hideModal">取消</button>
-        <button class="cu-btn bg-green margin-left" bindtap="tapUpdate">确定</button>
+    <radio-group class="block" bindchange="sessionChange">
+      <view class="cu-list menu text-left">
+        <view class="cu-item" wx:for="{{sessions}}" wx:key="index">
+          <label class="flex justify-between align-center flex-sub">
+            <view class="flex-sub">{{item}}</view>
+            <radio class="round" value="{{item}}" checked="{{curSession==item}}"></radio>
+          </label>
+        </view>
       </view>
-    </view>
+    </radio-group>
   </view>
 </view>

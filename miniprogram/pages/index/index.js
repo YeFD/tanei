@@ -15,8 +15,7 @@ Page({
         badge: 0,
         name: "消息",
         bindtap: "toMessageBox"
-      },
-      {
+      }, {
         icon: "form",
         color: "purple",
         name: "我的报修",
@@ -29,32 +28,33 @@ Page({
         color: "pink",
         name: "认证信息",
         bindtap: "toMyIdentity"
-      },
-      {
+      }, {
         icon: "repair",
         color: "blue",
         name: "我的维修",
         badge: 0,
         bindtap: "toMyReceivedRepairSheet"
-      },
-      {
+      }, {
         icon: "list",
         color: "orange",
         name: "所有报单",
         bindtap: "toAllSheets"
-      },
-      {
+      }, {
         icon: "group",
         color: "red",
         name: "塔内成员",
         bindtap: "toManageMember"
-      },
-      {
+      }, {
         icon: "lock",
         color: "cyan",
         name: "管理",
         bindtap: "toManageIdentify"
-      }
+      }, {
+        icon: "creative",
+        color: "brown",
+        name: "使用说明",
+        bindtap: "toInstruction"
+      },
     ]
   },
   onLoad: async function (options) {
@@ -126,7 +126,12 @@ Page({
               color: "cyan",
               name: "管理",
               bindtap: "toManageIdentify"
-            }
+            }, {
+              icon: "creative",
+              color: "brown",
+              name: "使用说明",
+              bindtap: "toInstruction"
+            },
           ]
           this.setData({
             list1, list2,
@@ -208,7 +213,12 @@ Page({
           color: "cyan",
           name: "管理",
           bindtap: "toManageIdentify"
-        }
+        }, {
+          icon: "creative",
+          color: "brown",
+          name: "使用说明",
+          bindtap: "toInstruction"
+        },
       ]
       this.setData({
         list1, list2,
@@ -245,7 +255,8 @@ Page({
       return
     }
     app.globalData.userInfo = result.userInfo
-    const {nickName, gender, avatarUrl} = app.globalData.userInfo
+    // app.globalData.userInfo.avatarUrl = "https://6469-dist-3gfsowkhc324384b-1259081600.tcb.qcloud.la/userAvatar/"+ ".png"
+    const {nickName, avatarUrl} = app.globalData.userInfo
     wx.showLoading({
       title: '请稍后',
       mask: true
@@ -262,7 +273,6 @@ Page({
         data: {
           action: "updateUserInfo",
           nickName,
-          gender,
           avatarUrl,
           adminId
         }
@@ -295,7 +305,6 @@ Page({
         data: {
           action: "register",
           nickName,
-          gender,
           avatarUrl
         }
       }).catch(res => {
@@ -399,6 +408,11 @@ Page({
   toDiscover() {
     wx.navigateTo({
       url: '/pages/aboutPage/package1/discover/discover',
+    })
+  },
+  toInstruction() {
+    wx.navigateTo({
+      url: '/pages/aboutPage/package/Instruction/Instruction',
     })
   }
 })

@@ -38,5 +38,15 @@ Page({
     this.setData({
       cardCur: e.detail.current
     })
-  }
+  },
+  copyData: function(e) {
+    wx.setClipboardData({
+      data: "i-am-xiaoji",
+      success: res => {
+        wx.showToast({
+          title: '已复制微信号',
+        })
+      }
+    })
+  },
 })

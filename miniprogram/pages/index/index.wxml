@@ -38,7 +38,6 @@
       </block>
       <block wx:if="{{identity > 1}}">
         <view class="cu-avatar round xxl" style="background-image:url({{userInfo.avatarUrl}})" bindlongpress="toIdentify">
-          <view class="cu-tag badge {{(userInfo.gender-1)%2==1?'cuIcon-female bg-pink':'cuIcon-male bg-blue'}}"></view>
         </view>
         <view class="margin-left">
           <view class="cu-capsule radius margin-top-xl">
@@ -115,7 +114,7 @@
       <view class="cu-item arrow">
         <button class="cu-btn content" open-type="feedback">
           <text class="cuIcon-writefill text-yellow"></text>
-          <text class="text-grey">bug反馈</text>
+          <text class="text-grey">意见反馈</text>
         </button>
         <view class="action">
           <view class="content"></view>
@@ -128,7 +127,7 @@
         </button>
         <view class="action">
           <view class="content">
-            <text class="text-grey text-sm">_(:з」∠)_酷爱来</text>
+            <text class="text-grey text-sm"></text>
           </view>
         </view>
       </view>

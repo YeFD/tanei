@@ -36,7 +36,14 @@ Component({
         color: "green",
         icon: "message",
         path: "package/QASystem/QASystem"
-      }
+      },
+      {
+        title: "报修流程",
+        name: "Process",
+        color: "purple",
+        icon: "sort",
+        path: "package/process/process"
+      },
     ],
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,

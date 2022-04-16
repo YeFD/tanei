@@ -128,7 +128,7 @@
   <view class="action">
     <text wx:if="{{!!adminInfo.nickName}}">{{adminInfo.nickName}}</text>
     <text wx:else>{{adminInfo.name}}</text>
-    <button class="cu-btn line-mauve margin-left sm" bindtap="showModal" data-target="nickName" bindlongpress="showRevoke">修改</button>
+    <button class="cu-btn icon bg-white round line" bindtap="showModal" data-target="nickName" bindlongpress="showRevoke"><text class="cuIcon-settingsfill text-mauve"></text></button>
   </view>
 </view>
 <view class="cu-form-group">
@@ -143,6 +143,12 @@
   <view class="action">
     <text>{{adminInfo.wechat}}</text>
     <!-- <button class="cu-btn line-mauve margin-left sm" bindtap="tapWechat">修改</button> -->
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="title">认证学年</view>
+  <view class="action">
+    <text>{{adminInfo.session}}</text>
   </view>
 </view>
 

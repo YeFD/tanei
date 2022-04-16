@@ -1,10 +1,6 @@
 // miniprogram/pages/aboutPage/manageIdentify/manageIdentify.js
 const app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     update: false,
     password: null,
@@ -12,10 +8,6 @@ Page({
     notice: "",
     msgList: []
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: async function (options) {
     if (app.globalData.identity <= 1) {
       wx.showToast({
@@ -49,12 +41,15 @@ Page({
       for (let i = 0; i*13 < notice.length; i++) {
         msgList[i] = notice.substr(13*i, 13)
       }
+      var sessions = [result.curSession+1, result.curSession, result.curSession-1]
       this.setData({
         isLoad: true,
         password: result.password,
         update: result.update,
         notice,
-        msgList
+        msgList,
+        curSession: result.curSession,
+        sessions
       })
     } else if (result.code == 1) {
       wx.showToast({
@@ -74,55 +69,6 @@ Page({
         isLoad: true
       })
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   },
   setNotice: async function(e) {
     if (this.data.identity <= 2 || this.data.identity == 5) {
@@ -175,7 +121,8 @@ Page({
     })
   },
   showModal: function(e) {
-    if (this.data.identity <= 2 || this.data.identity == 5) {
+    const {target} = e.currentTarget.dataset
+    if (this.data.identity <= 2) {
       wx.showToast({
         title: '权限不足',
         icon: "none"
@@ -183,12 +130,57 @@ Page({
       return
     }
     this.setData({
-      modalName: "notice"
+      modalName: target
     })
   },
   hideModal: function(e) {
     this.setData({
       modalName: null
     })
+  },
+  sessionChange: function(e) {
+    this.setData({
+      curSession: e.detail.value
+    })
+  },
+  
+  setSession: async function(e) {
+    if (this.data.identity <= 4 || this.data.identity == 5) {
+      wx.showToast({
+        title: '权限不足',
+        icon: "none"
+      })
+      return
+    }
+    wx.showLoading({
+      title: "加载中",
+      mask: true
+    })
+    const {result} = await wx.cloud.callFunction({
+      name: "adminHelper",
+      data: {
+        action: "setSession",
+        session: this.data.curSession
+      }
+    }).catch(e => {
+      wx.showToast({
+        title: '网络错误',
+        icon: "none"
+      })
+      return
+    })
+    wx.hideLoading()
+    if (result.code == 0) {
+      wx.showToast({
+        title: '修改成功',
+        icon: "success"
+      })
+      this.hideModal()
+    } else {
+      wx.showToast({
+        title: '请求错误',
+        icon: "none"
+      })
+    }
   },
 })

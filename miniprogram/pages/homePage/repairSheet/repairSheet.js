@@ -306,7 +306,7 @@ Page({
         mask: true
       })
       app.globalData.userInfo = result.userInfo
-      const {nickName, gender, avatarUrl} = result.userInfo
+      const {nickName, avatarUrl} = result.userInfo
       // identity = 1
       if (app.globalData.identity >= 1) {
         //更新
@@ -314,7 +314,7 @@ Page({
           name: "usersHelper",
           data: {
             action: "updateUserInfo",
-            nickName, gender, avatarUrl
+            nickName, avatarUrl
           }
         }).catch(e => {
           wx.showToast({
@@ -341,7 +341,7 @@ Page({
           name: "usersHelper",
           data: {
             action: "register",
-            nickName, gender, avatarUrl
+            nickName, avatarUrl
           }
         }).catch(e => {
           wx.showToast({

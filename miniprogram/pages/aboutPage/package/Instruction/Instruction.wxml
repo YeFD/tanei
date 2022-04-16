@@ -1,0 +1,38 @@
+<!--pages/aboutPage/package/Instruction/Instruction.wxml-->
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">使用说明</view>
+</cu-custom>
+<scroll-view scroll-y class="cu-chat">
+  <view class="cu-item" style="padding-bottom: 10px;">
+    <view class="cu-avatar radius" style="background-image: url({{botAvatarUrl}});"></view>
+      <view class="main" style="max-width: calc(100% - 160rpx);">
+        <view class="content shadow">{{identityList[identity-2]}}你好，欢迎使用i塔内小程序，这是一份简单的使用说明书</view>
+      </view>
+  </view>
+  <view class="cu-item" style="padding-bottom: 10px;">
+    <view class="cu-avatar radius" style="background-image: url({{botAvatarUrl}});"></view>
+      <view class="main" style="max-width: calc(100% - 160rpx);">
+        <view class="content shadow">
+          <text><block wx:if="{{identity==2}}">1. 接到单后，小程序会给维修人员发送提醒邮件，请及时到<text class="text-blue">"我的报单"</text>页面接单，点<text class="text-blue">"..."</text>可以查看报单详情\n2. 报单可以由维修人员、用户或管理人员取消\n3. 完成报单后，请及时到<text class="text-blue">"我的报单"</text>页面完成报单，这样用户才可以进行评价\n4. 完成报单后，可以填写报单总结\n5. 可以在<text class="text-blue">"我的认证"</text>界面左滑头像可以申请上/下线，该页面也可以修改展示昵称，申请后及时联系部长审批，申请可撤回\n6. 如果想修改电子邮箱或微信号，请联系开发者修改
+            </block>
+            <block wx:if="{{identity==3}}">1. 干事接到新的报单后，小程序会给每名部长发送提醒邮件\n2. 如果干事有上/下线、修改昵称申请，请及时到<text class="text-blue">"消息"</text>界面审批\n3. 认证部长后，默认为下线状态，可以在<text class="text-blue">"我的认证"</text>界面左滑头像直接修改上/下线状态，以及修改展示昵称\n4. 可以在<text class="text-blue">"管理"</text>页面查看干事的认证密钥，普通用户在"我的"页面长按头像可以进入认证页面\n5. 可以在<text class="text-blue">"管理"</text>页面修改"首页"的通知栏\n6. <text class="text-blue">"塔内成员"</text>页面可以左滑干事头像选择下架\n7. 如果留任，请联系会长更新<text class="text-blue">"管理"</text>页面的"认证学年"后，在<text class="text-blue">"我的认证"</text>界面左滑头像更新会长身份
+            </block>
+            <block wx:if="{{identity==4}}">1. 可以在管理页面查看部长、会长的认证密钥，普通用户在"我的"页面长按头像可以进入认证页面\n2. 如果换届，请会长到<text class="text-blue">"管理"</text>页面，修改认证学年为下一学年，这样干事/部长才可以在<text class="text-blue">"我的认证"</text>界面左滑头像可以进行更新身份。修改后，请及时提醒干事/部长更新认证\n3. <text class="text-blue">"塔内成员"</text>页面可以左滑干事头像选择下架
+            </block>
+            <block wx:if="{{identity>4}}">参考源代码</block>
+          </text>
+        </view>
+      </view>
+  </view>
+  <view class="cu-item" style="padding-bottom: 10px;">
+    <view class="cu-avatar radius" style="background-image: url({{SAAvatarUrl}});"></view>
+      <view class="main" style="max-width: calc(100% - 160rpx);">
+        <view class="content shadow" bindtap="copyData">
+          <text>本小程序已开源，如果你在使用i塔内的过程中有更好的建议和想法，希望维护、改进i塔内小程序，欢迎联系开发者<text class="text-purple">@小鸡</text>\n如对i塔内项目有贡献，即可加入<text class="text-purple">SA名单</text>！
+          </text>
+        </view>
+      </view>
+  </view>
+</scroll-view>
+

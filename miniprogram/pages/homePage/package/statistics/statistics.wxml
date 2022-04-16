@@ -95,7 +95,7 @@
     </view>
   </view>
   <view class="cu-list menu sm-border">
-    <view class="cu-item" wx:for="{{adminStatistics}}" wx:key="index">
+    <view class="cu-item" wx:for="{{adminStatistics}}" wx:if="{{item.completedNum!=0}}" wx:key="index">
       <view class="content">
         <text class="text-balck text-sm" wx:if="{{!!item.nickName}}">{{index+1}}. {{item.nickName}}</text>
         <text class="text-balck text-sm" wx:else>{{index+1}}. {{item.name}}</text>

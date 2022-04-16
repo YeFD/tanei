@@ -4,10 +4,26 @@
 </cu-custom>
 <scroll-view scroll-y>
 <view class="cu-timeline">
+  <view class="cu-item text-green">
+    <view class="bg-gradual-green content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.10.0</view>
+        <view class="cu-tag line-white">2022/4/16</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>1. 增加修机问答、报修流程和使用说明</view>
+        <view>2. 禁止内部页面分享</view>
+        <view>3. 修复头像显示异常</view>
+        <view>4. 优化评价和报单翻页</view>
+        <view>5. 增加认证年份，优化人员展示方式</view>
+        <view>6. 适应userProfile接口更新，不再展示性别</view>
+      </view>
+    </view>   
+  </view>
   <view class="cu-item text-cyan">
     <view class="bg-cyan content shadow">
       <view class="cu-capsule radius">
-        <view class="cu-tag bg-white text-blue">v1.9.2</view>
+        <view class="cu-tag bg-white text-cyan">v1.9.2</view>
         <view class="cu-tag line-white">2021/10/20</view>
       </view>
       <view class="margin-top-sm text-content">
@@ -22,7 +38,6 @@
         <view class="cu-tag line-white">2021/3/14</view>
       </view>
       <view class="margin-top-sm text-content text-white">
-        <view>第五个线上版本</view>
         <view>1. 管理员可以取消报单</view>
         <view>2. 修改getUserInfo相关代码</view>
         <view>3. 其它优化</view>
@@ -39,7 +54,6 @@
         <view class="cu-tag line-white">2020/12/12</view>
       </view>
       <view class="margin-top-sm text-content">
-        <view>第四个线上版本</view>
         <view>1. 实验室增加NLP</view>
         <view>2. 增加拒绝授权时的提醒</view>
         <view>3. 我的报单增加返回首页，以解决订阅消息不回退页面的问题</view>
@@ -54,7 +68,6 @@
         <view class="cu-tag line-white">2020/11/10</view>
       </view>
       <view class="margin-top-sm text-content">
-        <view>第三个线上版本</view>
         <view>1. 更新背景图片</view>
         <view>2. 首页增加可修改的公告栏</view>
         <view>3. 报单页显示总结</view>
@@ -83,7 +96,6 @@
         <view class="cu-tag line-white">2020/10/20</view>
       </view>
       <view class="margin-top-sm text-content">
-        <view>第二个线上版本</view>
         <view>1. 新增订阅消息，报单完成后提醒机主评价；</view>
         <view>2. 优化了评价页和所有报单页的布局</view>
       </view>
