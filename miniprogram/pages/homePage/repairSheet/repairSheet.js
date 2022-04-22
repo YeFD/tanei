@@ -46,7 +46,7 @@ Page({
   onLoad: async function (options) {
     // 注意事项
     this.setData({
-      modalName: 'DialogModal'
+      modalName: 'showAttention'
     });
     let that = this;
     function countdown(){

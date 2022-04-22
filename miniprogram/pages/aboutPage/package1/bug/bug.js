@@ -4,10 +4,27 @@ Page({
   onLoad: function (options) {
 
   },
-  tapRe: function(e) { 
-    console.log("tapRe") 
-    this.selectComponent("#custom").reBug() 
-    this.onLoad() 
+  tapRe: async function(e) { 
+    // console.log("tapRe") 
+    // this.selectComponent("#custom").reBug() 
+    // this.onLoad() 
+    // const {result} = await wx.cloud.callFunction({
+    //   name: "repairSheetHelper",
+    //   data: {
+    //     action: "test"
+    //   }
+    // }).catch(e => {
+    //   console.log(e)
+    //   this.setData({
+    //     isLoad: true
+    //   })
+    //   wx.showToast({
+    //     title: '网络错误',
+    //     icon: "none"
+    //   })
+    //   return
+    // })
+    // console.log(result)
   }, 
   tapFixBug: function(e) { 
     console.log(this.selectComponent("#custom").data) 

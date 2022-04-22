@@ -65,6 +65,12 @@ const repairSheetHelper = {
     })
     try {
       var nodemailer = require("nodemailer")
+      if (!nodemailer.createTransport) {
+        return {
+          code: 0,
+          message: "no nodemailer",
+        }
+      }
       var config = {
         host: 'smtp.163.com',
         port: 25,
@@ -73,15 +79,28 @@ const repairSheetHelper = {
           pass: "APFFUXRYFTTGVFEC"
         }
       }
-      var transporter = nodemailer.createTransport(config)
-      var mail = {
-        from: "i塔内小程序 <taneipc@163.com>",
-        subject: "您好，"+repairman + "，【" + userName + "】同学需要你的帮助~",
-        to: email,
-        text: "详细报单请到i塔内小程序查看，快去接单吧！（本邮件由i塔内小程序自动发送）"
+      config = {
+        host: 'smtp-mail.outlook.com',
+        port: 587,
+        secureConnection: false,
+        tls: {
+          ciphers:'SSLv3'
+        },
+        auth: {
+          user: "itanei2022@outlook.com",
+          pass: "TNPC123456."
+        }
       }
-      console.log(mail, identity)
-      transporter.sendMail(mail)
+      var transporter = nodemailer.createTransport(config)
+      // var mail = {
+      //   // from: "i塔内小程序 <taneipc@163.com>",
+      //   from: "i塔内小程序 <itanei2022@outlook.com>",
+      //   subject: "您好，"+repairman + "，【" + userName + "】同学需要你的帮助~",
+      //   to: email,
+      //   text: "请到i塔内小程序查看详细报单，快去接单吧！（本邮件来自i塔内小程序）"
+      // }
+      // console.log(mail, identity)
+      // transporter.sendMail(mail)
       if (identity == "干事") {
         const adminCollection = db.collection("admin")
         const [data] = (await adminCollection
@@ -99,31 +118,32 @@ const repairSheetHelper = {
           .get()
         ).data
         if (!!adminArray) {
-          if (adminArray.length > 1) {
-            var cc = ""
-            for (let i = 1; i < adminArray.length; i++) {
-              cc += adminArray[i].email + ","
-            }
-            var mail2 = {
-              from: "i塔内小程序 <taneipc@163.com>",
-              subject: "技术部部长，您好！【" + repairman + "】接到新的报单啦~",
-              to: adminArray[0].email,
-              text: "详细报单请到i塔内小程序查看，快去通知Ta吧！（本邮件由i塔内小程序自动发送）",
-              cc: cc
-            }
-            transporter.sendMail(mail2)
-            console.log(mail2)
-          } else {
-            var mail2 = {
-              from: "i塔内小程序 <taneipc@163.com>",
-              subject: "技术部部长，您好！【" + repairman + "】接到新的报单啦~",
-              to: adminArray[0].email,
-              text: "详细报单请到i塔内小程序查看，快去通知Ta吧！（本邮件由i塔内小程序自动发送）"
-            }
-            transporter.sendMail(mail2)
-            console.log(mail2)
-            }
+          var cc = ""
+          for (let i = 0; i < adminArray.length; i++) {
+            cc += adminArray[i].email + ","
+          }
+          var mail2 = {
+              // from: "i塔内小程序 <taneipc@163.com>",
+            from: "i塔内小程序 <itanei2022@outlook.com>",
+            subject: "您好, 【" + repairman + "】接到来自【" + userName + "】的报单",
+            to: email,
+            text: "请到i塔内小程序查看详细报单，快去看看吧！（本邮件由i塔内小程序自动发送）",
+            cc: cc
+          }
+          transporter.sendMail(mail2)
+          console.log(mail2)
         }
+      } else {
+        var mail2 = {
+            // from: "i塔内小程序 <taneipc@163.com>",
+          from: "i塔内小程序 <itanei2022@outlook.com>",
+          subject: "您好, 【" + repairman + "】接到来自【" + userName + "】的报单",
+          to: email,
+          text: "请到i塔内小程序查看详细报单，快去看看吧！（本邮件由i塔内小程序自动发送）",
+        }
+        transporter.sendMail(mail2)
+        console.log(mail2)
+
       }
     } catch(e) {
       console.error(e)
@@ -138,6 +158,9 @@ const repairSheetHelper = {
     console.log("test")
     var nodemailer = require("nodemailer")
     console.log(nodemailer, "node")
+    if (!nodemailer.createTransport) {
+      return {code: -1, nodemailer, state: !nodemailer.createTransport}
+    }
     var config = {
       host: 'smtp.163.com',
       port: 25,
@@ -146,42 +169,40 @@ const repairSheetHelper = {
         pass: "APFFUXRYFTTGVFEC"
       }
     }
+    // config = {
+    //   host: 'smtp.qq.com',
+    //   port: 465, 
+    //   auth: {
+    //     user: "xiaoji_owo@qq.com",
+    //     pass: ""
+    //   }
+    // }
+    config = {
+      host: 'smtp-mail.outlook.com',
+      port: 587,
+      secureConnection: false,
+      tls: {
+        ciphers:'SSLv3'
+      },
+      auth: {
+        user: "itanei2022@outlook.com",
+        pass: "TNPC123456."
+      }
+    }
     var repairman = "小鸡"
     var userName = "test"
     var transporter = nodemailer.createTransport(config)
     var mail = {
-      from: "i塔内小程序 <taneipc@163.com>",
-      subject: "您好，"+repairman + "，【" + userName + "】同学需要你的帮助~",
+      // from: "i塔内小程序 <taneipc@163.com>",
+      // from: "test <xiaoji_owo@qq.com>",
+      from: "test from outlook <itanei2022@outlook.com>",
+      subject: "test",
       to: "huckowo@163.com",
-      text: "test",
+      text: "testse cureConnection: false,",
     }
     console.log(config, mail, nodemailer)
     transporter.sendMail(mail)
-    // const adminCollection = db.collection("admin")
-    // const adminArray = (await adminCollection
-    //   .where({
-    //     id: 1,
-    //     identity: "部长"
-    //   })
-    //   .get()
-    // ).data
-    // // console.log(adminArray)
-    // if (!!adminArray) {
-    //   var cc = ""
-    //   for (let i = 1; i < adminArray.length; i++) {
-    //     cc += adminArray[i].email + ","
-    //   }
-    //   var mail2 = {
-    //     from: "塔内计协小程序 <taneipc@163.com>",
-    //     subject: "技术部部长，您好！【" + repairman + "】接到新的报单啦~",
-    //     to: adminArray[0].email,
-    //     text: "详细报单请到塔内小程序查看，快去通知Ta吧！（本邮件由塔内计协小程序自动发送）",
-    //     cc: cc
-    //   }
-    //   console.log(adminArray[0].email, cc)
-    //   transporter.sendMail(mail2)
-    // }
-    // return
+    return {code: 0, nodemailer, state: !nodemailer.createTransport}
   },
   async receive(event, wxContext) { //传入_id
     await collection.doc(event._id).update({

@@ -8,7 +8,7 @@
       <text class="cuIcon-back" bindtap="BackPage"></text>
     </view>
     <view class="content" style="top:{{StatusBar}}px">
-      <view>维修人员
+      <view>塔内成员
       </view>
     </view>
     <view class="action">
@@ -105,7 +105,7 @@
         <view class="cu-item" wx:for="{{sessions}}" wx:key="index">
           <label class="flex justify-between align-center flex-sub">
             <view class="flex-sub">{{item}}</view>
-            <radio class="round" value="{{item}}" checked="{{curSession==item}}"></radio>
+            <radio class="round orange" value="{{item}}" checked="{{curSession==item}}"></radio>
           </label>
         </view>
       </view>

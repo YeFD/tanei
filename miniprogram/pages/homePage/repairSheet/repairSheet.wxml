@@ -7,7 +7,7 @@
 </cu-custom>
 
 <!-- 注意事项 -->
-<view class="cu-modal {{modalName=='DialogModal'?'show':''}}">
+<view class="cu-modal {{modalName=='showAttention'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
       <view class="content">注意事项</view>
