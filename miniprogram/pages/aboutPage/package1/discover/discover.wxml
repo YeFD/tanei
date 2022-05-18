@@ -1,0 +1,62 @@
+<scroll-view scroll-y class="scrollPage">
+  <view class="ripple-main {{isShow?'filter':''}}">
+		<view class="v-content">
+			<view class="cu-custom" style="height:{{CustomBar}}px">
+				<view class="cu-bar fixed text-white" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+					<view class="action text-xs">
+						<text class="cuIcon-back" bindtap="backPage"></text>
+					</view>
+					<view class="content" style="top:{{StatusBar}}px">实验室</view>
+				</view>
+			</view>
+			<view>
+				<view class="components-ancube">
+					<view class="box" style="display: flex;justify-content: center;">
+						<view class="cube">
+							<view class="front" style="background-image: linear-gradient(45deg, #f43f3b, #ec008c);"></view>
+							<view class="back" style="background-image: linear-gradient(45deg, #ff7612, #ff571c);"></view>
+							<view class="left" style="background-image: linear-gradient(45deg, #7FD02B, #9ddb47);"></view>
+							<view class="right" style="background-image: linear-gradient(45deg, #9000ff, #5e00ff);"></view>
+							<view class="top" style="background-image: linear-gradient(45deg, #6F68DF, #ec008c);"></view>
+							<view class="bottom2" style="background-image: linear-gradient(45deg, #0070FF, #19CF8A);"></view>
+
+							<view class="in-front"></view>
+							<view class="in-back"></view>
+							<view class="in-left"></view>
+							<view class="in-right"></view>
+							<view class="in-top"></view>
+							<view class="in-bottom"></view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view style="display: flex;justify-content: center;">
+				<view class="ripple" animation="{{animationData}}" hidden='{{hidden}}' style='{{myStyle}}'></view>
+			</view>
+		</view>
+	</view>
+
+	<view class='bar'>
+		<view class='tabicon'>
+			<view hidden='{{!isShow}}' class='menu' style='height:{{CustomBar}}rpx;padding-top:{{CustomBar}}rpx;'>分享生活的点滴，见证美好的明天</view>
+			<view class='bottom' hidden='{{!isShow}}'>
+				<view class='navlist' wx:for='{{nav}}' wx:for-item="i" wx:for-index="d" wx:key="index">
+					<view class='item  {{isShow?"animation-nav":""}}' style='animation-delay: {{(index+1)*0.1}}s;' wx:for='{{i.navigation}}' wx:key="index" data-path="{{item.path}}" bindtap="navTo">
+						<image mode='widthFix' src='{{item.src}}'></image>
+						<!-- <view class="text"><text class="cuIcon-my"></text></view> -->
+						<text class='string'>{{item.name}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="add1" hidden='{{isShow}}'>
+		<view class='send'></view>
+	</view>
+	<view class="add">
+		<view bindtap="onClickAdd" class="text-xl">
+			<text class="cuIcon-add {{menuStyle}}"></text>
+		</view>
+	</view>
+
+</scroll-view>

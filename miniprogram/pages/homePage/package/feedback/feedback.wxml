@@ -1,0 +1,45 @@
+<cu-custom bgColor="bg-gradual-orange" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">用户评价</view>
+  <view class="action" slot="right">
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+  </view>
+</cu-custom>
+<scroll-view scroll-y>
+  <view class="cu-card dynamic no-card">
+    <view class="cu-load {{!isLoad?'loading':''}}"></view>
+    <view class="cu-load {{curFeedback.length == 0 && !!isLoad?'over':''}}"></view>
+    <view class="cu-item shadow" wx:for="{{curFeedback}}" wx:key="index">
+      <view class="cu-list menu-avatar solid-top">
+        <view class="cu-item">
+          <view class="cu-avatar round lg" style="background-image:url({{item.avatarUrl}});"></view>
+          <view class="content flex-sub" data-index="{{index}}">
+            <view>{{item.userName}}</view>
+            <view class="text-gray text-sm flex justify-between">{{item.time}}</view>
+          </view>
+          <view class=" text-right">
+            <view class="text-grey margin-right-xs text-sm" wx:if="{{!!item.nickName}}">@{{item.nickName}}</view>
+            <view class="text-grey margin-right-xs text-sm" wx:else>@{{item.repairman}}</view>
+            
+            <text wx:for="{{scoreStar}}" wx:key="index" wx:for-item="i" class="cuIcon-favor{{index<=item.score-1?'fill':''}} text-{{scoreStar[item.score-1].color}} text-sm text-right" decode="{{true}}" space="{{true}}">&nbsp;</text>
+          </view>
+        </view>
+        <view class="padding bg-white">
+          <view class="flex flex-wrap justify-end">
+            <view class="basis-xl margin-right">{{item.feedback}}</view>
+          </view>
+        </view> 
+      </view>
+    </view>
+  </view>
+
+  <view class="padding flex flex-wrap justify-between align-center bg-white" wx:if="{{pageNum > 0}}">
+    <button style="visibility: {{curPage>1?'':'hidden'}};" class="cu-btn bg-purple" bindtap="lastPage">上一页</button>
+    <picker range="{{pageArray}}" value="{{curPage - 1}}" bindchange="pageChange">
+      <text>{{curPage}}</text>
+      <text class="cuIcon-triangledownfill"></text>
+      <text class="text-gray">/{{pageNum}}</text>
+    </picker>
+    <button style="visibility: {{curPage<pageNum?'':'hidden'}};" class="cu-btn bg-purple" bindtap="nextPage">下一页</button>
+  </view>
+</scroll-view>

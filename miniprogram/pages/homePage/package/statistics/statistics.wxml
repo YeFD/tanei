@@ -1,0 +1,112 @@
+<!--miniprogram/pages/homePage/statistics/statistics.wxml-->
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">数据展示</view>
+  <view class="action" slot="right">
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+  </view>
+</cu-custom>
+<scroll-view scroll-y>
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>报单数据
+    </view>
+  </view>
+  <view class="cu-list menu sm-border solid-bottom-sm">
+    <view class="cu-item">
+      <view class="content">
+        <text class="text-black text-sm">总单数</text>
+      </view>
+      <view class="action">
+        <text class="text-black text-sm">{{totalNum}}</text>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="content">
+        <text class="text-black text-sm">正在进行</text>
+      </view>
+      <view class="action">
+        <text class="text-black text-sm">{{ingNum}}</text>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="content">
+        <text class="text-black text-sm">已完成</text>
+      </view>
+      <view class="action">
+        <text class="text-black text-sm">{{completedNum}}</text>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="content">
+        <text class="text-black text-sm">1天内完成</text>
+      </view>
+      <view class="action">
+        <text class="text-black text-sm">{{completed1}}</text>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="content">
+        <text class="text-black text-sm">3天内完成</text>
+      </view>
+      <view class="action">
+        <text class="text-black text-sm">{{completed3}}</text>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="content">
+        <text class="text-black text-sm">7天内完成</text>
+      </view>
+      <view class="action">
+        <text class="text-black text-sm">{{completed7}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="cu-bar bg-white solid-bottom margin-top-sm">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>接单数据
+    </view>
+    <view class="action">
+      <text class="text-grey text-sm">完成单数</text>
+    </view>
+  </view>
+  <view class="cu-list menu sm-border">
+    <view class="cu-item" wx:for="{{adminStatistics2}}" wx:key="index">
+      <view class="content">
+        <text class="text-balck text-sm" wx:if="{{!!item.nickName}}">{{index+1}}. {{item.nickName}}</text>
+        <text class="text-balck text-sm" wx:else>{{index+1}}. {{item.name}}</text>
+      </view>
+      <view class="action">
+        <text class="text-black text-sm">{{item.completedNum}}</text>
+      </view>
+    </view>
+    <view class="cu-load bg-white {{!isLoad?'loading':''}}"></view>
+    <view class="cu-load bg-white {{adminStatistics.length == 0 && !!isLoad?'over':''}}"></view>
+    <view class="cu-load over bg-white" wx:if="{{adminStatistics==null && isLoad}}"></view>
+  </view>
+
+  <view class="cu-bar bg-white solid-bottom margin-top-sm">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>历史接单
+    </view>
+    <view class="action">
+      <text class="text-grey text-sm">完成单数</text>
+    </view>
+  </view>
+  <view class="cu-list menu sm-border">
+    <view class="cu-item" wx:for="{{adminStatistics}}" wx:if="{{item.completedNum!=0}}" wx:key="index">
+      <view class="content">
+        <text class="text-balck text-sm" wx:if="{{!!item.nickName}}">{{index+1}}. {{item.nickName}}</text>
+        <text class="text-balck text-sm" wx:else>{{index+1}}. {{item.name}}</text>
+      </view>
+      <view class="action">
+        <text class="text-black text-sm">{{item.completedNum}}</text>
+      </view>
+    </view>
+    <view class="cu-load bg-white {{!isLoad?'loading':''}}"></view>
+    <view class="cu-load bg-white {{adminStatistics.length == 0 && !!isLoad?'over':''}}"></view>
+    <view class="cu-load over bg-white" wx:if="{{adminStatistics==null && isLoad}}"></view>
+  </view>
+  <view class="padding-sm"></view>
+</scroll-view>

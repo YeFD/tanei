@@ -1,0 +1,54 @@
+[
+  {
+    "name": "adminInit",
+    "value": {
+      "action": "init",
+      "password2": "jishubu2020",
+      "password3": "jsb2019",
+      "password4": "tnpc666",
+      "password5": "tnpcjsb",
+      "password6": "xiaojiowo",
+      "update": true
+    }
+  },
+  {
+    "name": "adminIdentify",
+    "value": {
+      "action": "identify",
+      "password": "jishubu",
+      "name": "yip",
+      "department": "技术部",
+      "identity": 0,
+      "email": "123@qq.com"
+    }
+  },
+  {
+    "name": "adminGet",
+    "value": {
+      "action": "getIdentity"
+    }
+  },
+  {
+    "name": "adminUpdate",
+    "value": {
+      "action": "update",
+      "nickName": "小鸡",
+      "email": "13456@qq.com",
+      "online": 1,
+      "adminId": "7498b5fe5f469f88006942580f74cf22"
+    }
+  },
+  {
+    "name": "getOnlineAdminArray",
+    "value": {
+      "action": "getOnlineAdminArray"
+    }
+  },
+  {
+    "name": "setNotice",
+    "value": {
+      "action": "setNotice",
+      "notice": "撒打算打算的撒喜欢也好请问"
+    }
+  }
+]

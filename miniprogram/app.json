@@ -1,0 +1,61 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/homePage/repairSheet/repairSheet",
+    "pages/aboutPage/myRepairSheet/myRepairSheet",
+    "pages/aboutPage/messageBox/messageBox",
+    "pages/aboutPage/about/about",
+    "pages/aboutPage/detailSheet/detailSheet"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/homePage/package",
+      "pages": [
+        "statistics/statistics",
+        "feedback/feedback",
+        "QASystem/QASystem",
+        "process/process"
+      ]
+    },
+    {
+      "root": "pages/aboutPage/package",
+      "pages": [
+        "allSheets/allSheets",
+        "manageIdentify/manageIdentify",
+        "manageMember/manageMember",
+        "myIdentity/myIdentity",
+        "myReceivedRepairSheet/myReceivedRepairSheet",
+        "Instruction/Instruction"
+      ]
+    },
+    {
+      "root": "pages/aboutPage/package2",
+      "pages": [
+        "identify/identify"
+      ]
+    },
+    {
+      "root": "pages/aboutPage/package1",
+      "pages": [
+        "discover/discover",
+        "algorithm/algorithm",
+        "bug/bug",
+        "log/log",
+        "nlp/nlp"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "塔内",
+    "navigationStyle": "custom"
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "lazyCodeLoading": "requiredComponents"
+}

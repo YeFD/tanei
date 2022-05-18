@@ -1,0 +1,121 @@
+<!--miniprogram/pages/aboutPage/manageIdentify/manageIdentify.wxml-->
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">认证管理</view>
+  <view class="action" slot="right">
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+  </view>
+</cu-custom>
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-green"></text>二次认证
+  </view>
+  <view class="action">
+    <text wx:if="{{update}}" class="text-green">开启</text>
+    <text wx:else class="text-red">关闭</text>
+  </view>
+</view>
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-green"></text>认证学年
+  </view>
+  <view class="action">{{curSession}}
+    <button class="cu-btn icon bg-white round line" bindtap="showModal" data-target="session"><text class="cuIcon-settingsfill text-green"></text></button>
+  </view>
+</view>
+<view class="cu-bar bg-white margin-top-sm">
+  <view class="action">
+    <text class="cuIcon-title text-green"></text>认证密钥
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="title">干事</view>
+  <view class="action">
+    <text wx:if="{{!isLoad || identity == 5}}">******</text>
+    <text wx:else>{{password.password2}}</text>
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="title">部长</view>
+  <view class="action">
+    <text wx:if="{{!isLoad || identity < 3 || identity == 5}}">******</text>
+    <text wx:else>{{password.password3}}</text>
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="title">会长</view>
+  <view class="action">
+    <text wx:if="{{!isLoad || identity < 4 || identity == 5}}">******</text>
+    <text wx:else>{{password.password4}}</text>
+  </view>
+</view>
+<!-- <view class="cu-form-group">
+  <view class="title">老人</view>
+  <view class="action">
+    <text wx:if="{{!isLoad || identity < 4}}">******</text>
+    <text wx:else>{{password.password5}}</text>
+  </view>
+</view> -->
+<view class="cu-bar bg-white solid-bottom margin-top-sm">
+  <view class="action">
+    <text class="cuIcon-title text-green"></text>通知栏
+  </view>
+  <view class="action">
+    <button class="cu-btn icon bg-white round line" bindtap="showModal" data-target="notice"><text class="cuIcon-settingsfill text-green"></text></button>
+  </view>
+</view>
+    <view class="cu-bar text-xl" wx:if="{{notice!=''}}">
+      <view class="flex">
+      <text class="cuIcon-notificationfill text-orange margin-left margin-top"></text>
+      <swiper class="swiper_container margin-top margin-left" vertical="true" autoplay="true" circular="true" interval="3000">
+          <swiper-item wx:for="{{msgList}}">
+            <view class="swiper_item text-orange">{{item}}</view>
+          </swiper-item>
+      </swiper>
+    </view>
+    </view>
+<view class="cu-modal {{modalName=='notice'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">通知栏</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      <input bindinput="inputNotice" placeholder="通知将展示在首页" disabled="{{modalName!='notice'}}" value="{{notice}}"></input>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-red text-red" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="setNotice">提交</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='session'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content text-red">请在换届时修改！</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <radio-group class="block" bindchange="sessionChange">
+      <view class="cu-list menu text-left">
+        <view class="cu-item" wx:for="{{sessions}}" wx:key="index">
+          <label class="flex justify-between align-center flex-sub">
+            <view class="flex-sub">{{item}}</view>
+            <radio class="round" value="{{item}}" checked="{{curSession==item}}"></radio>
+          </label>
+        </view>
+      </view>
+    </radio-group>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-red text-red" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="setSession">提交</button>
+      </view>
+    </view>
+  </view>
+</view>

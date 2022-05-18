@@ -1,0 +1,124 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "pages/aboutPage/messageBox/messageBox",
+          "pathName": "pages/aboutPage/messageBox/messageBox",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "test",
+          "pathName": "pages/testPage/test",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "myRepairSheet",
+          "pathName": "pages/aboutPage/myRepairSheet/myRepairSheet",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "myReceivedRepairSheet",
+          "pathName": "pages/aboutPage/myReceivedRepairSheet/myReceivedRepairSheet",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "repairSheet",
+          "pathName": "pages/homePage/repairSheet/repairSheet",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "detailSheet",
+          "pathName": "pages/aboutPage/detailSheet/detailSheet",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "allSheets",
+          "pathName": "pages/aboutPage/allSheets/allSheets",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "discover",
+          "pathName": "pages/aboutPage/package1/discover/discover",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "update",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
+        },
+        {
+          "id": -1,
+          "name": "about",
+          "pathName": "pages/aboutPage/about/about",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "algorithm",
+          "pathName": "pages/aboutPage/package1/algorithm/algorithm",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "manageIdentify",
+          "pathName": "pages/aboutPage/package/manageIdentify/manageIdentify",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "log",
+          "pathName": "pages/aboutPage/package1/log/log",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "nlp",
+          "pathName": "pages/aboutPage/package1/nlp/nlp",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "report",
+          "pathName": "pages/aboutPage/package1/report/report",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "QASystem",
+          "pathName": "pages/homePage/package/QASystem/QASystem",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
+}
