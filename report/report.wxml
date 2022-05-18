@@ -1,3 +1,0 @@
-<view class="cu-btn bg-blue" bindtap="getReport">
-getReport
-</view>

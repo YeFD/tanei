@@ -1,9 +1,0 @@
-{
-  "usingComponents": {
-      "parser": "./components/parser/parser",
-      "navigation-bar": "./components/navigation-bar/navigation-bar"
-  },
-  "pageOrientation": "landscape",
-  "navigationStyle": "custom",
-  "navigationBarTextStyle": "white"
-}

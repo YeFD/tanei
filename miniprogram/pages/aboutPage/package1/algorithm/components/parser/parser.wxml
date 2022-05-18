@@ -1,2 +1,0 @@
-<slot wx:if="{{!nodes.length}}"></slot>
-<trees class="top" lazyLoad="{{lazyLoad}}" loading="{{loadingImg}}" nodes="{{nodes}}" style="{{selectable?'user-select:text;-webkit-user-select:text;':''}}{{showAm}}"></trees>
