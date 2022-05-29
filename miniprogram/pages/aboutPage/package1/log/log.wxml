@@ -4,6 +4,15 @@
 </cu-custom>
 <scroll-view scroll-y>
 <view class="cu-timeline">
+  <view class="cu-item text-yellow">
+    <view class="bg-yellow content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-yellow">v1.10.1</view>
+        <view class="cu-tag line-white">2022/5/29</view>
+      </view>
+      <view class="margin-top-sm text-content">修复了一些已知问题。</view>
+    </view>
+  </view>
   <view class="cu-item text-green">
     <view class="bg-gradual-green content shadow">
       <view class="cu-capsule radius">
