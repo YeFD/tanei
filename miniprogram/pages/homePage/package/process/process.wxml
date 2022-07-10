@@ -14,7 +14,7 @@
   <view class="cu-item" style="padding-bottom: 10px;">
     <view class="cu-avatar radius" style="background-image: url({{botAvatarUrl}});"></view>
       <view class="main" style="max-width: calc(100% - 160rpx);">
-        <view class="content shadow" bindtap="copyData">
+        <view class="content shadow">
           <text>以下为特别声明：\n1. 维修人员全部来自塔内计协技术部，我们本着“服务同窗，锻炼自我”的理念，<text style="color:red">自愿免费</text>为华师师生提供电脑维修服务\n2. 我们的技术人员平时也需要上课，所以可能无法第一时间回复\n3. 我们会尽力提供帮助，但无法保证一定能解决问题\n4. 如果无法信任塔内，请退出\n5. 对于态度恶劣的机主，我们<text style="color:red">有权拒绝</text>提供服务</text>
         </view>
       </view>

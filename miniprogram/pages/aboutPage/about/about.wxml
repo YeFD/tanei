@@ -24,7 +24,7 @@
       </text>
     </view>
     <view class="text-center">
-      <text class="text-grey text-lg">Version 1.10.0</text>
+      <text class="text-grey text-lg">Version 1.10.1</text>
     </view>
     <view class="text-center text-grey" bindtap="copyData">Author
       <text class="text-purple"> @小鸡</text>
