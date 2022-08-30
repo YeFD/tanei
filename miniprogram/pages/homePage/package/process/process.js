@@ -1,7 +1,7 @@
 // pages/homePage/package/process/process.js
 Page({
   data: {
-    botAvatarUrl: "https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg",
+    botAvatarUrl: "https://6469-dist-3gfsowkhc324384b-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg",
     SAAvatarUrl: "https://6469-dist-3gfsowkhc324384b-1259081600.tcb.qcloud.la/userAvatar/SAAvatar.png"
   },
   copyData: function(e) {

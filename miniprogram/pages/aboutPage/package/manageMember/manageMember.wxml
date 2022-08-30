@@ -8,7 +8,7 @@
       <text class="cuIcon-back" bindtap="BackPage"></text>
     </view>
     <view class="content" style="top:{{StatusBar}}px">
-      <view>塔内成员
+      <view>所有成员
       </view>
     </view>
     <view class="action">
@@ -80,7 +80,7 @@
     <view class="cu-load {{adminArray5.length == 0 && !!isLoad?'over':''}}"></view>
     <view class="cu-item {{move=='move-'+index?'move-cur':''}}" wx:for="{{adminArray5}}" wx:key="index">
       <view class="cu-avatar round lg" wx:if="{{!!item.avatarUrl}}" style="background-image:url({{item.avatarUrl}})"></view>
-      <view class="cu-avatar round lg" wx:else style="background-image:url(https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg)"></view>
+      <view class="cu-avatar round lg" wx:else style="background-image:url(https://6469-dist-3gfsowkhc324384b-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg)"></view>
       <view class="content">
         <view class="">
           <view class="cu-tag bg-{{item.identity=='SA'?'mauve':'yellow'}}">{{item.identity}}</view>

@@ -42,7 +42,7 @@ Page({
       }, {
         icon: "group",
         color: "red",
-        name: "塔内成员",
+        name: "维修人员",
         bindtap: "toManageMember"
       }, {
         icon: "lock",
@@ -118,7 +118,7 @@ Page({
             {
               icon: "group",
               color: "red",
-              name: "塔内成员",
+              name: "维修人员",
               bindtap: "toManageMember"
             },
             {
@@ -205,7 +205,7 @@ Page({
         {
           icon: "group",
           color: "red",
-          name: "塔内成员",
+          name: "维修人员",
           bindtap: "toManageMember"
         },
         {

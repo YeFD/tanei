@@ -3,7 +3,7 @@ const app = getApp()
 Page({
   data: {
     identityList: ["干事", "部长", "会长", "老人", "SA"],
-    botAvatarUrl: "https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg",
+    botAvatarUrl: "https://6469-dist-3gfsowkhc324384b-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg",
     SAAvatarUrl: "https://6469-dist-3gfsowkhc324384b-1259081600.tcb.qcloud.la/userAvatar/SAAvatar.png"
   },
   onLoad: function (options) {

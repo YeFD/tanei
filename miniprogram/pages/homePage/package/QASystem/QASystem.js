@@ -4,8 +4,8 @@ Page({
   data: {
     inputBottom: 0,
     messages: [],
-    avatarUrl: "https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg",
-    botAvatarUrl: "https://6465-demo-vr23l-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg",
+    avatarUrl: "https://6469-dist-3gfsowkhc324384b-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg",
+    botAvatarUrl: "https://6469-dist-3gfsowkhc324384b-1259081600.tcb.qcloud.la/image/defaultAvatar.jpg",
     curQuestion: "",
     queryUrl: ""
   },
