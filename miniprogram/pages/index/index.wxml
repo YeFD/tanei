@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 <home wx:if="{{curPage=='home'}}"></home>
 <block wx:if="{{curPage==='about'}}">
   <scroll-view scroll-y class="scrollPage">
@@ -146,7 +146,7 @@
     <view class='cuIcon-my text-bold navbar__icon icon'></view>
     <view class="cu-avatar sm round avatar -green shadow"><text class="text-balck cuIcon-name text-sm" style="margin-bottom:-85rpx;font-size:20rpx;color:#303030">我的</text></view>
   </view>
-=======
+</view>
 <home wx:if="{{curPage=='home'}}"></home>
 <block wx:if="{{curPage==='about'}}">
   <scroll-view scroll-y class="scrollPage">
@@ -300,5 +300,5 @@
     <view class='cuIcon-my text-bold navbar__icon icon'></view>
     <view class="cu-avatar sm round avatar -green shadow"><text class="text-balck cuIcon-name text-sm" style="margin-bottom:-85rpx;font-size:20rpx;color:#303030">我的</text></view>
   </view>
->>>>>>> Stashed changes
+
 </view>

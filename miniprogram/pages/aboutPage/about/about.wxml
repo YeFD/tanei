@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 <cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content">关于塔内</view>
@@ -6,6 +5,7 @@
     <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
   </view>
 </cu-custom>
+
 <scroll-view scroll-y>
   <swiper class="card-swiper round-dot margin-bottom" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper">
     <swiper-item wx:for="{{4}}" wx:key="index" class="{{cardCur==index?'cur':''}}">
@@ -31,7 +31,7 @@
       <text class="text-purple"> @小鸡</text>
     </view>
   </view>
-=======
+</scroll-view>
 <cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content">关于塔内</view>
@@ -64,5 +64,5 @@
       <text class="text-purple"> @小鸡</text>
     </view>
   </view>
->>>>>>> Stashed changes
+
 </scroll-view>
