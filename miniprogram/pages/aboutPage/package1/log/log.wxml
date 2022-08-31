@@ -10,7 +10,7 @@
         <view class="cu-tag bg-white text-yellow">v1.10.2</view>
         <view class="cu-tag line-white">2022/8/31</view>
       </view>
-      <view class="margin-top-sm text-content">修改双环境资源，以适应计费方式变化。</view>
+      <view class="margin-top-sm text-content">更换单环境资源链接，以适应计费方式变化。</view>
     </view>
   </view>
   <view class="cu-item text-yellow">
